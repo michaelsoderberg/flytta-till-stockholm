@@ -1,0 +1,4269 @@
+{
+ "boroughs": [
+  {
+   "id": "jarva",
+   "name": "Järva",
+   "stadsdelar": [
+    "AKALLA",
+    "BROMSTEN",
+    "FLYSTA",
+    "HANSTA",
+    "HUSBY",
+    "KISTA",
+    "LUNDA",
+    "RINKEBY",
+    "SOLHEM",
+    "SUNDBY",
+    "TENSTA"
+   ]
+  },
+  {
+   "id": "hasselby-vallingby",
+   "name": "Hässelby-Vällingby",
+   "stadsdelar": [
+    "GRIMSTA",
+    "HÄSSELBY GÅRD",
+    "HÄSSELBY STRAND",
+    "HÄSSELBY VILLASTAD",
+    "KÄLVESTA",
+    "NÄLSTA",
+    "RÅCKSTA",
+    "VINSTA",
+    "VÄLLINGBY"
+   ]
+  },
+  {
+   "id": "bromma",
+   "name": "Bromma",
+   "stadsdelar": [
+    "ABRAHAMSBERG",
+    "ALVIK",
+    "BECKOMBERGA",
+    "BLACKEBERG",
+    "BROMMA KYRKA",
+    "BÄLLSTA",
+    "ENEBY",
+    "HÖGLANDET",
+    "MARIEHÄLL",
+    "NOCKEBY",
+    "NOCKEBYHOV",
+    "NORRA ÄNGBY",
+    "OLOVSLUND",
+    "RIKSBY",
+    "SMEDSLÄTTEN",
+    "STORA MOSSEN",
+    "SÖDRA ÄNGBY",
+    "TRANEBERG",
+    "ULVSUNDA",
+    "ULVSUNDA INDUSTRIOMR",
+    "ÅKESHOV",
+    "ÅKESLUND",
+    "ÅLSTEN",
+    "ÄPPELVIKEN"
+   ]
+  },
+  {
+   "id": "kungsholmen",
+   "name": "Kungsholmen",
+   "stadsdelar": [
+    "KUNGSHOLMEN",
+    "STADSHAGEN",
+    "KRISTINEBERG",
+    "FREDHÄLL",
+    "MARIEBERG",
+    "LILLA ESSINGEN",
+    "STORA ESSINGEN"
+   ]
+  },
+  {
+   "id": "norra-innerstaden",
+   "name": "Norra innerstaden",
+   "stadsdelar": [
+    "DJURGÅRDEN",
+    "LADUGÅRDSGÄRDET",
+    "HJORTHAGEN",
+    "NORRA DJURGÅRDEN",
+    "NORRMALM",
+    "SKEPPSHOLMEN",
+    "VASASTADEN",
+    "ÖSTERMALM"
+   ]
+  },
+  {
+   "id": "sodermalm",
+   "name": "Södermalm",
+   "stadsdelar": [
+    "GAMLA STAN",
+    "RIDDARHOLMEN",
+    "LÅNGHOLMEN",
+    "REIMERSHOLME",
+    "SÖDERMALM",
+    "SÖDRA HAMMARBYHAMNEN"
+   ]
+  },
+  {
+   "id": "hagersten-alvsjo",
+   "name": "Hägersten-Älvsjö",
+   "stadsdelar": [
+    "ASPUDDEN",
+    "FRUÄNGEN",
+    "GRÖNDAL",
+    "HERRÄNGEN",
+    "HÄGERSTEN",
+    "HÄGERSTENSÅSEN",
+    "LILJEHOLMEN",
+    "LISEBERG",
+    "LÅNGBRO",
+    "LÅNGSJÖ",
+    "MIDSOMMARKRANSEN",
+    "MÄLARHÖJDEN",
+    "SOLBERGA",
+    "VÄSTBERGA",
+    "VÄSTERTORP",
+    "ÄLVSJÖ",
+    "ÖRBY SLOTT"
+   ]
+  },
+  {
+   "id": "skarholmen",
+   "name": "Skärholmen",
+   "stadsdelar": [
+    "BREDÄNG",
+    "SÄTRA",
+    "SKÄRHOLMEN",
+    "VÅRBERG"
+   ]
+  },
+  {
+   "id": "enskede-arsta-vantor",
+   "name": "Enskede-Årsta-Vantör",
+   "stadsdelar": [
+    "BANDHAGEN",
+    "ENSKEDEFÄLTET",
+    "ENSKEDE GÅRD",
+    "GAMLA ENSKEDE",
+    "HAGSÄTRA",
+    "HÖGDALEN",
+    "JOHANNESHOV",
+    "RÅGSVED",
+    "STUREBY",
+    "ÅRSTA",
+    "ÖRBY",
+    "ÖSTBERGA"
+   ]
+  },
+  {
+   "id": "skarpnack",
+   "name": "Skarpnäck",
+   "stadsdelar": [
+    "HAMMARBYHÖJDEN",
+    "BJÖRKHAGEN",
+    "ENSKEDEDALEN",
+    "KÄRRTORP",
+    "BAGARMOSSEN",
+    "SKARPNÄCKS GÅRD",
+    "FLATEN",
+    "ORHEM",
+    "SKRUBBA"
+   ]
+  },
+  {
+   "id": "farsta",
+   "name": "Farsta",
+   "stadsdelar": [
+    "FAGERSJÖ",
+    "FARSTA",
+    "FARSTANÄSET",
+    "FARSTA STRAND",
+    "GUBBÄNGEN",
+    "HÖKARÄNGEN",
+    "LARSBODA",
+    "SKÖNDAL",
+    "SVEDMYRA",
+    "TALLKROGEN"
+   ]
+  }
+ ],
+ "deso": {
+  "0180C1250": "farsta",
+  "0180C1160": "enskede-arsta-vantor",
+  "0180C1470": "enskede-arsta-vantor",
+  "0180C1190": "skarpnack",
+  "0180C1440": "enskede-arsta-vantor",
+  "0180C1450": "enskede-arsta-vantor",
+  "0180C1430": "hagersten-alvsjo",
+  "0180C1420": "farsta",
+  "0180C1550": "enskede-arsta-vantor",
+  "0180C1570": "farsta",
+  "0180C1580": "farsta",
+  "0180C2980": "sodermalm",
+  "0180C1670": "hagersten-alvsjo",
+  "0180C1760": "farsta",
+  "0180C1860": "skarholmen",
+  "0180C2120": "enskede-arsta-vantor",
+  "0180C2190": "enskede-arsta-vantor",
+  "0180C2670": "skarpnack",
+  "0180C2720": "hagersten-alvsjo",
+  "0180C2783": "hagersten-alvsjo",
+  "0180C2640": "hagersten-alvsjo",
+  "0180C3090": "hagersten-alvsjo",
+  "0180C3180": "sodermalm",
+  "0180C3190": "sodermalm",
+  "0180C3230": "hagersten-alvsjo",
+  "0180C2970": "hagersten-alvsjo",
+  "0180C3030": "hagersten-alvsjo",
+  "0180C3160": "sodermalm",
+  "0180C3510": "hagersten-alvsjo",
+  "0180C3710": "sodermalm",
+  "0180C3780": "sodermalm",
+  "0180C3810": "sodermalm",
+  "0180C3790": "sodermalm",
+  "0180C3800": "sodermalm",
+  "0180C3820": "sodermalm",
+  "0180C3260": "sodermalm",
+  "0180C3290": "sodermalm",
+  "0180C3310": "sodermalm",
+  "0180C3340": "sodermalm",
+  "0180C3202": "sodermalm",
+  "0180C3201": "sodermalm",
+  "0180C3350": "sodermalm",
+  "0180C3220": "hagersten-alvsjo",
+  "0180C3380": "sodermalm",
+  "0180C3390": "sodermalm",
+  "0180C3570": "sodermalm",
+  "0180C3590": "sodermalm",
+  "0180C3620": "sodermalm",
+  "0180C3660": "sodermalm",
+  "0180C3640": "sodermalm",
+  "0180C3630": "sodermalm",
+  "0180C4050": "bromma",
+  "0180C4130": "kungsholmen",
+  "0180C4120": "kungsholmen",
+  "0180C4160": "kungsholmen",
+  "0180C4300": "bromma",
+  "0180C4350": "bromma",
+  "0180C4490": "kungsholmen",
+  "0180C4580": "kungsholmen",
+  "0180C4520": "kungsholmen",
+  "0180C4640": "norra-innerstaden",
+  "0180C4550": "kungsholmen",
+  "0180C4620": "norra-innerstaden",
+  "0180C4670": "bromma",
+  "0180C5264": "norra-innerstaden",
+  "0180C5290": "norra-innerstaden",
+  "0180C5310": "norra-innerstaden",
+  "0180C5421": "hasselby-vallingby",
+  "0180C5422": "hasselby-vallingby",
+  "0180C5620": "bromma",
+  "0180C5600": "hasselby-vallingby",
+  "0180C5660": "hasselby-vallingby",
+  "0180C5610": "hasselby-vallingby",
+  "0180C5640": "hasselby-vallingby",
+  "0180C5850": "hasselby-vallingby",
+  "0180C6110": "jarva",
+  "0180C5780": "hasselby-vallingby",
+  "0180C5840": "hasselby-vallingby",
+  "0180C5870": "hasselby-vallingby",
+  "0180C5880": "hasselby-vallingby",
+  "0180C5480": "hasselby-vallingby",
+  "0180C5550": "bromma",
+  "0180C5510": "hasselby-vallingby",
+  "0180C5570": "norra-innerstaden",
+  "0180C5470": "hasselby-vallingby",
+  "0180C5590": "hasselby-vallingby",
+  "0180C5652": "norra-innerstaden",
+  "0180C5691": "bromma",
+  "0180C5752": "bromma",
+  "0180C5630": "bromma",
+  "0180C5680": "hasselby-vallingby",
+  "0180C5700": "hasselby-vallingby",
+  "0180C5520": "norra-innerstaden",
+  "0180C5710": "hasselby-vallingby",
+  "0180C5210": "norra-innerstaden",
+  "0180C5300": "norra-innerstaden",
+  "0180C5160": "bromma",
+  "0180C5360": "norra-innerstaden",
+  "0180C5330": "norra-innerstaden",
+  "0180C5350": "norra-innerstaden",
+  "0180C5150": "bromma",
+  "0180C6180": "jarva",
+  "0180C6250": "jarva",
+  "0180C5751": "bromma",
+  "0180C5250": "bromma",
+  "0180C4730": "kungsholmen",
+  "0180C4720": "norra-innerstaden",
+  "0180C4780": "norra-innerstaden",
+  "0180C4750": "norra-innerstaden",
+  "0180C4630": "norra-innerstaden",
+  "0180C4760": "norra-innerstaden",
+  "0180C4710": "norra-innerstaden",
+  "0180C4590": "bromma",
+  "0180C4530": "bromma",
+  "0180C4790": "norra-innerstaden",
+  "0180C4510": "bromma",
+  "0180C4910": "norra-innerstaden",
+  "0180C4980": "norra-innerstaden",
+  "0180C4960": "norra-innerstaden",
+  "0180C4870": "norra-innerstaden",
+  "0180C4900": "norra-innerstaden",
+  "0180C5261": "norra-innerstaden",
+  "0180C5270": "norra-innerstaden",
+  "0180C5230": "norra-innerstaden",
+  "0180C4310": "norra-innerstaden",
+  "0180C4270": "kungsholmen",
+  "0180C3920": "norra-innerstaden",
+  "0180C4170": "kungsholmen",
+  "0180C4220": "kungsholmen",
+  "0180C4180": "bromma",
+  "0180C4330": "kungsholmen",
+  "0180C4410": "kungsholmen",
+  "0180C4420": "kungsholmen",
+  "0180C4040": "norra-innerstaden",
+  "0180C4400": "norra-innerstaden",
+  "0180C4610": "norra-innerstaden",
+  "0180C4480": "bromma",
+  "0180C4450": "norra-innerstaden",
+  "0180C4440": "bromma",
+  "0180C4430": "norra-innerstaden",
+  "0180C3690": "sodermalm",
+  "0180C3750": "sodermalm",
+  "0180C3730": "kungsholmen",
+  "0180C3720": "bromma",
+  "0180C3890": "kungsholmen",
+  "0180C3840": "bromma",
+  "0180C3850": "bromma",
+  "0180C3240": "sodermalm",
+  "0180C4020": "kungsholmen",
+  "0180C4090": "kungsholmen",
+  "0180C4010": "kungsholmen",
+  "0180C3210": "sodermalm",
+  "0180C3300": "sodermalm",
+  "0180C4200": "bromma",
+  "0180C4650": "norra-innerstaden",
+  "0180C4690": "norra-innerstaden",
+  "0180C3120": "hagersten-alvsjo",
+  "0180C3250": "sodermalm",
+  "0180C3280": "sodermalm",
+  "0180C3420": "sodermalm",
+  "0180C3440": "sodermalm",
+  "0180C3400": "sodermalm",
+  "0180C3530": "hagersten-alvsjo",
+  "0180C3670": "sodermalm",
+  "0180C1850": "enskede-arsta-vantor",
+  "0180C2140": "hagersten-alvsjo",
+  "0180C2112": "hagersten-alvsjo",
+  "0180C2280": "hagersten-alvsjo",
+  "0180C2030": "hagersten-alvsjo",
+  "0180C1990": "skarpnack",
+  "0180C1970": "hagersten-alvsjo",
+  "0180C2450": "hagersten-alvsjo",
+  "0180C3580": "sodermalm",
+  "0180C3520": "sodermalm",
+  "0180C3600": "sodermalm",
+  "0180C2520": "enskede-arsta-vantor",
+  "0180C2440": "hagersten-alvsjo",
+  "0180C2530": "enskede-arsta-vantor",
+  "0180C2630": "hagersten-alvsjo",
+  "0180C2590": "enskede-arsta-vantor",
+  "0180C2690": "enskede-arsta-vantor",
+  "0180C2960": "sodermalm",
+  "0180C2951": "hagersten-alvsjo",
+  "0180C2910": "sodermalm",
+  "0180C1610": "skarpnack",
+  "0180C1720": "skarholmen",
+  "0180C1480": "enskede-arsta-vantor",
+  "0180C1680": "skarholmen",
+  "0180C1640": "enskede-arsta-vantor",
+  "0180C3700": "sodermalm",
+  "0180C1750": "skarpnack",
+  "0180C1800": "skarpnack",
+  "0180C1650": "enskede-arsta-vantor",
+  "0180C1810": "skarpnack",
+  "0180C1840": "enskede-arsta-vantor",
+  "0180C1260": "farsta",
+  "0180C1280": "enskede-arsta-vantor",
+  "0180C1310": "farsta",
+  "0180C1300": "enskede-arsta-vantor",
+  "0180C1150": "farsta",
+  "0180C1030": "farsta",
+  "0180C1290": "farsta",
+  "0180C1101": "farsta",
+  "0180C1360": "enskede-arsta-vantor",
+  "0180C1370": "enskede-arsta-vantor",
+  "0180C1241": "farsta",
+  "0180C1700": "hagersten-alvsjo",
+  "0180C1873": "hagersten-alvsjo",
+  "0180C1770": "enskede-arsta-vantor",
+  "0180C1020": "farsta",
+  "0180C1010": "farsta",
+  "0180C1040": "farsta",
+  "0180C1070": "farsta",
+  "0180C1540": "enskede-arsta-vantor",
+  "0180C1592": "skarholmen",
+  "0180C1510": "skarpnack",
+  "0180C1080": "farsta",
+  "0180C1060": "farsta",
+  "0180C1090": "farsta",
+  "0180C1050": "farsta",
+  "0180C1102": "farsta",
+  "0180C1120": "farsta",
+  "0180C1110": "farsta",
+  "0180C1140": "enskede-arsta-vantor",
+  "0180C1130": "farsta",
+  "0180C1200": "enskede-arsta-vantor",
+  "0180C1180": "farsta",
+  "0180C1230": "enskede-arsta-vantor",
+  "0180C1170": "farsta",
+  "0180C1220": "farsta",
+  "0180C1242": "farsta",
+  "0180C1270": "farsta",
+  "0180C1330": "enskede-arsta-vantor",
+  "0180C1320": "enskede-arsta-vantor",
+  "0180C1460": "enskede-arsta-vantor",
+  "0180C1390": "farsta",
+  "0180C1400": "farsta",
+  "0180C1350": "enskede-arsta-vantor",
+  "0180C4070": "kungsholmen",
+  "0180C4140": "kungsholmen",
+  "0180C1410": "farsta",
+  "0180C1380": "enskede-arsta-vantor",
+  "0180C1340": "enskede-arsta-vantor",
+  "0180C1490": "skarholmen",
+  "0180C1520": "skarpnack",
+  "0180C1210": "skarpnack",
+  "0180C1660": "skarholmen",
+  "0180C1500": "enskede-arsta-vantor",
+  "0180C1560": "skarholmen",
+  "0180C1530": "enskede-arsta-vantor",
+  "0180C1591": "skarholmen",
+  "0180C1620": "hagersten-alvsjo",
+  "0180C1630": "farsta",
+  "0180C1730": "skarholmen",
+  "0180C1780": "skarholmen",
+  "0180C1740": "skarpnack",
+  "0180C1710": "enskede-arsta-vantor",
+  "0180C2020": "hagersten-alvsjo",
+  "0180C1960": "skarpnack",
+  "0180C2040": "skarpnack",
+  "0180C1790": "farsta",
+  "0180C2113": "hagersten-alvsjo",
+  "0180C1871": "hagersten-alvsjo",
+  "0180C1820": "hagersten-alvsjo",
+  "0180C1600": "hagersten-alvsjo",
+  "0180C1872": "hagersten-alvsjo",
+  "0180C1900": "skarpnack",
+  "0180C1690": "skarholmen",
+  "0180C1890": "enskede-arsta-vantor",
+  "0180C1950": "skarpnack",
+  "0180C1910": "skarholmen",
+  "0180C1880": "hagersten-alvsjo",
+  "0180C1930": "enskede-arsta-vantor",
+  "0180C1830": "hagersten-alvsjo",
+  "0180C1940": "skarpnack",
+  "0180C1920": "hagersten-alvsjo",
+  "0180C2000": "enskede-arsta-vantor",
+  "0180C2010": "skarholmen",
+  "0180C1980": "hagersten-alvsjo",
+  "0180C2070": "enskede-arsta-vantor",
+  "0180C2060": "skarholmen",
+  "0180C2080": "hagersten-alvsjo",
+  "0180C2050": "hagersten-alvsjo",
+  "0180C2090": "hagersten-alvsjo",
+  "0180C2180": "hagersten-alvsjo",
+  "0180C2160": "enskede-arsta-vantor",
+  "0180C2100": "hagersten-alvsjo",
+  "0180C2200": "enskede-arsta-vantor",
+  "0180C2111": "hagersten-alvsjo",
+  "0180C2230": "skarpnack",
+  "0180C2210": "enskede-arsta-vantor",
+  "0180C2130": "skarpnack",
+  "0180C2170": "enskede-arsta-vantor",
+  "0180C2150": "skarholmen",
+  "0180C2260": "enskede-arsta-vantor",
+  "0180C2270": "hagersten-alvsjo",
+  "0180C2240": "skarpnack",
+  "0180C2250": "skarholmen",
+  "0180C2290": "skarholmen",
+  "0180C2310": "hagersten-alvsjo",
+  "0180C2330": "skarpnack",
+  "0180C2900": "hagersten-alvsjo",
+  "0180C3020": "sodermalm",
+  "0180C2881": "sodermalm",
+  "0180C2431": "enskede-arsta-vantor",
+  "0180C2360": "enskede-arsta-vantor",
+  "0180C2370": "skarpnack",
+  "0180C2410": "skarpnack",
+  "0180C2432": "enskede-arsta-vantor",
+  "0180C2320": "hagersten-alvsjo",
+  "0180C2400": "skarpnack",
+  "0180C2420": "hagersten-alvsjo",
+  "0180C2350": "enskede-arsta-vantor",
+  "0180C2460": "skarpnack",
+  "0180C2220": "skarholmen",
+  "0180C2380": "hagersten-alvsjo",
+  "0180C2300": "hagersten-alvsjo",
+  "0180C2490": "skarpnack",
+  "0180C2390": "enskede-arsta-vantor",
+  "0180C2480": "enskede-arsta-vantor",
+  "0180C2510": "hagersten-alvsjo",
+  "0180C2540": "enskede-arsta-vantor",
+  "0180C2340": "enskede-arsta-vantor",
+  "0180C5180": "bromma",
+  "0180C5262": "norra-innerstaden",
+  "0180C4700": "norra-innerstaden",
+  "0180C2570": "hagersten-alvsjo",
+  "0180C2560": "enskede-arsta-vantor",
+  "0180C2500": "skarholmen",
+  "0180C2550": "skarholmen",
+  "0180C2650": "skarpnack",
+  "0180C2620": "hagersten-alvsjo",
+  "0180C2610": "skarpnack",
+  "0180C2680": "hagersten-alvsjo",
+  "0180C2470": "hagersten-alvsjo",
+  "0180C2660": "skarpnack",
+  "0180C2760": "hagersten-alvsjo",
+  "0180C2600": "hagersten-alvsjo",
+  "0180C2700": "enskede-arsta-vantor",
+  "0180C2740": "hagersten-alvsjo",
+  "0180C2710": "enskede-arsta-vantor",
+  "0180C2781": "hagersten-alvsjo",
+  "0180C2790": "sodermalm",
+  "0180C2770": "hagersten-alvsjo",
+  "0180C2810": "sodermalm",
+  "0180C2890": "hagersten-alvsjo",
+  "0180C2860": "sodermalm",
+  "0180C2782": "hagersten-alvsjo",
+  "0180C2580": "hagersten-alvsjo",
+  "0180C2882": "sodermalm",
+  "0180C2830": "sodermalm",
+  "0180C2750": "enskede-arsta-vantor",
+  "0180C2840": "sodermalm",
+  "0180C2850": "hagersten-alvsjo",
+  "0180C2730": "hagersten-alvsjo",
+  "0180C2820": "hagersten-alvsjo",
+  "0180C2952": "hagersten-alvsjo",
+  "0180C2870": "hagersten-alvsjo",
+  "0180C2940": "sodermalm",
+  "0180C3050": "sodermalm",
+  "0180C2930": "sodermalm",
+  "0180C3000": "sodermalm",
+  "0180C2920": "hagersten-alvsjo",
+  "0180C3070": "hagersten-alvsjo",
+  "0180C3080": "sodermalm",
+  "0180C2953": "hagersten-alvsjo",
+  "0180C2800": "enskede-arsta-vantor",
+  "0180C3110": "sodermalm",
+  "0180C3040": "sodermalm",
+  "0180C3060": "hagersten-alvsjo",
+  "0180C2990": "hagersten-alvsjo",
+  "0180C3100": "sodermalm",
+  "0180C3010": "hagersten-alvsjo",
+  "0180C3130": "sodermalm",
+  "0180C3140": "sodermalm",
+  "0180C3150": "sodermalm",
+  "0180C3170": "sodermalm",
+  "0180C3430": "sodermalm",
+  "0180C3320": "sodermalm",
+  "0180C3270": "hagersten-alvsjo",
+  "0180C3370": "sodermalm",
+  "0180C3460": "sodermalm",
+  "0180C3470": "sodermalm",
+  "0180C3450": "sodermalm",
+  "0180C3360": "sodermalm",
+  "0180C3500": "sodermalm",
+  "0180C3490": "sodermalm",
+  "0180C3330": "hagersten-alvsjo",
+  "0180C3480": "sodermalm",
+  "0180C3550": "sodermalm",
+  "0180C3680": "sodermalm",
+  "0180C3540": "sodermalm",
+  "0180C3560": "kungsholmen",
+  "0180C3410": "bromma",
+  "0180C3650": "sodermalm",
+  "0180C3740": "sodermalm",
+  "0180C3770": "sodermalm",
+  "0180C3860": "kungsholmen",
+  "0180C3830": "kungsholmen",
+  "0180C3760": "bromma",
+  "0180C3610": "bromma",
+  "0180C3900": "kungsholmen",
+  "0180C3950": "kungsholmen",
+  "0180C3880": "sodermalm",
+  "0180C3870": "kungsholmen",
+  "0180C3930": "kungsholmen",
+  "0180C3960": "kungsholmen",
+  "0180C3980": "kungsholmen",
+  "0180C3910": "bromma",
+  "0180C4100": "kungsholmen",
+  "0180C3970": "kungsholmen",
+  "0180C3940": "sodermalm",
+  "0180C3990": "kungsholmen",
+  "0180C4000": "bromma",
+  "0180C4030": "kungsholmen",
+  "0180C4150": "kungsholmen",
+  "0180C4230": "kungsholmen",
+  "0180C4110": "bromma",
+  "0180C4240": "kungsholmen",
+  "0180C4250": "kungsholmen",
+  "0180C4060": "bromma",
+  "0180C4080": "bromma",
+  "0180C4290": "kungsholmen",
+  "0180C4280": "kungsholmen",
+  "0180C4190": "bromma",
+  "0180C4210": "norra-innerstaden",
+  "0180C4260": "bromma",
+  "0180C4320": "kungsholmen",
+  "0180C4370": "kungsholmen",
+  "0180C4340": "norra-innerstaden",
+  "0180C4360": "kungsholmen",
+  "0180C4380": "norra-innerstaden",
+  "0180C4540": "norra-innerstaden",
+  "0180C4500": "norra-innerstaden",
+  "0180C4600": "kungsholmen",
+  "0180C4390": "norra-innerstaden",
+  "0180C4560": "norra-innerstaden",
+  "0180C4660": "norra-innerstaden",
+  "0180C4470": "kungsholmen",
+  "0180C4800": "norra-innerstaden",
+  "0180C4810": "norra-innerstaden",
+  "0180C4680": "bromma",
+  "0180C4850": "norra-innerstaden",
+  "0180C4740": "norra-innerstaden",
+  "0180C4830": "norra-innerstaden",
+  "0180C4820": "norra-innerstaden",
+  "0180C4840": "norra-innerstaden",
+  "0180C4860": "norra-innerstaden",
+  "0180C4460": "bromma",
+  "0180C4570": "bromma",
+  "0180C4890": "norra-innerstaden",
+  "0180C4880": "norra-innerstaden",
+  "0180C4920": "norra-innerstaden",
+  "0180C4770": "norra-innerstaden",
+  "0180C4940": "bromma",
+  "0180C5020": "norra-innerstaden",
+  "0180C5000": "norra-innerstaden",
+  "0180C5030": "norra-innerstaden",
+  "0180C5010": "norra-innerstaden",
+  "0180C4930": "norra-innerstaden",
+  "0180C4950": "bromma",
+  "0180C5060": "norra-innerstaden",
+  "0180C5110": "norra-innerstaden",
+  "0180C5090": "norra-innerstaden",
+  "0180C4990": "norra-innerstaden",
+  "0180C5070": "norra-innerstaden",
+  "0180C5080": "norra-innerstaden",
+  "0180C5050": "norra-innerstaden",
+  "0180C5140": "norra-innerstaden",
+  "0180C5130": "norra-innerstaden",
+  "0180C5040": "norra-innerstaden",
+  "0180C4970": "bromma",
+  "0180C5120": "norra-innerstaden",
+  "0180C5170": "norra-innerstaden",
+  "0180C5220": "norra-innerstaden",
+  "0180C5200": "norra-innerstaden",
+  "0180C5100": "norra-innerstaden",
+  "0180C5280": "norra-innerstaden",
+  "0180C5190": "bromma",
+  "0180C5380": "norra-innerstaden",
+  "0180C5263": "norra-innerstaden",
+  "0180C5432": "norra-innerstaden",
+  "0180C5390": "norra-innerstaden",
+  "0180C5370": "norra-innerstaden",
+  "0180C5400": "bromma",
+  "0180C5240": "hasselby-vallingby",
+  "0180C5500": "bromma",
+  "0180C5431": "norra-innerstaden",
+  "0180C5320": "bromma",
+  "0180C5460": "bromma",
+  "0180C5440": "norra-innerstaden",
+  "0180C5490": "norra-innerstaden",
+  "0180C5410": "hasselby-vallingby",
+  "0180C5530": "norra-innerstaden",
+  "0180C5450": "hasselby-vallingby",
+  "0180C5340": "bromma",
+  "0180C5540": "bromma",
+  "0180C5651": "norra-innerstaden",
+  "0180C5580": "hasselby-vallingby",
+  "0180C5560": "bromma",
+  "0180C5670": "hasselby-vallingby",
+  "0180C5692": "bromma",
+  "0180C5653": "norra-innerstaden",
+  "0180C5730": "hasselby-vallingby",
+  "0180C5760": "hasselby-vallingby",
+  "0180C5720": "hasselby-vallingby",
+  "0180C5740": "bromma",
+  "0180C5790": "hasselby-vallingby",
+  "0180C5800": "hasselby-vallingby",
+  "0180C5810": "hasselby-vallingby",
+  "0180C5900": "norra-innerstaden",
+  "0180C5820": "jarva",
+  "0180C5830": "hasselby-vallingby",
+  "0180C5862": "jarva",
+  "0180C6360": "jarva",
+  "0180C5920": "hasselby-vallingby",
+  "0180C5930": "hasselby-vallingby",
+  "0180C5770": "norra-innerstaden",
+  "0180C5940": "hasselby-vallingby",
+  "0180C5890": "hasselby-vallingby",
+  "0180C5950": "hasselby-vallingby",
+  "0180C5910": "jarva",
+  "0180C6380": "jarva",
+  "0180C5980": "hasselby-vallingby",
+  "0180C5861": "jarva",
+  "0180C5960": "jarva",
+  "0180C5970": "jarva",
+  "0180C5990": "hasselby-vallingby",
+  "0180C6000": "jarva",
+  "0180C6010": "hasselby-vallingby",
+  "0180C6020": "hasselby-vallingby",
+  "0180C6030": "jarva",
+  "0180C6070": "jarva",
+  "0180C6040": "jarva",
+  "0180C6060": "hasselby-vallingby",
+  "0180C6120": "jarva",
+  "0180C6340": "jarva",
+  "0180C6100": "jarva",
+  "0180C6090": "jarva",
+  "0180C6080": "jarva",
+  "0180C6152": "jarva",
+  "0180C6160": "jarva",
+  "0180C6170": "jarva",
+  "0180C6140": "jarva",
+  "0180C6151": "jarva",
+  "0180C6050": "hasselby-vallingby",
+  "0180C6230": "jarva",
+  "0180C6210": "jarva",
+  "0180C6190": "hasselby-vallingby",
+  "0180C6220": "jarva",
+  "0180C6410": "jarva",
+  "0180C6420": "jarva",
+  "0180C6400": "jarva",
+  "0180C6430": "jarva",
+  "0180C6130": "jarva",
+  "0180C6260": "jarva",
+  "0180C6270": "jarva",
+  "0180C6240": "jarva",
+  "0180C6200": "jarva",
+  "0180C6280": "jarva",
+  "0180C6300": "jarva",
+  "0180C6320": "jarva",
+  "0180C6290": "jarva",
+  "0180C6350": "jarva",
+  "0180C6310": "jarva",
+  "0180C6330": "jarva",
+  "0180C6370": "jarva",
+  "0180C6390": "jarva",
+  "0180C6440": "jarva"
+ },
+ "regso": {
+  "0180R031": {
+   "name": "Hagsätra",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C1360",
+    "0180C1350",
+    "0180C1380",
+    "0180C1340",
+    "0180C1500"
+   ]
+  },
+  "0180R032": {
+   "name": "Hammarbyhöjden",
+   "borough": "skarpnack",
+   "desos": [
+    "0180C2670",
+    "0180C2410",
+    "0180C2400",
+    "0180C2460",
+    "0180C2650",
+    "0180C2610"
+   ]
+  },
+  "0180R033": {
+   "name": "Hedvig Eleonora",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C4750",
+    "0180C4960",
+    "0180C4430",
+    "0180C4690",
+    "0180C4340",
+    "0180C4540",
+    "0180C4830",
+    "0180C4890"
+   ]
+  },
+  "0180R034": {
+   "name": "Herrängen",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C1670",
+    "0180C1700"
+   ]
+  },
+  "0180R042": {
+   "name": "Högdalen",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C1440",
+    "0180C1450",
+    "0180C1370",
+    "0180C1320",
+    "0180C1460"
+   ]
+  },
+  "0180R060": {
+   "name": "Mariehäll",
+   "borough": "bromma",
+   "desos": [
+    "0180C5620",
+    "0180C5550",
+    "0180C5691",
+    "0180C5752",
+    "0180C5751",
+    "0180C5692"
+   ]
+  },
+  "0180R061": {
+   "name": "Mellersta Högalid",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3640",
+    "0180C3400",
+    "0180C3580",
+    "0180C3370",
+    "0180C3490",
+    "0180C3480"
+   ]
+  },
+  "0180R062": {
+   "name": "Midsommarkransen",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2720",
+    "0180C2630",
+    "0180C2620",
+    "0180C2740",
+    "0180C2770",
+    "0180C2730"
+   ]
+  },
+  "0180R071": {
+   "name": "Norra Ängby",
+   "borough": "bromma",
+   "desos": [
+    "0180C5150",
+    "0180C5250",
+    "0180C4970"
+   ]
+  },
+  "0180R086": {
+   "name": "Stora Mossen",
+   "borough": "bromma",
+   "desos": [
+    "0180C4110"
+   ]
+  },
+  "0180R087": {
+   "name": "Storkyrkan",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3880",
+    "0180C3940"
+   ]
+  },
+  "0180R088": {
+   "name": "Stureby",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C1650",
+    "0180C1840",
+    "0180C1710",
+    "0180C1930"
+   ]
+  },
+  "0180R097": {
+   "name": "Södra Sofia",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3202",
+    "0180C3201",
+    "0180C3240",
+    "0180C3020",
+    "0180C2940",
+    "0180C3050",
+    "0180C3040",
+    "0180C3150"
+   ]
+  },
+  "0180R098": {
+   "name": "Södra Station",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3350",
+    "0180C3280",
+    "0180C3420"
+   ]
+  },
+  "0180R099": {
+   "name": "Södra Ängby",
+   "borough": "bromma",
+   "desos": [
+    "0180C4510"
+   ]
+  },
+  "0180R100": {
+   "name": "Tallkrogen",
+   "borough": "farsta",
+   "desos": [
+    "0180C1570",
+    "0180C1760",
+    "0180C1630"
+   ]
+  },
+  "0180R107": {
+   "name": "Vinsta",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5880",
+    "0180C5930",
+    "0180C5940"
+   ]
+  },
+  "0180R108": {
+   "name": "Vårberg",
+   "borough": "skarholmen",
+   "desos": [
+    "0180C1720",
+    "0180C1592",
+    "0180C1560",
+    "0180C1591",
+    "0180C1730",
+    "0180C1690"
+   ]
+  },
+  "0180R109": {
+   "name": "Vällingby",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5590",
+    "0180C5700",
+    "0180C5730",
+    "0180C5720",
+    "0180C5800"
+   ]
+  },
+  "0180R122": {
+   "name": "Östberga",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C2070",
+    "0180C2160",
+    "0180C2340"
+   ]
+  },
+  "0180R123": {
+   "name": "Östra Farsta Strand",
+   "borough": "farsta",
+   "desos": [
+    "0180C1020",
+    "0180C1010"
+   ]
+  },
+  "0180R124": {
+   "name": "Östra Katarina",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3190",
+    "0180C3290",
+    "0180C3340",
+    "0180C3690",
+    "0180C3750",
+    "0180C3250",
+    "0180C3520",
+    "0180C3110",
+    "0180C3140",
+    "0180C3170",
+    "0180C3430",
+    "0180C3450"
+   ]
+  },
+  "0180R125": {
+   "name": "Östra Matteus",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C5310",
+    "0180C5300",
+    "0180C5230",
+    "0180C4860",
+    "0180C5110",
+    "0180C5040",
+    "0180C5370"
+   ]
+  },
+  "0180R021": {
+   "name": "Farsta",
+   "borough": "farsta",
+   "desos": [
+    "0180C1101",
+    "0180C1040",
+    "0180C1070",
+    "0180C1080",
+    "0180C1060",
+    "0180C1090",
+    "0180C1102",
+    "0180C1110",
+    "0180C1130"
+   ]
+  },
+  "0180R022": {
+   "name": "Flysta",
+   "borough": "jarva",
+   "desos": [
+    "0180C5820"
+   ]
+  },
+  "0180R023": {
+   "name": "Fredhäll",
+   "borough": "kungsholmen",
+   "desos": [
+    "0180C4090",
+    "0180C4070",
+    "0180C3950",
+    "0180C4030"
+   ]
+  },
+  "0180R035": {
+   "name": "Hjorthagen-Värtahamnen",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C5570",
+    "0180C5652",
+    "0180C5520",
+    "0180C5530",
+    "0180C5651",
+    "0180C5653"
+   ]
+  },
+  "0180R036": {
+   "name": "Husby",
+   "borough": "jarva",
+   "desos": [
+    "0180C6360",
+    "0180C6380",
+    "0180C6400",
+    "0180C6350",
+    "0180C6310",
+    "0180C6370"
+   ]
+  },
+  "0180R043": {
+   "name": "Höglandet",
+   "borough": "bromma",
+   "desos": [
+    "0180C3760"
+   ]
+  },
+  "0180R044": {
+   "name": "Hökarängen",
+   "borough": "farsta",
+   "desos": [
+    "0180C1250",
+    "0180C1260",
+    "0180C1290",
+    "0180C1180",
+    "0180C1220"
+   ]
+  },
+  "0180R045": {
+   "name": "Johanneshov",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C2520",
+    "0180C2690",
+    "0180C2360",
+    "0180C2390"
+   ]
+  },
+  "0180R063": {
+   "name": "Mälarhöjden",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2300",
+    "0180C2580"
+   ]
+  },
+  "0180R064": {
+   "name": "Nockeby",
+   "borough": "bromma",
+   "desos": [
+    "0180C3850",
+    "0180C4000"
+   ]
+  },
+  "0180R065": {
+   "name": "Nockebyhov-Olovslund",
+   "borough": "bromma",
+   "desos": [
+    "0180C4200",
+    "0180C4060"
+   ]
+  },
+  "0180R072": {
+   "name": "Nälsta",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5840",
+    "0180C5870",
+    "0180C5920"
+   ]
+  },
+  "0180R073": {
+   "name": "Oscars kyrka",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C4640",
+    "0180C4720",
+    "0180C4790",
+    "0180C4310",
+    "0180C4450",
+    "0180C4210",
+    "0180C4380",
+    "0180C4390",
+    "0180C4560",
+    "0180C4810"
+   ]
+  },
+  "0180R074": {
+   "name": "Reimersholme-Långholmen",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3780",
+    "0180C3590"
+   ]
+  },
+  "0180R075": {
+   "name": "Riksby-Åkeshov",
+   "borough": "bromma",
+   "desos": [
+    "0180C4590",
+    "0180C4530",
+    "0180C5340"
+   ]
+  },
+  "0180R089": {
+   "name": "Sundby",
+   "borough": "jarva",
+   "desos": [
+    "0180C5862",
+    "0180C5861"
+   ]
+  },
+  "0180R090": {
+   "name": "Svedmyra",
+   "borough": "farsta",
+   "desos": [
+    "0180C1580",
+    "0180C1790"
+   ]
+  },
+  "0180R091": {
+   "name": "Sydvästra Skarpnäcks gård-Orhem",
+   "borough": "skarpnack",
+   "desos": [
+    "0180C1190"
+   ]
+  },
+  "0180R101": {
+   "name": "Tekniska Högskolan",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C5432",
+    "0180C5431",
+    "0180C5490"
+   ]
+  },
+  "0180R102": {
+   "name": "Tensta",
+   "borough": "jarva",
+   "desos": [
+    "0180C6250",
+    "0180C6170",
+    "0180C6140",
+    "0180C6230",
+    "0180C6210",
+    "0180C6220",
+    "0180C6260",
+    "0180C6270",
+    "0180C6240"
+   ]
+  },
+  "0180R103": {
+   "name": "Traneberg",
+   "borough": "bromma",
+   "desos": [
+    "0180C4350",
+    "0180C4670",
+    "0180C4180",
+    "0180C4440",
+    "0180C4680"
+   ]
+  },
+  "0180R110": {
+   "name": "Västberga",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2450",
+    "0180C2380",
+    "0180C2570",
+    "0180C2470"
+   ]
+  },
+  "0180R111": {
+   "name": "Västertorp",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2280",
+    "0180C2270",
+    "0180C2320",
+    "0180C2420"
+   ]
+  },
+  "0180R112": {
+   "name": "Västra Farsta Strand-Farstanäset",
+   "borough": "farsta",
+   "desos": [
+    "0180C1030"
+   ]
+  },
+  "0180R126": {
+   "name": "Östra Sankt Göran",
+   "borough": "kungsholmen",
+   "desos": [
+    "0180C4130",
+    "0180C4490",
+    "0180C4410",
+    "0180C4420",
+    "0180C4100",
+    "0180C4150",
+    "0180C4240",
+    "0180C4280",
+    "0180C4360",
+    "0180C4600"
+   ]
+  },
+  "0180R078": {
+   "name": "Rågsved",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C1160",
+    "0180C1280",
+    "0180C1300",
+    "0180C1140",
+    "0180C1200",
+    "0180C1230",
+    "0180C1330"
+   ]
+  },
+  "0180R127": {
+   "name": "Östra Skarpnäcks gård-Flaten-Skrubba",
+   "borough": "skarpnack",
+   "desos": [
+    "0180C1210"
+   ]
+  },
+  "0180R104": {
+   "name": "Ulvsunda",
+   "borough": "bromma",
+   "desos": [
+    "0180C4480",
+    "0180C4570"
+   ]
+  },
+  "0180R105": {
+   "name": "Ulvsunda Industriområde",
+   "borough": "bromma",
+   "desos": [
+    "0180C5190",
+    "0180C5320"
+   ]
+  },
+  "0180R106": {
+   "name": "Universitetet",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C5900",
+    "0180C5770"
+   ]
+  },
+  "0180R037": {
+   "name": "Hägersten",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2640",
+    "0180C2900",
+    "0180C2760",
+    "0180C2600",
+    "0180C2820",
+    "0180C2920"
+   ]
+  },
+  "0180R038": {
+   "name": "Hägerstensåsen",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2440",
+    "0180C2310",
+    "0180C2510",
+    "0180C2680"
+   ]
+  },
+  "0180R039": {
+   "name": "Hässelby Gård",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5780",
+    "0180C5710",
+    "0180C5670",
+    "0180C5760",
+    "0180C5790",
+    "0180C5810"
+   ]
+  },
+  "0180R094": {
+   "name": "Södra Hammarbyhamnen",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C2980",
+    "0180C3300",
+    "0180C2960",
+    "0180C2881",
+    "0180C2790",
+    "0180C2810",
+    "0180C2860",
+    "0180C2882",
+    "0180C2830",
+    "0180C2840",
+    "0180C3100"
+   ]
+  },
+  "0180R095": {
+   "name": "Södra Högalid",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3310",
+    "0180C3210",
+    "0180C3080"
+   ]
+  },
+  "0180R096": {
+   "name": "Södra Johannes",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C4710"
+   ]
+  },
+  "0180R053": {
+   "name": "Liljeholmen",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2783",
+    "0180C3230",
+    "0180C3120",
+    "0180C2951",
+    "0180C2781",
+    "0180C2782",
+    "0180C2952",
+    "0180C3070",
+    "0180C2953",
+    "0180C3060",
+    "0180C2990",
+    "0180C3010"
+   ]
+  },
+  "0180R054": {
+   "name": "Lilla Essingen",
+   "borough": "kungsholmen",
+   "desos": [
+    "0180C3890",
+    "0180C3860",
+    "0180C3830"
+   ]
+  },
+  "0180R055": {
+   "name": "Liseberg",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2100"
+   ]
+  },
+  "0180R066": {
+   "name": "Norra Adolf Fredrik",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C4760",
+    "0180C4650",
+    "0180C4840"
+   ]
+  },
+  "0180R067": {
+   "name": "Norra Högalid",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3810",
+    "0180C3790",
+    "0180C3800",
+    "0180C3620",
+    "0180C3660",
+    "0180C3630",
+    "0180C3670",
+    "0180C3700",
+    "0180C3470",
+    "0180C3500"
+   ]
+  },
+  "0180R068": {
+   "name": "Norra Johannes",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C5360",
+    "0180C5270",
+    "0180C4990",
+    "0180C5140",
+    "0180C5220",
+    "0180C5440"
+   ]
+  },
+  "0180R056": {
+   "name": "Långbro",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C1970",
+    "0180C1820",
+    "0180C1830",
+    "0180C1920"
+   ]
+  },
+  "0180R057": {
+   "name": "Långsjö",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C1430",
+    "0180C1620"
+   ]
+  },
+  "0180R058": {
+   "name": "Mariatorget",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3710",
+    "0180C3820",
+    "0180C3570",
+    "0180C3440",
+    "0180C3600",
+    "0180C3460",
+    "0180C3550",
+    "0180C3680",
+    "0180C3740",
+    "0180C3770"
+   ]
+  },
+  "0180R059": {
+   "name": "Marieberg",
+   "borough": "kungsholmen",
+   "desos": [
+    "0180C4020",
+    "0180C3900"
+   ]
+  },
+  "0180R040": {
+   "name": "Hässelby Strand",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5660",
+    "0180C5470",
+    "0180C5450",
+    "0180C5580"
+   ]
+  },
+  "0180R041": {
+   "name": "Hässelby Villastad",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5640",
+    "0180C5850",
+    "0180C5830",
+    "0180C5890",
+    "0180C5950",
+    "0180C5980",
+    "0180C6010",
+    "0180C6060",
+    "0180C6050",
+    "0180C6190"
+   ]
+  },
+  "0180R076": {
+   "name": "Rinkeby",
+   "borough": "jarva",
+   "desos": [
+    "0180C6110",
+    "0180C6180",
+    "0180C6070",
+    "0180C6120",
+    "0180C6100",
+    "0180C6090",
+    "0180C6152",
+    "0180C6160",
+    "0180C6151"
+   ]
+  },
+  "0180R077": {
+   "name": "Råcksta",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5421",
+    "0180C5422",
+    "0180C5600",
+    "0180C5480",
+    "0180C5510",
+    "0180C5680"
+   ]
+  },
+  "0180R113": {
+   "name": "Västra Katarina",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3180",
+    "0180C3160",
+    "0180C3260",
+    "0180C2910",
+    "0180C2930",
+    "0180C3000",
+    "0180C3130",
+    "0180C3320"
+   ]
+  },
+  "0180R069": {
+   "name": "Norra Skarpnäcks Gård",
+   "borough": "skarpnack",
+   "desos": [
+    "0180C1610",
+    "0180C1810",
+    "0180C1510",
+    "0180C1520"
+   ]
+  },
+  "0180R070": {
+   "name": "Norra Sofia",
+   "borough": "sodermalm",
+   "desos": [
+    "0180C3380",
+    "0180C3390",
+    "0180C3360",
+    "0180C3540",
+    "0180C3650"
+   ]
+  },
+  "0180R092": {
+   "name": "Sätra",
+   "borough": "skarholmen",
+   "desos": [
+    "0180C1910",
+    "0180C2010",
+    "0180C2060",
+    "0180C2220"
+   ]
+  },
+  "0180R093": {
+   "name": "Södra Adolf Fredrik",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C4620",
+    "0180C4400",
+    "0180C4500"
+   ]
+  },
+  "0180R001": {
+   "name": "Abrahamsberg",
+   "borough": "bromma",
+   "desos": [
+    "0180C4050",
+    "0180C4190"
+   ]
+  },
+  "0180R010": {
+   "name": "Bredäng",
+   "borough": "skarholmen",
+   "desos": [
+    "0180C2150",
+    "0180C2250",
+    "0180C2290",
+    "0180C2500",
+    "0180C2550"
+   ]
+  },
+  "0180R011": {
+   "name": "Bromma kyrka",
+   "borough": "bromma",
+   "desos": [
+    "0180C5400",
+    "0180C5460"
+   ]
+  },
+  "0180R002": {
+   "name": "Akalla",
+   "borough": "jarva",
+   "desos": [
+    "0180C6340",
+    "0180C6410",
+    "0180C6420",
+    "0180C6430",
+    "0180C6440"
+   ]
+  },
+  "0180R003": {
+   "name": "Alvik",
+   "borough": "bromma",
+   "desos": [
+    "0180C4080"
+   ]
+  },
+  "0180R004": {
+   "name": "Aspudden",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C3090",
+    "0180C2970",
+    "0180C3030",
+    "0180C2890",
+    "0180C2850",
+    "0180C2870"
+   ]
+  },
+  "0180R005": {
+   "name": "Bagarmossen",
+   "borough": "skarpnack",
+   "desos": [
+    "0180C1750",
+    "0180C1800",
+    "0180C1740",
+    "0180C2040",
+    "0180C1900",
+    "0180C1950",
+    "0180C1940"
+   ]
+  },
+  "0180R006": {
+   "name": "Bandhagen",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C1470",
+    "0180C1480",
+    "0180C1540",
+    "0180C1530"
+   ]
+  },
+  "0180R007": {
+   "name": "Beckomberga",
+   "borough": "bromma",
+   "desos": [
+    "0180C5630",
+    "0180C5500",
+    "0180C5540"
+   ]
+  },
+  "0180R008": {
+   "name": "Björkhagen",
+   "borough": "skarpnack",
+   "desos": [
+    "0180C2330",
+    "0180C2370",
+    "0180C2490",
+    "0180C2660"
+   ]
+  },
+  "0180R009": {
+   "name": "Blackeberg",
+   "borough": "bromma",
+   "desos": [
+    "0180C5160",
+    "0180C5180",
+    "0180C4460",
+    "0180C4940",
+    "0180C4950"
+   ]
+  },
+  "0180R012": {
+   "name": "Bromsten",
+   "borough": "jarva",
+   "desos": [
+    "0180C5910",
+    "0180C6000",
+    "0180C6040"
+   ]
+  },
+  "0180R013": {
+   "name": "Bällsta",
+   "borough": "bromma",
+   "desos": [
+    "0180C5740"
+   ]
+  },
+  "0180R014": {
+   "name": "Djurgården",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C3920"
+   ]
+  },
+  "0180R015": {
+   "name": "Eneby",
+   "borough": "bromma",
+   "desos": [
+    "0180C5560"
+   ]
+  },
+  "0180R016": {
+   "name": "Engelbrekts kyrka",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C4870",
+    "0180C4770",
+    "0180C5010",
+    "0180C5050",
+    "0180C5120",
+    "0180C5280",
+    "0180C5390"
+   ]
+  },
+  "0180R017": {
+   "name": "Enskede Gård",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C2170",
+    "0180C2350"
+   ]
+  },
+  "0180R018": {
+   "name": "Enskededalen",
+   "borough": "skarpnack",
+   "desos": [
+    "0180C1990",
+    "0180C1960"
+   ]
+  },
+  "0180R019": {
+   "name": "Enskedefältet",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C2190"
+   ]
+  },
+  "0180R020": {
+   "name": "Fagersjö",
+   "borough": "farsta",
+   "desos": [
+    "0180C1150",
+    "0180C1120"
+   ]
+  },
+  "0180R024": {
+   "name": "Fruängen",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2030",
+    "0180C1980",
+    "0180C2080",
+    "0180C2050",
+    "0180C2090"
+   ]
+  },
+  "0180R025": {
+   "name": "Gamla Enskede",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C2120",
+    "0180C1850",
+    "0180C1890",
+    "0180C2000",
+    "0180C2200",
+    "0180C2210",
+    "0180C2260"
+   ]
+  },
+  "0180R026": {
+   "name": "Grimsta",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5610",
+    "0180C5240",
+    "0180C5410"
+   ]
+  },
+  "0180R027": {
+   "name": "Gröndal",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C3510",
+    "0180C3220",
+    "0180C3530",
+    "0180C3270",
+    "0180C3330"
+   ]
+  },
+  "0180R028": {
+   "name": "Gubbängen",
+   "borough": "farsta",
+   "desos": [
+    "0180C1390",
+    "0180C1400",
+    "0180C1410"
+   ]
+  },
+  "0180R029": {
+   "name": "Gustav Vasa",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C4630",
+    "0180C4900",
+    "0180C4610",
+    "0180C4800",
+    "0180C4880",
+    "0180C5020",
+    "0180C5000",
+    "0180C5090",
+    "0180C5130"
+   ]
+  },
+  "0180R030": {
+   "name": "Gärdet",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C5290",
+    "0180C5210",
+    "0180C5330",
+    "0180C5350",
+    "0180C4910",
+    "0180C4700",
+    "0180C4930",
+    "0180C5070",
+    "0180C5080",
+    "0180C5170",
+    "0180C5200",
+    "0180C5100",
+    "0180C5380"
+   ]
+  },
+  "0180R046": {
+   "name": "Kista",
+   "borough": "jarva",
+   "desos": [
+    "0180C6200",
+    "0180C6280",
+    "0180C6300",
+    "0180C6320",
+    "0180C6290",
+    "0180C6330",
+    "0180C6390"
+   ]
+  },
+  "0180R047": {
+   "name": "Klara-Jacob",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C4040"
+   ]
+  },
+  "0180R048": {
+   "name": "Kristineberg",
+   "borough": "kungsholmen",
+   "desos": [
+    "0180C4580",
+    "0180C4270",
+    "0180C4170",
+    "0180C4330",
+    "0180C4250"
+   ]
+  },
+  "0180R049": {
+   "name": "Kungsholm",
+   "borough": "kungsholmen",
+   "desos": [
+    "0180C4120",
+    "0180C4160",
+    "0180C4220",
+    "0180C4010",
+    "0180C4140",
+    "0180C3930",
+    "0180C3960",
+    "0180C3980",
+    "0180C3970",
+    "0180C3990",
+    "0180C4230",
+    "0180C4290",
+    "0180C4370"
+   ]
+  },
+  "0180R050": {
+   "name": "Kälvesta",
+   "borough": "hasselby-vallingby",
+   "desos": [
+    "0180C5990",
+    "0180C6020"
+   ]
+  },
+  "0180R051": {
+   "name": "Kärrtorp",
+   "borough": "skarpnack",
+   "desos": [
+    "0180C2230",
+    "0180C2130",
+    "0180C2240"
+   ]
+  },
+  "0180R052": {
+   "name": "Larsboda",
+   "borough": "farsta",
+   "desos": [
+    "0180C1050"
+   ]
+  },
+  "0180R079": {
+   "name": "Skärholmen",
+   "borough": "skarholmen",
+   "desos": [
+    "0180C1860",
+    "0180C1680",
+    "0180C1490",
+    "0180C1660",
+    "0180C1780"
+   ]
+  },
+  "0180R080": {
+   "name": "Sköndal",
+   "borough": "farsta",
+   "desos": [
+    "0180C1420",
+    "0180C1310",
+    "0180C1241",
+    "0180C1170",
+    "0180C1242",
+    "0180C1270"
+   ]
+  },
+  "0180R081": {
+   "name": "Smedslätten",
+   "borough": "bromma",
+   "desos": [
+    "0180C3720",
+    "0180C3410"
+   ]
+  },
+  "0180R082": {
+   "name": "Solberga",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C2140",
+    "0180C2112",
+    "0180C1873",
+    "0180C2020",
+    "0180C2113",
+    "0180C1871",
+    "0180C1872",
+    "0180C2180",
+    "0180C2111"
+   ]
+  },
+  "0180R083": {
+   "name": "Solhem-Lunda",
+   "borough": "jarva",
+   "desos": [
+    "0180C5960",
+    "0180C5970",
+    "0180C6030",
+    "0180C6080",
+    "0180C6130"
+   ]
+  },
+  "0180R084": {
+   "name": "Stadshagen",
+   "borough": "kungsholmen",
+   "desos": [
+    "0180C4520",
+    "0180C4550",
+    "0180C4730",
+    "0180C4320",
+    "0180C4470"
+   ]
+  },
+  "0180R085": {
+   "name": "Stora Essingen",
+   "borough": "kungsholmen",
+   "desos": [
+    "0180C3730",
+    "0180C3560",
+    "0180C3870"
+   ]
+  },
+  "0180R114": {
+   "name": "Västra Matteus",
+   "borough": "norra-innerstaden",
+   "desos": [
+    "0180C5264",
+    "0180C4780",
+    "0180C4980",
+    "0180C5261",
+    "0180C5262",
+    "0180C4660",
+    "0180C4850",
+    "0180C4740",
+    "0180C4820",
+    "0180C4920",
+    "0180C5030",
+    "0180C5060",
+    "0180C5263"
+   ]
+  },
+  "0180R115": {
+   "name": "Åkeslund",
+   "borough": "bromma",
+   "desos": [
+    "0180C4300",
+    "0180C4260"
+   ]
+  },
+  "0180R116": {
+   "name": "Ålsten",
+   "borough": "bromma",
+   "desos": [
+    "0180C3840",
+    "0180C3610"
+   ]
+  },
+  "0180R117": {
+   "name": "Årsta",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C2530",
+    "0180C2590",
+    "0180C2431",
+    "0180C2432",
+    "0180C2480",
+    "0180C2540",
+    "0180C2560",
+    "0180C2700",
+    "0180C2710",
+    "0180C2750",
+    "0180C2800"
+   ]
+  },
+  "0180R118": {
+   "name": "Älvsjö",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C1600"
+   ]
+  },
+  "0180R119": {
+   "name": "Äppelviken",
+   "borough": "bromma",
+   "desos": [
+    "0180C3910"
+   ]
+  },
+  "0180R120": {
+   "name": "Örby",
+   "borough": "enskede-arsta-vantor",
+   "desos": [
+    "0180C1550",
+    "0180C1640",
+    "0180C1770"
+   ]
+  },
+  "0180R121": {
+   "name": "Örby Slott",
+   "borough": "hagersten-alvsjo",
+   "desos": [
+    "0180C1880"
+   ]
+  }
+ },
+ "deso2018": {
+  "0180C3420": {
+   "borough": "sodermalm",
+   "regso": "0180R098"
+  },
+  "0180C3440": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C3400": {
+   "borough": "sodermalm",
+   "regso": "0180R061"
+  },
+  "0180C3650": {
+   "borough": "sodermalm",
+   "regso": "0180R070"
+  },
+  "0180C1060": {
+   "borough": "farsta",
+   "regso": "0180R021"
+  },
+  "0180C1120": {
+   "borough": "farsta",
+   "regso": "0180R020"
+  },
+  "0180C1450": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R042"
+  },
+  "0180C1430": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R057"
+  },
+  "0180C1420": {
+   "borough": "farsta",
+   "regso": "0180R080"
+  },
+  "0180C1460": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R042"
+  },
+  "0180C1540": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R006"
+  },
+  "0180C1510": {
+   "borough": "skarpnack",
+   "regso": "0180R069"
+  },
+  "0180C1550": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R120"
+  },
+  "0180C1570": {
+   "borough": "farsta",
+   "regso": "0180R100"
+  },
+  "0180C1580": {
+   "borough": "farsta",
+   "regso": "0180R090"
+  },
+  "0180C2100": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R055"
+  },
+  "0180C2200": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R025"
+  },
+  "0180C2120": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R025"
+  },
+  "0180C1850": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R025"
+  },
+  "0180C2140": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R082"
+  },
+  "0180C4090": {
+   "borough": "kungsholmen",
+   "regso": "0180R023"
+  },
+  "0180C4920": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C1110": {
+   "borough": "farsta",
+   "regso": "0180R021"
+  },
+  "0180C1390": {
+   "borough": "farsta",
+   "regso": "0180R028"
+  },
+  "0180C1610": {
+   "borough": "skarpnack",
+   "regso": "0180R069"
+  },
+  "0180C1720": {
+   "borough": "skarholmen",
+   "regso": "0180R108"
+  },
+  "0180C2110": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R082"
+  },
+  "0180C2280": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R111"
+  },
+  "0180C2640": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R037"
+  },
+  "0180C2690": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R045"
+  },
+  "0180C3250": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3280": {
+   "borough": "sodermalm",
+   "regso": "0180R098"
+  },
+  "0180C3260": {
+   "borough": "sodermalm",
+   "regso": "0180R113"
+  },
+  "0180C3540": {
+   "borough": "sodermalm",
+   "regso": "0180R070"
+  },
+  "0180C3610": {
+   "borough": "bromma",
+   "regso": "0180R116"
+  },
+  "0180C3890": {
+   "borough": "kungsholmen",
+   "regso": "0180R054"
+  },
+  "0180C3840": {
+   "borough": "bromma",
+   "regso": "0180R116"
+  },
+  "0180C3850": {
+   "borough": "bromma",
+   "regso": "0180R064"
+  },
+  "0180C4040": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R087"
+  },
+  "0180C4400": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R093"
+  },
+  "0180C4520": {
+   "borough": "kungsholmen",
+   "regso": "0180R084"
+  },
+  "0180C4640": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4550": {
+   "borough": "kungsholmen",
+   "regso": "0180R084"
+  },
+  "0180C4620": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R093"
+  },
+  "0180C4730": {
+   "borough": "kungsholmen",
+   "regso": "0180R084"
+  },
+  "0180C4720": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4780": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C4750": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R033"
+  },
+  "0180C4630": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C4760": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R066"
+  },
+  "0180C4670": {
+   "borough": "bromma",
+   "regso": "0180R103"
+  },
+  "0180C4510": {
+   "borough": "bromma",
+   "regso": "0180R099"
+  },
+  "0180C4910": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C4980": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C5050": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R016"
+  },
+  "0180C5290": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5180": {
+   "borough": "bromma",
+   "regso": "0180R009"
+  },
+  "0180C4700": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5430": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R101"
+  },
+  "0180C5470": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R040"
+  },
+  "0180C5590": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R109"
+  },
+  "0180C4960": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R033"
+  },
+  "0180C4870": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R016"
+  },
+  "0180C4900": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C5070": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5080": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5280": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R016"
+  },
+  "0180C5520": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R035"
+  },
+  "0180C5190": {
+   "borough": "bromma",
+   "regso": "0180R105"
+  },
+  "0180C6410": {
+   "borough": "jarva",
+   "regso": "0180R002"
+  },
+  "0180C6420": {
+   "borough": "jarva",
+   "regso": "0180R002"
+  },
+  "0180C6400": {
+   "borough": "jarva",
+   "regso": "0180R036"
+  },
+  "0180C5360": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R068"
+  },
+  "0180C5330": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C6110": {
+   "borough": "jarva",
+   "regso": "0180R076"
+  },
+  "0180C6160": {
+   "borough": "jarva",
+   "regso": "0180R076"
+  },
+  "0180C5710": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R039"
+  },
+  "0180C5320": {
+   "borough": "bromma",
+   "regso": "0180R105"
+  },
+  "0180C5460": {
+   "borough": "bromma",
+   "regso": "0180R011"
+  },
+  "0180C5440": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R068"
+  },
+  "0180C5210": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5300": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R125"
+  },
+  "0180C5160": {
+   "borough": "bromma",
+   "regso": "0180R009"
+  },
+  "0180C5720": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R109"
+  },
+  "0180C5740": {
+   "borough": "bromma",
+   "regso": "0180R013"
+  },
+  "0180C5620": {
+   "borough": "bromma",
+   "regso": "0180R060"
+  },
+  "0180C5380": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5350": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C4350": {
+   "borough": "bromma",
+   "regso": "0180R103"
+  },
+  "0180C4490": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4390": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4560": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4660": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C4650": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R066"
+  },
+  "0180C4690": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R033"
+  },
+  "0180C4580": {
+   "borough": "kungsholmen",
+   "regso": "0180R048"
+  },
+  "0180C4610": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C4470": {
+   "borough": "kungsholmen",
+   "regso": "0180R084"
+  },
+  "0180C4480": {
+   "borough": "bromma",
+   "regso": "0180R104"
+  },
+  "0180C5810": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R039"
+  },
+  "0180C4710": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R096"
+  },
+  "0180C4590": {
+   "borough": "bromma",
+   "regso": "0180R075"
+  },
+  "0180C4890": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R033"
+  },
+  "0180C4880": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C3710": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C3290": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3310": {
+   "borough": "sodermalm",
+   "regso": "0180R095"
+  },
+  "0180C3340": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3200": {
+   "borough": "sodermalm",
+   "regso": "0180R097"
+  },
+  "0180C3350": {
+   "borough": "sodermalm",
+   "regso": "0180R098"
+  },
+  "0180C3220": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R027"
+  },
+  "0180C3210": {
+   "borough": "sodermalm",
+   "regso": "0180R095"
+  },
+  "0180C3820": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C1010": {
+   "borough": "farsta",
+   "regso": "0180R123"
+  },
+  "0180C1020": {
+   "borough": "farsta",
+   "regso": "0180R123"
+  },
+  "0180C2780": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R053"
+  },
+  "0180C1100": {
+   "borough": "farsta",
+   "regso": "0180R021"
+  },
+  "0180C3680": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C3560": {
+   "borough": "kungsholmen",
+   "regso": "0180R085"
+  },
+  "0180C1400": {
+   "borough": "farsta",
+   "regso": "0180R028"
+  },
+  "0180C1470": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R006"
+  },
+  "0180C1190": {
+   "borough": "skarpnack",
+   "regso": "0180R091"
+  },
+  "0180C1680": {
+   "borough": "skarholmen",
+   "regso": "0180R079"
+  },
+  "0180C1730": {
+   "borough": "skarholmen",
+   "regso": "0180R108"
+  },
+  "0180C1700": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R034"
+  },
+  "0180C1770": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R120"
+  },
+  "0180C1040": {
+   "borough": "farsta",
+   "regso": "0180R021"
+  },
+  "0180C3870": {
+   "borough": "kungsholmen",
+   "regso": "0180R085"
+  },
+  "0180C3930": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C1030": {
+   "borough": "farsta",
+   "regso": "0180R112"
+  },
+  "0180C1070": {
+   "borough": "farsta",
+   "regso": "0180R021"
+  },
+  "0180C1090": {
+   "borough": "farsta",
+   "regso": "0180R021"
+  },
+  "0180C1050": {
+   "borough": "farsta",
+   "regso": "0180R052"
+  },
+  "0180C1140": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R078"
+  },
+  "0180C1170": {
+   "borough": "farsta",
+   "regso": "0180R080"
+  },
+  "0180C1130": {
+   "borough": "farsta",
+   "regso": "0180R021"
+  },
+  "0180C2190": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R019"
+  },
+  "0180C2310": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R038"
+  },
+  "0180C2360": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R045"
+  },
+  "0180C2430": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2370": {
+   "borough": "skarpnack",
+   "regso": "0180R008"
+  },
+  "0180C1200": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R078"
+  },
+  "0180C1180": {
+   "borough": "farsta",
+   "regso": "0180R044"
+  },
+  "0180C1150": {
+   "borough": "farsta",
+   "regso": "0180R020"
+  },
+  "0180C1230": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R078"
+  },
+  "0180C1220": {
+   "borough": "farsta",
+   "regso": "0180R044"
+  },
+  "0180C1250": {
+   "borough": "farsta",
+   "regso": "0180R044"
+  },
+  "0180C1160": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R078"
+  },
+  "0180C1260": {
+   "borough": "farsta",
+   "regso": "0180R044"
+  },
+  "0180C1280": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R078"
+  },
+  "0180C1310": {
+   "borough": "farsta",
+   "regso": "0180R080"
+  },
+  "0180C1300": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R078"
+  },
+  "0180C1270": {
+   "borough": "farsta",
+   "regso": "0180R080"
+  },
+  "0180C1330": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R078"
+  },
+  "0180C1320": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R042"
+  },
+  "0180C1350": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R031"
+  },
+  "0180C1380": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R031"
+  },
+  "0180C1410": {
+   "borough": "farsta",
+   "regso": "0180R028"
+  },
+  "0180C1490": {
+   "borough": "skarholmen",
+   "regso": "0180R079"
+  },
+  "0180C1520": {
+   "borough": "skarpnack",
+   "regso": "0180R069"
+  },
+  "0180C1660": {
+   "borough": "skarholmen",
+   "regso": "0180R079"
+  },
+  "0180C1500": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R031"
+  },
+  "0180C1560": {
+   "borough": "skarholmen",
+   "regso": "0180R108"
+  },
+  "0180C1530": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R006"
+  },
+  "0180C1590": {
+   "borough": "skarholmen",
+   "regso": "0180R108"
+  },
+  "0180C1620": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R057"
+  },
+  "0180C1640": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R120"
+  },
+  "0180C1210": {
+   "borough": "skarpnack",
+   "regso": "0180R127"
+  },
+  "0180C1630": {
+   "borough": "farsta",
+   "regso": "0180R100"
+  },
+  "0180C4010": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C4050": {
+   "borough": "bromma",
+   "regso": "0180R001"
+  },
+  "0180C4130": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4120": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C1710": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R088"
+  },
+  "0180C1780": {
+   "borough": "skarholmen",
+   "regso": "0180R079"
+  },
+  "0180C1740": {
+   "borough": "skarpnack",
+   "regso": "0180R005"
+  },
+  "0180C1670": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R034"
+  },
+  "0180C1760": {
+   "borough": "farsta",
+   "regso": "0180R100"
+  },
+  "0180C1750": {
+   "borough": "skarpnack",
+   "regso": "0180R005"
+  },
+  "0180C1790": {
+   "borough": "farsta",
+   "regso": "0180R090"
+  },
+  "0180C1800": {
+   "borough": "skarpnack",
+   "regso": "0180R005"
+  },
+  "0180C1650": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R088"
+  },
+  "0180C1820": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R056"
+  },
+  "0180C1600": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R118"
+  },
+  "0180C1900": {
+   "borough": "skarpnack",
+   "regso": "0180R005"
+  },
+  "0180C1810": {
+   "borough": "skarpnack",
+   "regso": "0180R069"
+  },
+  "0180C1840": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R088"
+  },
+  "0180C1890": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R025"
+  },
+  "0180C1860": {
+   "borough": "skarholmen",
+   "regso": "0180R079"
+  },
+  "0180C1830": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R056"
+  },
+  "0180C1690": {
+   "borough": "skarholmen",
+   "regso": "0180R108"
+  },
+  "0180C1950": {
+   "borough": "skarpnack",
+   "regso": "0180R005"
+  },
+  "0180C1910": {
+   "borough": "skarholmen",
+   "regso": "0180R092"
+  },
+  "0180C1880": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R121"
+  },
+  "0180C1930": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R088"
+  },
+  "0180C2410": {
+   "borough": "skarpnack",
+   "regso": "0180R032"
+  },
+  "0180C2320": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R111"
+  },
+  "0180C2330": {
+   "borough": "skarpnack",
+   "regso": "0180R008"
+  },
+  "0180C2400": {
+   "borough": "skarpnack",
+   "regso": "0180R032"
+  },
+  "0180C2420": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R111"
+  },
+  "0180C1940": {
+   "borough": "skarpnack",
+   "regso": "0180R005"
+  },
+  "0180C2020": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R082"
+  },
+  "0180C1960": {
+   "borough": "skarpnack",
+   "regso": "0180R018"
+  },
+  "0180C2040": {
+   "borough": "skarpnack",
+   "regso": "0180R005"
+  },
+  "0180C1920": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R056"
+  },
+  "0180C2000": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R025"
+  },
+  "0180C2010": {
+   "borough": "skarholmen",
+   "regso": "0180R092"
+  },
+  "0180C1980": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R024"
+  },
+  "0180C2070": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R122"
+  },
+  "0180C2030": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R024"
+  },
+  "0180C1990": {
+   "borough": "skarpnack",
+   "regso": "0180R018"
+  },
+  "0180C1970": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R056"
+  },
+  "0180C2060": {
+   "borough": "skarholmen",
+   "regso": "0180R092"
+  },
+  "0180C2160": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R122"
+  },
+  "0180C2230": {
+   "borough": "skarpnack",
+   "regso": "0180R051"
+  },
+  "0180C2210": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R025"
+  },
+  "0180C2130": {
+   "borough": "skarpnack",
+   "regso": "0180R051"
+  },
+  "0180C2170": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R017"
+  },
+  "0180C2150": {
+   "borough": "skarholmen",
+   "regso": "0180R010"
+  },
+  "0180C2260": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R025"
+  },
+  "0180C2270": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R111"
+  },
+  "0180C2240": {
+   "borough": "skarpnack",
+   "regso": "0180R051"
+  },
+  "0180C2710": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2580": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R063"
+  },
+  "0180C2830": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C2250": {
+   "borough": "skarholmen",
+   "regso": "0180R010"
+  },
+  "0180C2290": {
+   "borough": "skarholmen",
+   "regso": "0180R010"
+  },
+  "0180C2350": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R017"
+  },
+  "0180C2460": {
+   "borough": "skarpnack",
+   "regso": "0180R032"
+  },
+  "0180C2220": {
+   "borough": "skarholmen",
+   "regso": "0180R092"
+  },
+  "0180C2380": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R110"
+  },
+  "0180C2490": {
+   "borough": "skarpnack",
+   "regso": "0180R008"
+  },
+  "0180C2390": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R045"
+  },
+  "0180C2510": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R038"
+  },
+  "0180C2540": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2340": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R122"
+  },
+  "0180C2570": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R110"
+  },
+  "0180C2560": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2550": {
+   "borough": "skarholmen",
+   "regso": "0180R010"
+  },
+  "0180C2650": {
+   "borough": "skarpnack",
+   "regso": "0180R032"
+  },
+  "0180C2620": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R062"
+  },
+  "0180C2610": {
+   "borough": "skarpnack",
+   "regso": "0180R032"
+  },
+  "0180C2680": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R038"
+  },
+  "0180C2670": {
+   "borough": "skarpnack",
+   "regso": "0180R032"
+  },
+  "0180C2660": {
+   "borough": "skarpnack",
+   "regso": "0180R008"
+  },
+  "0180C2730": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R062"
+  },
+  "0180C2760": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R037"
+  },
+  "0180C2600": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R037"
+  },
+  "0180C2700": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2740": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R062"
+  },
+  "0180C2770": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R062"
+  },
+  "0180C2790": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C4410": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4420": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C2750": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2850": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R004"
+  },
+  "0180C2840": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C2820": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R037"
+  },
+  "0180C2870": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R004"
+  },
+  "0180C2810": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C2940": {
+   "borough": "sodermalm",
+   "regso": "0180R097"
+  },
+  "0180C3050": {
+   "borough": "sodermalm",
+   "regso": "0180R097"
+  },
+  "0180C2930": {
+   "borough": "sodermalm",
+   "regso": "0180R113"
+  },
+  "0180C3000": {
+   "borough": "sodermalm",
+   "regso": "0180R113"
+  },
+  "0180C3110": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3040": {
+   "borough": "sodermalm",
+   "regso": "0180R097"
+  },
+  "0180C3060": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R053"
+  },
+  "0180C3100": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C3130": {
+   "borough": "sodermalm",
+   "regso": "0180R113"
+  },
+  "0180C3140": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3150": {
+   "borough": "sodermalm",
+   "regso": "0180R097"
+  },
+  "0180C3170": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3070": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R053"
+  },
+  "0180C3080": {
+   "borough": "sodermalm",
+   "regso": "0180R095"
+  },
+  "0180C3160": {
+   "borough": "sodermalm",
+   "regso": "0180R113"
+  },
+  "0180C3090": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R004"
+  },
+  "0180C3180": {
+   "borough": "sodermalm",
+   "regso": "0180R113"
+  },
+  "0180C3190": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3120": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R053"
+  },
+  "0180C3270": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R027"
+  },
+  "0180C3370": {
+   "borough": "sodermalm",
+   "regso": "0180R061"
+  },
+  "0180C3460": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C3470": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3450": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3360": {
+   "borough": "sodermalm",
+   "regso": "0180R070"
+  },
+  "0180C3500": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3490": {
+   "borough": "sodermalm",
+   "regso": "0180R061"
+  },
+  "0180C3580": {
+   "borough": "sodermalm",
+   "regso": "0180R061"
+  },
+  "0180C3520": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3600": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C3530": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R027"
+  },
+  "0180C3670": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3570": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C3630": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3640": {
+   "borough": "sodermalm",
+   "regso": "0180R061"
+  },
+  "0180C3590": {
+   "borough": "sodermalm",
+   "regso": "0180R074"
+  },
+  "0180C3660": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3620": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3690": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3730": {
+   "borough": "kungsholmen",
+   "regso": "0180R085"
+  },
+  "0180C3750": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3720": {
+   "borough": "bromma",
+   "regso": "0180R081"
+  },
+  "0180C3780": {
+   "borough": "sodermalm",
+   "regso": "0180R074"
+  },
+  "0180C3810": {
+   "borough": "sodermalm",
+   "regso": "0180R074"
+  },
+  "0180C3790": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3800": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3860": {
+   "borough": "kungsholmen",
+   "regso": "0180R054"
+  },
+  "0180C3830": {
+   "borough": "kungsholmen",
+   "regso": "0180R054"
+  },
+  "0180C3760": {
+   "borough": "bromma",
+   "regso": "0180R043"
+  },
+  "0180C3900": {
+   "borough": "kungsholmen",
+   "regso": "0180R059"
+  },
+  "0180C3950": {
+   "borough": "kungsholmen",
+   "regso": "0180R023"
+  },
+  "0180C3880": {
+   "borough": "sodermalm",
+   "regso": "0180R087"
+  },
+  "0180C3960": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C3970": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C3940": {
+   "borough": "sodermalm",
+   "regso": "0180R087"
+  },
+  "0180C3990": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C4000": {
+   "borough": "bromma",
+   "regso": "0180R064"
+  },
+  "0180C4020": {
+   "borough": "kungsholmen",
+   "regso": "0180R059"
+  },
+  "0180C4030": {
+   "borough": "kungsholmen",
+   "regso": "0180R023"
+  },
+  "0180C3980": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C3910": {
+   "borough": "bromma",
+   "regso": "0180R119"
+  },
+  "0180C4100": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4150": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4070": {
+   "borough": "kungsholmen",
+   "regso": "0180R023"
+  },
+  "0180C4140": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C3920": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R014"
+  },
+  "0180C4170": {
+   "borough": "kungsholmen",
+   "regso": "0180R048"
+  },
+  "0180C4160": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C4230": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C4110": {
+   "borough": "bromma",
+   "regso": "0180R086"
+  },
+  "0180C4240": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4250": {
+   "borough": "kungsholmen",
+   "regso": "0180R048"
+  },
+  "0180C4060": {
+   "borough": "bromma",
+   "regso": "0180R065"
+  },
+  "0180C4080": {
+   "borough": "bromma",
+   "regso": "0180R003"
+  },
+  "0180C4290": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C4280": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4310": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4190": {
+   "borough": "bromma",
+   "regso": "0180R001"
+  },
+  "0180C4210": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4270": {
+   "borough": "kungsholmen",
+   "regso": "0180R048"
+  },
+  "0180C4260": {
+   "borough": "bromma",
+   "regso": "0180R115"
+  },
+  "0180C4320": {
+   "borough": "kungsholmen",
+   "regso": "0180R084"
+  },
+  "0180C4370": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C4340": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R033"
+  },
+  "0180C4360": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4380": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4450": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4740": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C4830": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R033"
+  },
+  "0180C4820": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C4840": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R066"
+  },
+  "0180C4440": {
+   "borough": "bromma",
+   "regso": "0180R103"
+  },
+  "0180C4430": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R033"
+  },
+  "0180C4540": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R033"
+  },
+  "0180C4500": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R093"
+  },
+  "0180C4600": {
+   "borough": "kungsholmen",
+   "regso": "0180R126"
+  },
+  "0180C4860": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R125"
+  },
+  "0180C4460": {
+   "borough": "bromma",
+   "regso": "0180R009"
+  },
+  "0180C4570": {
+   "borough": "bromma",
+   "regso": "0180R104"
+  },
+  "0180C4770": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R016"
+  },
+  "0180C4940": {
+   "borough": "bromma",
+   "regso": "0180R009"
+  },
+  "0180C5020": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C5000": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C5030": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C5010": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R016"
+  },
+  "0180C4930": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C4950": {
+   "borough": "bromma",
+   "regso": "0180R009"
+  },
+  "0180C5110": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R125"
+  },
+  "0180C5060": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C5090": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C4990": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R068"
+  },
+  "0180C5140": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R068"
+  },
+  "0180C5130": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C5040": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R125"
+  },
+  "0180C4970": {
+   "borough": "bromma",
+   "regso": "0180R071"
+  },
+  "0180C5120": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R016"
+  },
+  "0180C5170": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5100": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5270": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R068"
+  },
+  "0180C5230": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R125"
+  },
+  "0180C5220": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R068"
+  },
+  "0180C5200": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R030"
+  },
+  "0180C5310": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R125"
+  },
+  "0180C5260": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C5390": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R016"
+  },
+  "0180C5150": {
+   "borough": "bromma",
+   "regso": "0180R071"
+  },
+  "0180C5420": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R077"
+  },
+  "0180C5370": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R125"
+  },
+  "0180C5250": {
+   "borough": "bromma",
+   "regso": "0180R071"
+  },
+  "0180C5400": {
+   "borough": "bromma",
+   "regso": "0180R011"
+  },
+  "0180C5240": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R026"
+  },
+  "0180C5500": {
+   "borough": "bromma",
+   "regso": "0180R007"
+  },
+  "0180C5410": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R026"
+  },
+  "0180C5530": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R035"
+  },
+  "0180C5450": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R040"
+  },
+  "0180C5480": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R077"
+  },
+  "0180C5550": {
+   "borough": "bromma",
+   "regso": "0180R060"
+  },
+  "0180C5340": {
+   "borough": "bromma",
+   "regso": "0180R075"
+  },
+  "0180C5540": {
+   "borough": "bromma",
+   "regso": "0180R007"
+  },
+  "0180C5570": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R035"
+  },
+  "0180C5680": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R077"
+  },
+  "0180C5580": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R040"
+  },
+  "0180C5560": {
+   "borough": "bromma",
+   "regso": "0180R015"
+  },
+  "0180C5600": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R077"
+  },
+  "0180C5660": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R040"
+  },
+  "0180C5610": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R026"
+  },
+  "0180C5670": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R039"
+  },
+  "0180C5690": {
+   "borough": "bromma",
+   "regso": "0180R060"
+  },
+  "0180C5630": {
+   "borough": "bromma",
+   "regso": "0180R077"
+  },
+  "0180C5650": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R035"
+  },
+  "0180C5730": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R109"
+  },
+  "0180C5750": {
+   "borough": "bromma",
+   "regso": "0180R060"
+  },
+  "0180C5760": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R039"
+  },
+  "0180C5780": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R039"
+  },
+  "0180C5640": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C5790": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R039"
+  },
+  "0180C5800": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R109"
+  },
+  "0180C5900": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R106"
+  },
+  "0180C5870": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R072"
+  },
+  "0180C5880": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R107"
+  },
+  "0180C5820": {
+   "borough": "jarva",
+   "regso": "0180R022"
+  },
+  "0180C5840": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R072"
+  },
+  "0180C5950": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C5830": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C5970": {
+   "borough": "jarva",
+   "regso": "0180R083"
+  },
+  "0180C5850": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C5920": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R072"
+  },
+  "0180C5930": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R107"
+  },
+  "0180C5770": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R106"
+  },
+  "0180C5940": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R107"
+  },
+  "0180C5890": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C5910": {
+   "borough": "jarva",
+   "regso": "0180R012"
+  },
+  "0180C5960": {
+   "borough": "jarva",
+   "regso": "0180R083"
+  },
+  "0180C5980": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C5860": {
+   "borough": "jarva",
+   "regso": "0180R089"
+  },
+  "0180C5990": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R050"
+  },
+  "0180C6000": {
+   "borough": "jarva",
+   "regso": "0180R012"
+  },
+  "0180C6010": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C6020": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R050"
+  },
+  "0180C6030": {
+   "borough": "jarva",
+   "regso": "0180R083"
+  },
+  "0180C6070": {
+   "borough": "jarva",
+   "regso": "0180R076"
+  },
+  "0180C6040": {
+   "borough": "jarva",
+   "regso": "0180R012"
+  },
+  "0180C6100": {
+   "borough": "jarva",
+   "regso": "0180R076"
+  },
+  "0180C6060": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C6120": {
+   "borough": "jarva",
+   "regso": "0180R076"
+  },
+  "0180C6090": {
+   "borough": "jarva",
+   "regso": "0180R076"
+  },
+  "0180C6080": {
+   "borough": "jarva",
+   "regso": "0180R083"
+  },
+  "0180C6150": {
+   "borough": "jarva",
+   "regso": "0180R076"
+  },
+  "0180C6170": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6140": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6180": {
+   "borough": "jarva",
+   "regso": "0180R076"
+  },
+  "0180C6230": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6280": {
+   "borough": "jarva",
+   "regso": "0180R046"
+  },
+  "0180C6050": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C6210": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6190": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R041"
+  },
+  "0180C6220": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6130": {
+   "borough": "jarva",
+   "regso": "0180R083"
+  },
+  "0180C6260": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6320": {
+   "borough": "jarva",
+   "regso": "0180R046"
+  },
+  "0180C6390": {
+   "borough": "jarva",
+   "regso": "0180R046"
+  },
+  "0180C6270": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6250": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6240": {
+   "borough": "jarva",
+   "regso": "0180R102"
+  },
+  "0180C6200": {
+   "borough": "jarva",
+   "regso": "0180R046"
+  },
+  "0180C6430": {
+   "borough": "jarva",
+   "regso": "0180R002"
+  },
+  "0180C6300": {
+   "borough": "jarva",
+   "regso": "0180R046"
+  },
+  "0180C6290": {
+   "borough": "jarva",
+   "regso": "0180R046"
+  },
+  "0180C6310": {
+   "borough": "jarva",
+   "regso": "0180R036"
+  },
+  "0180C6360": {
+   "borough": "jarva",
+   "regso": "0180R036"
+  },
+  "0180C6340": {
+   "borough": "jarva",
+   "regso": "0180R002"
+  },
+  "0180C6350": {
+   "borough": "jarva",
+   "regso": "0180R036"
+  },
+  "0180C6330": {
+   "borough": "jarva",
+   "regso": "0180R046"
+  },
+  "0180C6370": {
+   "borough": "jarva",
+   "regso": "0180R036"
+  },
+  "0180C6380": {
+   "borough": "jarva",
+   "regso": "0180R036"
+  },
+  "0180C6440": {
+   "borough": "jarva",
+   "regso": "0180R002"
+  },
+  "0180C3430": {
+   "borough": "sodermalm",
+   "regso": "0180R124"
+  },
+  "0180C3320": {
+   "borough": "sodermalm",
+   "regso": "0180R113"
+  },
+  "0180C1290": {
+   "borough": "farsta",
+   "regso": "0180R044"
+  },
+  "0180C1440": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R042"
+  },
+  "0180C1870": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R082"
+  },
+  "0180C2300": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R063"
+  },
+  "0180C2450": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R110"
+  },
+  "0180C2890": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R004"
+  },
+  "0180C2860": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C2960": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C3300": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C3240": {
+   "borough": "sodermalm",
+   "regso": "0180R097"
+  },
+  "0180C3380": {
+   "borough": "sodermalm",
+   "regso": "0180R070"
+  },
+  "0180C3390": {
+   "borough": "sodermalm",
+   "regso": "0180R070"
+  },
+  "0180C3230": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R053"
+  },
+  "0180C3020": {
+   "borough": "sodermalm",
+   "regso": "0180R097"
+  },
+  "0180C3010": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R053"
+  },
+  "0180C2990": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R053"
+  },
+  "0180C2970": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R004"
+  },
+  "0180C3030": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R004"
+  },
+  "0180C3330": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R027"
+  },
+  "0180C3480": {
+   "borough": "sodermalm",
+   "regso": "0180R061"
+  },
+  "0180C3550": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C3510": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R027"
+  },
+  "0180C3700": {
+   "borough": "sodermalm",
+   "regso": "0180R067"
+  },
+  "0180C3410": {
+   "borough": "bromma",
+   "regso": "0180R081"
+  },
+  "0180C3740": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C3770": {
+   "borough": "sodermalm",
+   "regso": "0180R058"
+  },
+  "0180C4300": {
+   "borough": "bromma",
+   "regso": "0180R115"
+  },
+  "0180C4220": {
+   "borough": "kungsholmen",
+   "regso": "0180R049"
+  },
+  "0180C4180": {
+   "borough": "bromma",
+   "regso": "0180R103"
+  },
+  "0180C4200": {
+   "borough": "bromma",
+   "regso": "0180R065"
+  },
+  "0180C2480": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2520": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R045"
+  },
+  "0180C2440": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R038"
+  },
+  "0180C2530": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2080": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R024"
+  },
+  "0180C2050": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R024"
+  },
+  "0180C2090": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R024"
+  },
+  "0180C2180": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R082"
+  },
+  "0180C2920": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R037"
+  },
+  "0180C2950": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R053"
+  },
+  "0180C2800": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2500": {
+   "borough": "skarholmen",
+   "regso": "0180R010"
+  },
+  "0180C2630": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R062"
+  },
+  "0180C2590": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R117"
+  },
+  "0180C2900": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R037"
+  },
+  "0180C2910": {
+   "borough": "sodermalm",
+   "regso": "0180R113"
+  },
+  "0180C2880": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C2980": {
+   "borough": "sodermalm",
+   "regso": "0180R094"
+  },
+  "0180C1360": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R031"
+  },
+  "0180C1370": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R042"
+  },
+  "0180C1240": {
+   "borough": "farsta",
+   "regso": "0180R080"
+  },
+  "0180C1340": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R031"
+  },
+  "0180C2470": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R110"
+  },
+  "0180C2720": {
+   "borough": "hagersten-alvsjo",
+   "regso": "0180R062"
+  },
+  "0180C1480": {
+   "borough": "enskede-arsta-vantor",
+   "regso": "0180R006"
+  },
+  "0180C4330": {
+   "borough": "kungsholmen",
+   "regso": "0180R048"
+  },
+  "0180C1080": {
+   "borough": "farsta",
+   "regso": "0180R021"
+  },
+  "0180C4530": {
+   "borough": "bromma",
+   "regso": "0180R075"
+  },
+  "0180C4790": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4800": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R029"
+  },
+  "0180C4810": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R073"
+  },
+  "0180C4680": {
+   "borough": "bromma",
+   "regso": "0180R103"
+  },
+  "0180C4850": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R114"
+  },
+  "0180C5490": {
+   "borough": "norra-innerstaden",
+   "regso": "0180R101"
+  },
+  "0180C5510": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R077"
+  },
+  "0180C5700": {
+   "borough": "hasselby-vallingby",
+   "regso": "0180R109"
+  }
+ }
+}
