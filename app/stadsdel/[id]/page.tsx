@@ -20,6 +20,7 @@ import {
   ServicesCard,
 } from "@/components/LocalSections";
 import { geometryCenter } from "@/lib/geometry";
+import { optional } from "@/lib/http";
 import VerdictBadge from "@/components/VerdictBadge";
 import boroughGeo from "@/data/stockholm/boroughs.geojson.json";
 import { verdict } from "@/lib/compare";
@@ -49,7 +50,10 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
   const borough = getBorough(id);
   if (!borough) notFound();
 
-  const [data, trendTables] = await Promise.all([loadStockholm(), loadTrends(), collectIfStale()]);
+  // Police collection runs in the background so a slow Polisen API never delays the page.
+  void collectIfStale();
+  // Trends are optional: if SCB's trend tables fail, the page renders without that section.
+  const [data, trendTables] = await Promise.all([loadStockholm(), optional(loadTrends(), "SCB trends")]);
   const a = stats(data, boroughRef(id));
   const stad = stats(data, stadRef());
   const geometry = (boroughGeo as unknown as FeatureCollection).features.find((f) => f.properties?.id === id)!
@@ -140,11 +144,13 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
 
       <MapCard area={local} />
 
-      <TrendsCard
-        name={borough.name}
-        points={trendFor(trendTables, boroughTrendRef(id))}
-        reference={{ name: "Stockholm", points: trendFor(trendTables, stadTrendRef()) }}
-      />
+      {trendTables && (
+        <TrendsCard
+          name={borough.name}
+          points={trendFor(trendTables, boroughTrendRef(id))}
+          reference={{ name: "Stockholm", points: trendFor(trendTables, stadTrendRef()) }}
+        />
+      )}
 
       <Card
         id="brott"

@@ -1,3 +1,5 @@
+import { TIMEOUT_MS } from "@/lib/http";
+
 const WFS = "https://geodata.scb.se/geoserver/stat/wfs";
 const DAY = 60 * 60 * 24;
 
@@ -29,7 +31,10 @@ async function wfs(typeName: string, cql: string): Promise<WfsResponse> {
     srsName: "EPSG:4326",
     cql_filter: cql,
   });
-  const res = await fetch(`${WFS}?${params}`, { next: { revalidate: DAY * 30 } });
+  const res = await fetch(`${WFS}?${params}`, {
+    next: { revalidate: DAY * 30 },
+    signal: AbortSignal.timeout(TIMEOUT_MS.wfs),
+  });
   if (!res.ok) throw new Error(`SCB WFS ${res.status}`);
   return (await res.json()) as WfsResponse;
 }

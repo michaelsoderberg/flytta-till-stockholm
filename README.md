@@ -72,7 +72,8 @@ Polisen only gives "Stockholm" as the location. `lib/police-areas.ts` places an 
 its text names a stadsdel, neighbourhood or well-known place ("…på Södermalm", "…vid Odenplan"). That
 works for about two thirds of events. The collector polls both the national feed and
 `?locationname=Stockholm` (the latest 500 Stockholm events, about six months). For serverless hosting, call
-`GET /api/cron/polisen` on a schedule (protect it with `CRON_SECRET`).
+`GET /api/cron/polisen` on a schedule with `Authorization: Bearer <CRON_SECRET>`. The route is closed by default:
+without `CRON_SECRET` set it refuses every request (503).
 
 ### Refreshing the static data
 

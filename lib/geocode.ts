@@ -1,3 +1,5 @@
+import { TIMEOUT_MS } from "@/lib/http";
+
 const NOMINATIM = "https://nominatim.openstreetmap.org/search";
 const USER_AGENT = process.env.NOMINATIM_USER_AGENT ?? "Kommunkollen/0.1 (open data demo)";
 
@@ -31,7 +33,11 @@ export async function geocode(query: string): Promise<GeocodeResult[]> {
     viewbox: "17.75,59.44,18.20,59.22",
     bounded: "1",
   });
-  const res = await fetch(`${NOMINATIM}?${params}`, { headers: { "User-Agent": USER_AGENT }, cache: "no-store" });
+  const res = await fetch(`${NOMINATIM}?${params}`, {
+    headers: { "User-Agent": USER_AGENT },
+    cache: "no-store",
+    signal: AbortSignal.timeout(TIMEOUT_MS.nominatim),
+  });
   if (!res.ok) throw new Error(`Nominatim ${res.status}`);
   const json = (await res.json()) as {
     display_name: string;

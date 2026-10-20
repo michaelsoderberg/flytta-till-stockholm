@@ -349,3 +349,30 @@ Resultatet kan bli fel siffror utan att något syns. Andra beräkningar som är 
 
 **Rekommenderad ordning:** börja med punkt 1 och 3, eftersom de påverkar driften. Därefter punkt 5 (den dolda
 nollhanteringen kan ge fel siffror), och sist 2 och 4, som är omstrukturering och namnbyten.
+
+## Åtgärdat
+
+Åtgärdat 2026-10-20: en åtgärd från varje sektion ovan.
+
+| Sektion | Fynd | Åtgärd | Filer |
+|---|---|---|---|
+| Arkitektur | Punkt 1: MCF anropades direkt från webbläsaren, per sidvisning | Översvämningskartan hämtas nu via en egen proxy. Den tar bara emot de två lager appen använder, i Stockholm och i projektionen EPSG:3857, med begränsad bildstorlek. Parametrarna byggs om från validerade värden. Bilderna cachas (30 dagar på servern, 1 dag i webbläsaren), och anropen till MCF har timeout. | `app/api/flood-map/route.ts` (ny), `components/ExploreMap.tsx:10` |
+| Säkerhet | 5.1 och 4.1: cron-rutten var öppen och returnerade interna fel | Rutten är stängd som standard (503 utan `CRON_SECRET`) och jämför nyckeln i konstant tid (`timingSafeEqual`). Fel loggas bara på servern; anroparen får ett generellt meddelande. | `app/api/cron/polisen/route.ts` |
+| Kodkvalitet | Punkt 1: inga timeouts, allt eller inget, inga felgränser | Det här åtgärdades: | `lib/http.ts` (ny), `lib/scb.ts`, `lib/deso.ts`, `lib/polisen.ts`, `lib/geocode.ts`, `app/stadsdel/[id]/page.tsx`, `app/omrade/[deso]/page.tsx`, `app/error.tsx` (ny) |
+
+Kodkvalitet punkt 1 åtgärdades så här:
+- **Timeouts:** alla externa anrop har nu timeout: SCB 20 s, kartservern 10 s, Polisen 10 s, Nominatim 8 s och MCF 10 s.
+- **Trender:** trenddatan är valfri; misslyckas den, visas sidan utan den sektionen.
+- **Polisen:** insamlingen körs i bakgrunden i stället för att blockera sidan. När Polisens API ligger nere görs
+  bara ett nytt försök per 10 minuter.
+- **Felsida:** en ny felsida visar ett tydligt meddelande med "Försök igen" när kärndata inte går att ladda.
+
+**Verifierat:**
+- Typkontroll och lint ger inga fel, och 25 tester går igenom. Fem av dem är nya, i `tests/routes.test.ts`:
+  - cron-rutten utan nyckel och med fel nyckel
+  - proxyns validering av lager, område, storlek och projektion
+  - `optional()`
+- Live mot den lokala servern: proxyn levererar kartbilder och avvisar ogiltiga förfrågningar med 400, cron-rutten
+  svarar 503 utan nyckel, och alla sidor renderas.
+
+Kvar att åtgärda: övriga punkter i respektive sektion ovan.
