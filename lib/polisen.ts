@@ -1,4 +1,5 @@
 import { getDb } from "@/lib/db";
+import { TIMEOUT_MS } from "@/lib/http";
 import { findKommunByName, getKommun, LAN } from "@/lib/kommuner";
 
 const API = "https://polisen.se/api/events";
@@ -61,6 +62,7 @@ async function fetchFeed(url: string): Promise<RawEvent[]> {
   const res = await fetch(url, {
     cache: "no-store",
     headers: { "User-Agent": "Kommunkollen (open data demo)" },
+    signal: AbortSignal.timeout(TIMEOUT_MS.polisen),
   });
   if (!res.ok) throw new Error(`Polisen API ${res.status}`);
   return (await res.json()) as RawEvent[];
@@ -87,12 +89,20 @@ export async function collectEvents(): Promise<{ fetched: number; inserted: numb
   return { fetched: raw.length, inserted };
 }
 
-/** Collects if the last poll is older than the poll interval. Errors are swallowed so pages still render. */
+/**
+ * Time of the last collection attempt, successful or not. Kept in memory so that while Polisen's API is
+ * down, it is retried at most once per poll interval instead of on every page view.
+ */
+let lastAttempt = 0;
+
+/** Collects if the last poll is older than the poll interval. Errors are logged, never thrown. */
 export async function collectIfStale() {
   const row = getDb().prepare("SELECT value FROM meta WHERE key = 'polisen_last_poll'").get() as
     | { value: string }
     | undefined;
   if (row && Date.now() - Date.parse(row.value) < POLL_INTERVAL_MS) return;
+  if (Date.now() - lastAttempt < POLL_INTERVAL_MS) return;
+  lastAttempt = Date.now();
   try {
     await collectEvents();
   } catch (err) {

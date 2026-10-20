@@ -15,6 +15,7 @@ import {
   ServicesCard,
 } from "@/components/LocalSections";
 import { geometryCenter } from "@/lib/geometry";
+import { optional } from "@/lib/http";
 import { desoByCode, regsoGeometry } from "@/lib/deso";
 import { boroughRef, desoRef, loadStockholm, neighbourhoodRef, stadRef, stats, summarize } from "@/lib/profile";
 import {
@@ -65,7 +66,8 @@ export default async function AreaPage({
   const area = await resolve(code);
   if (!area) notFound();
 
-  const [data, trendTables] = await Promise.all([loadStockholm(), loadTrends()]);
+  // Trends are optional: if SCB's trend tables fail, the page renders without that section.
+  const [data, trendTables] = await Promise.all([loadStockholm(), optional(loadTrends(), "SCB trends")]);
   const a = stats(data, area.ref);
   const b = stats(data, boroughRef(area.borough.id));
   const stad = stats(data, stadRef());
@@ -147,7 +149,7 @@ export default async function AreaPage({
 
       <MapCard area={local} />
 
-      {area.neighbourhood && (
+      {area.neighbourhood && trendTables && (
         <TrendsCard
           name={area.neighbourhood.name}
           points={trendFor(trendTables, neighbourhoodTrendRef(area.neighbourhood.code))}

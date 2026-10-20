@@ -1,3 +1,5 @@
+import { TIMEOUT_MS } from "@/lib/http";
+
 const BASE = "https://api.scb.se/OV0104/v2beta/api/v2";
 const DAY = 60 * 60 * 24;
 
@@ -67,6 +69,7 @@ export function queryTable(table: string, selection: Record<string, string[]>): 
           headers: { "Content-Type": "application/json" },
           body,
           cache: "no-store",
+          signal: AbortSignal.timeout(TIMEOUT_MS.scb),
         });
         if (res.status === 429 || res.status >= 500) throw new Error(`SCB ${table} ${res.status}`);
         if (!res.ok) throw new Error(`SCB ${table} ${res.status}: ${await res.text()}`, { cause: "client" });

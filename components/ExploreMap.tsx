@@ -6,7 +6,8 @@ import L from "leaflet";
 export type MapMarker = { lat: number; lon: number; label: string; sub?: string; href?: string | null };
 export type MapGroup = { key: string; label: string; color: string; markers: MapMarker[]; on?: boolean };
 
-const MCF_WMS = "https://gis-tjanster.mcf.se/arcgis/services/Oversvamningskarteringar/hotkartor_2026/MapServer/WMSServer";
+/** MCF's flood maps, fetched through our own cached proxy (app/api/flood-map) rather than from MCF directly. */
+const FLOOD_WMS = "/api/flood-map";
 const OVERLAYS = [
   { key: "skyfall", label: "Översvämning vid skyfall (100-årsregn)", layers: "57" },
   { key: "malaren", label: "Mälaren, 100-årsflöde", layers: "78" },
@@ -33,7 +34,7 @@ export default function ExploreMap({ geometry, groups }: { geometry: GeoJSON.Geo
     map.fitBounds(outline.getBounds(), { padding: [12, 12] });
 
     for (const o of OVERLAYS) {
-      layers.current[o.key] = L.tileLayer.wms(MCF_WMS, { layers: o.layers, format: "image/png", transparent: true, opacity: 0.75 });
+      layers.current[o.key] = L.tileLayer.wms(FLOOD_WMS, { layers: o.layers, format: "image/png", transparent: true, opacity: 0.75 });
     }
     for (const g of groups) {
       const fg = L.featureGroup();
