@@ -61,7 +61,7 @@ sites show parts of it, often as a black box. Kommunkollen:
 | Styling | **Tailwind CSS v4**, theme tokens for light and dark mode, from a validated colour palette |
 | Charts | **Recharts** (bars and line charts with tooltips) |
 | Maps | **Leaflet** with OpenStreetMap tiles; MCF flood maps as WMS overlays |
-| Storage | **SQLite** via `better-sqlite3`, for collected police events |
+| Storage | **SQLite** for collected police events: a local file in development, **Turso** (hosted SQLite, `@libsql/client`) in production on Vercel |
 | Geodata in build scripts | **Turf.js** (intersections, point in polygon), **proj4** (SWEREF 99 TM / 18 00 → WGS84), `shapefile`, `pngjs`, SheetJS (`xlsx`) |
 | Tests | **Vitest**: unit tests, data sanity tests, and optional live API tests (`LIVE=1`) |
 | Scripts | `tsx` build scripts that produce static JSON in `data/stockholm/` |
@@ -121,7 +121,8 @@ code, by coordinates or by overlapping area. Neighbourhoods and boroughs are the
 | Decision | Why |
 |---|---|
 | **Next.js with server components** | Server-side fetching hides API details, gets around CORS (SCB, Skolverket), and sends little JavaScript. Only maps and interactive charts are client components. |
-| **`better-sqlite3` pinned to v11** | v13 segfaults on the Node version in use (23.2). v11 has working prebuilt binaries. |
+| **Vercel Hobby + Turso + GitHub Actions for hosting** | Free. Vercel has no persistent disk, so police events moved from `better-sqlite3` to Turso (same SQLite schema); locally a SQLite file is still used. Vercel Hobby cron runs only daily, so a GitHub Actions schedule calls `/api/cron/polisen` every 10 minutes. The site is behind Basic Auth (`middleware.ts`) until the source licences are verified. |
+| **libSQL's Node client loaded outside the bundle** | Turbopack's build fails on the dynamic require `libsql` uses to pick its native binary. The app bundles the HTTP-only `@libsql/client/web` for Turso, and imports the file-capable client at runtime only in local development. |
 | **Leaflet loaded only in the browser** | Leaflet touches `window` on import. The colour ramp was moved to its own module so server code never imports Leaflet. |
 | **OpenStreetMap tiles instead of CARTO** | CARTO's basemaps now require an API key and showed a watermark. |
 | **Nominatim search on submit, not autocomplete** | Nominatim's usage policy forbids autocomplete. Neighbourhoods and boroughs are suggested instantly from local data, and addresses are searched when you press Sök, limited to Stockholm municipality. |
@@ -191,9 +192,8 @@ code, by coordinates or by overlapping area. Neighbourhoods and boroughs are the
   a restart.
 - **The first page load is slow.** It loads every SCB table for all of Stockholm, which takes about 5–6 s. Later
   requests use the in-memory cache, but a server restart or a new serverless instance starts cold.
-- **Police collection needs a long-running server.** It runs inside the Node server (`instrumentation.ts`). On
-  serverless hosting it only works if something calls `/api/cron/polisen` on a schedule and the SQLite file is on
-  persistent storage.
+- **Police collection needs a long-running server or a scheduler.** Locally it runs inside the Node server
+  (`instrumentation.ts`). On Vercel it relies on GitHub Actions calling `/api/cron/polisen`, with events in Turso.
 - **Address search sometimes can't find a house number.** Nominatim may return only the street (for example
   "Götgatan 10" gives street segments), so the area found can be a neighbouring one.
 - **The geocoding cache is unbounded.** It is kept in memory and grows with every new query.
@@ -205,7 +205,8 @@ code, by coordinates or by overlapping area. Neighbourhoods and boroughs are the
   pages are long.
 - **Phone layout is not tested on a real phone.** It was only checked in headless Chrome, which cannot go
   narrower than about 500 px.
-- **`better-sqlite3` is pinned to v11.** v13 crashes on Node 23.2, so check before upgrading either one.
+- **Police collection on Vercel depends on GitHub Actions.** Scheduled runs can be delayed, and GitHub
+  disables them after 60 days without commits in a public repository.
 
 ## Running and refreshing
 
@@ -271,7 +272,7 @@ areas) → `build-housing` → `build-elections` → `fetch-bra` (needs `NODE_EX
   `stats(data, ref)` computes any area. `AreaRef = { scb: codes to sum, work: DeSO codes for the employment table }`.
 - `lib/trends.ts`: time series across SCB's 2018 and 2025 DeSO divisions.
 - `lib/local.ts`: schools, places, nature, flood, housing and elections per set of DeSO codes (static JSON).
-- `lib/crime.ts` (Brå JSON), `lib/polisen.ts` + `lib/db.ts` (SQLite), `lib/police-areas.ts` (place-name matching).
+- `lib/crime.ts` (Brå JSON), `lib/polisen.ts` + `lib/db.ts` (SQLite file locally, Turso in production), `lib/police-areas.ts` (place-name matching).
 - `lib/scb.ts`: PxWeb v2 client (POST, 24 h memo, retries) and json-stat2 `StatTable.get({dim: code})`.
 - `lib/metrics.ts` + `lib/borough-rows.ts`: the measures on the start page and compare page.
 - `components/LocalSections.tsx`: all the newer cards (map, schools, services, nature, flood, housing, elections).
@@ -318,7 +319,9 @@ areas) → `build-housing` → `build-elections` → `fetch-bra` (needs `NODE_EX
 - CARTO tiles now need a key, so use OSM tiles.
 
 **Next.js and libraries**
-- `better-sqlite3` **v11** (v13 segfaults on Node 23.2). It is in `serverExternalPackages`.
+- Police events use `@libsql/client`. The app imports `@libsql/client/web` (HTTP, for Turso); the file-capable
+  `@libsql/client` is imported at runtime with `turbopackIgnore`, because bundling `libsql`'s native loader breaks
+  the Turbopack build (it parses `@libsql/*/LICENSE` as JavaScript). Don't change it to a static import.
 - Leaflet must never be imported server-side: use `*Lazy.tsx` wrappers with `dynamic(..., { ssr: false })`, and
   keep shared constants (e.g. `lib/ramp.ts`) out of Leaflet files.
 - Recharts: keep `isAnimationActive={false}` (animations hid data in renders) and `itemSorter={null}` on legends.

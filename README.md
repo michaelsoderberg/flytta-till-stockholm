@@ -34,7 +34,7 @@ Requires Node 20+. No API keys are needed.
 | Who lives there (DeSO/RegSO) | SCB PxWeb API v2 | Live, cached for a day. Boroughs are summed from their DeSO areas |
 | Area boundaries, address → area | SCB open geodata WFS | Live |
 | Reported crimes per borough | Brå statistics database (SOL) | `npm run fetch-bra` → `data/stockholm/crime.json` |
-| Police events | `polisen.se/api/events` | Collected every 10 minutes into SQLite |
+| Police events | `polisen.se/api/events` | Collected every 10 minutes into SQLite (Turso in production) |
 | Which borough each area belongs to | Stockholms stad stadsdelar (CC0) + SCB DeSO | `npm run build-areas` → `data/stockholm/` |
 | Schools (merit, teachers) | Skolverket Planned Educations API v3 | `npm run build-schools` |
 | Preschools | Stockholms stad Hitta service API | `npm run build-schools` |
@@ -74,6 +74,40 @@ works for about two thirds of events. The collector polls both the national feed
 `?locationname=Stockholm` (the latest 500 Stockholm events, about six months). For serverless hosting, call
 `GET /api/cron/polisen` on a schedule with `Authorization: Bearer <CRON_SECRET>`. The route is closed by default:
 without `CRON_SECRET` set it refuses every request (503).
+
+Locally, events are stored in the SQLite file `data/kommunkollen.db` (not in git). In production they are stored
+in [Turso](https://turso.tech) (hosted SQLite) when `TURSO_DATABASE_URL` is set.
+
+## Deploying to Vercel (free)
+
+The app runs on Vercel's free Hobby plan. Three free services are involved:
+
+| Need | Service | Why |
+|---|---|---|
+| Next.js server | **Vercel Hobby** | Deploys from GitHub on every push |
+| Police event database | **Turso** (free plan) | Vercel has no persistent disk, so the SQLite file can't live there |
+| Polling Polisen every 10 min | **GitHub Actions** (`.github/workflows/polisen-cron.yml`) | Vercel Hobby cron runs at most once a day |
+
+1. **Turso:** create a database (web dashboard or `turso db create kommunkollen`) and an auth token
+   (`turso db tokens create kommunkollen`). Copy the existing police history into it, since Polisen's API
+   can't give it back:
+   `TURSO_DATABASE_URL=libsql://… TURSO_AUTH_TOKEN=… npm run migrate-police` (safe to run again; it never
+   overwrites).
+2. **Vercel:** import the GitHub repository (framework Next.js, no other settings). Add these environment
+   variables for Production and Preview:
+   - `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`
+   - `CRON_SECRET`: a long random string, e.g. `openssl rand -hex 32`
+   - `BASIC_AUTH_USER`, `BASIC_AUTH_PASSWORD`: the site is password-protected on Vercel until the licences
+     of all sources are verified (see CLAUDE.md). Without them every page answers 503. After the review,
+     set `SITE_PUBLIC=1` instead.
+3. **GitHub:** in the repository's Settings → Secrets and variables → Actions, add the secret `CRON_SECRET`
+   (same value as on Vercel) and the variable `APP_URL` (e.g. `https://kommunkollen.vercel.app`). The
+   workflow only runs on its schedule once it is on the default branch; run it once by hand
+   (Actions → Collect police events → Run workflow) to check it answers `{"fetched":…,"inserted":…}`.
+
+Caveats: GitHub may delay scheduled runs, and disables them after 60 days without commits in a public
+repository (re-enable in the Actions tab). Each Vercel function instance keeps its own SCB cache, so a cold
+instance takes a few seconds on the first request. Vercel Hobby is for non-commercial use.
 
 ### Refreshing the static data
 

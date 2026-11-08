@@ -1,0 +1,26 @@
+# Collects Polisen events every 10 minutes by calling the app's cron route.
+# Vercel Hobby's own cron runs at most once a day, so GitHub Actions does the scheduling.
+# Needs: repository secret CRON_SECRET (same value as on Vercel) and repository variable APP_URL.
+# Scheduled runs only start from the default branch and can be delayed by GitHub under load.
+name: Collect police events
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Call /api/cron/polisen
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          APP_URL: ${{ vars.APP_URL }}
+        run: |
+          curl --fail-with-body --silent --show-error --max-time 60 \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${APP_URL%/}/api/cron/polisen"
