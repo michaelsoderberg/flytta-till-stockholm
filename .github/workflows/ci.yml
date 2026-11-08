@@ -1,0 +1,90 @@
+# CI/CD: checks every pull request and push to main; deploys to Vercel only when all checks pass on main.
+# Vercel's own automatic deploys of main are turned off in vercel.json, so this workflow is the only path
+# to production. Pull requests still get Vercel preview deployments from the Git integration.
+#
+# Secrets (Settings → Secrets and variables → Actions): VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID.
+# The app's own secrets (Turso, CRON_SECRET) stay in Vercel and are pulled at deploy time.
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# A newer push cancels a still-running check of the same branch or PR.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, type check, test and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npx eslint .
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Test
+        run: npm test
+
+      # Prerenders the borough pages, which calls SCB once per table. Without TURSO_DATABASE_URL the
+      # police events come from an empty local SQLite file, which is fine for checking that the app builds.
+      - name: Build
+        run: npm run build
+        env:
+          DISABLE_POLISEN_POLLING: "1"
+          NEXT_TELEMETRY_DISABLED: "1"
+
+  deploy:
+    name: Deploy to Vercel (production)
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Never cancel a deploy halfway; queue the next one instead.
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: https://flytta-till-stockholm.vercel.app
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_CLI: vercel@64.7.0
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Fetches the project settings and production environment variables (Turso, CRON_SECRET) from Vercel.
+      - name: Pull Vercel settings
+        run: npx --yes "$VERCEL_CLI" pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build for Vercel
+        run: npx --yes "$VERCEL_CLI" build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy
+        run: npx --yes "$VERCEL_CLI" deploy --prebuilt --prod --token="$VERCEL_TOKEN"
