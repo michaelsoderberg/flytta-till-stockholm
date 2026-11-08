@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 const fmt = (v: number | null | undefined) => (v == null ? "–" : Math.round(v).toLocaleString("sv-SE"));
-const pct = (v: number) => `${Math.round(v * 100)} %`;
+const pct = (v: number | null) => (v == null ? "–" : `${Math.round(v * 100)} %`);
 
 export default async function BoroughPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -84,7 +84,7 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
 
   const neighbourhoods = neighbourhoodsInBorough(id)
     .map((n) => ({ n, s: stats(data, neighbourhoodRef(n.code)) }))
-    .sort((x, y) => y.s.population - x.s.population);
+    .sort((x, y) => (y.s.population ?? 0) - (x.s.population ?? 0));
 
   const local: LocalArea = {
     name: borough.name,

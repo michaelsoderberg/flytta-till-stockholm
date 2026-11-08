@@ -3,10 +3,18 @@ import ComparisonBars from "@/components/charts/ComparisonBars";
 import type { AreaStats, Share } from "@/lib/profile";
 
 const pct = (x: number | null | undefined) => (x == null ? "–" : `${Math.round(x * 100)} %`);
-const num = (x: number | null | undefined) => (x == null ? "–" : Math.round(x).toLocaleString("sv-SE"));
+const num = (x: number | null | undefined, unit = "") => (x == null ? "–" : `${Math.round(x).toLocaleString("sv-SE")}${unit}`);
 
 function toBars(area: Share[], ref: Share[]) {
   return area.map((s, i) => ({ label: s.label, a: s.share, b: ref[i]?.share ?? null }));
+}
+
+/** Comparison bars, or a note when SCB has no data for the area (an empty list), instead of an empty chart. */
+function Bars(props: Parameters<typeof ComparisonBars>[0]) {
+  if (!props.data.length || props.data.every((d) => d.a == null)) {
+    return <p className="text-sm text-ink-2">Uppgift saknas från SCB för {props.nameA}.</p>;
+  }
+  return <ComparisonBars {...props} />;
 }
 
 type Ref = { name: string; stats: AreaStats };
@@ -25,8 +33,8 @@ export function ProfileTiles({ a, refs }: { a: AreaStats; refs: Ref[] }) {
   // Medians only exist for single SCB regions, so the income tile compares means throughout.
   const tiles: { label: string; get: (s: AreaStats) => string }[] = [
     { label: "Invånare", get: (s) => num(s.population) },
-    { label: "Medelålder (uppskattad)", get: (s) => `${num(s.averageAge)} år` },
-    { label: "Ekonomisk standard, snitt", get: (s) => `${num(s.meanIncome)} tkr` },
+    { label: "Medelålder (uppskattad)", get: (s) => num(s.averageAge, " år") },
+    { label: "Ekonomisk standard, snitt", get: (s) => num(s.meanIncome, " tkr") },
     { label: "Eftergymnasial utbildning", get: (s) => pct(s.higherEducationShare) },
     { label: "Förvärvsarbetande 20–64 år", get: (s) => pct(s.employmentRate) },
     { label: "Bor i hyresrätt", get: (s) => pct(s.rentalShare) },
@@ -53,31 +61,31 @@ export function ProfileCharts({ a, nameA, reference }: { a: AreaStats; nameA: st
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <Card title="Ålder" subtitle="Andel av invånarna per åldersgrupp." source="SCB, TAB6574">
-        <ComparisonBars data={toBars(a.ageBands, k.ageBands)} {...bars} />
+        <Bars data={toBars(a.ageBands, k.ageBands)} {...bars} />
       </Card>
       <div className="flex flex-col gap-6">
         <Card title="Hushåll" subtitle="Andel av hushållen per hushållstyp." source="SCB, TAB6568">
-          <ComparisonBars data={toBars(a.householdTypes, k.householdTypes)} {...bars} />
+          <Bars data={toBars(a.householdTypes, k.householdTypes)} {...bars} />
         </Card>
         <Card
           title="Inkomst"
           subtitle="Andel invånare i varje fjärdedel av rikets ekonomiska standard (disponibel inkomst per person, justerad för hushållets storlek)."
           source="SCB, TAB6684"
         >
-          <ComparisonBars data={quartiles} {...bars} />
+          <Bars data={quartiles} {...bars} />
         </Card>
       </div>
       <Card title="Boende – upplåtelseform" subtitle="Andel invånare per upplåtelseform." source="SCB, TAB6253">
-        <ComparisonBars data={toBars(a.tenure, k.tenure)} {...bars} />
+        <Bars data={toBars(a.tenure, k.tenure)} {...bars} />
       </Card>
       <Card title="Boende – hustyp" subtitle="Andel invånare per hustyp." source="SCB, TAB6065">
-        <ComparisonBars data={toBars(a.houseTypes, k.houseTypes)} {...bars} />
+        <Bars data={toBars(a.houseTypes, k.houseTypes)} {...bars} />
       </Card>
       <Card title="Utbildning" subtitle="Högsta utbildningsnivå, 25–65 år." source="SCB, TAB6534">
-        <ComparisonBars data={toBars(a.education, k.education)} {...bars} />
+        <Bars data={toBars(a.education, k.education)} {...bars} />
       </Card>
       <Card title="Bebyggelsens ålder" subtitle="Andel bostäder efter byggår." source="SCB, TAB6540">
-        <ComparisonBars data={toBars(a.buildingAge, k.buildingAge)} {...bars} />
+        <Bars data={toBars(a.buildingAge, k.buildingAge)} {...bars} />
       </Card>
     </div>
   );
