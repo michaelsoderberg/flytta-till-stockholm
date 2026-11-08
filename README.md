@@ -1,142 +1,146 @@
 # Kommunkollen Stockholm
 
-Compare Stockholm's 11 boroughs (stadsdelsområden) and 127 neighbourhoods using open data from Swedish
-public agencies (found via [Sveriges dataportal](https://www.dataportal.se)).
+En webbapp som beskriver hur det är att bo i olika delar av Stockholm. Den samlar öppna data från ett tiotal
+myndigheter, som annars finns i olika format och på olika geografiska nivåer, på en gemensam karta.
 
-- **Start page** (`/`): a map of the boroughs, coloured by a measure you choose (reported crime, income,
-  education, employment, rental housing, households with children, age, cars, population), with a ranking.
-- **Borough page** (`/stadsdel/[id]`) has these sections:
-  - a summary of who lives there compared with Stockholm as a whole, and trends since 2015
-  - reported crimes by type and over time (Brå), and police events placed in the borough
-  - schools and preschools; shops, healthcare and restaurants
-  - nature and bathing water, and cloudburst flood risk
-  - rents, queue times, prices and construction projects
-  - 2026 election results, a layered map, its neighbourhoods, and population charts
-- **Area page** (`/omrade/[kod]`): the same profile for a neighbourhood (RegSO, e.g. `0180R031`) or a
-  small area (DeSO, e.g. `0180C1010`), compared with its borough. Address search lands here.
-- **Compare** (`/jamfor`): sortable tables with every borough side by side.
+**Live:** https://flytta-till-stockholm.vercel.app
 
-## Getting started
+## Vad det gör
+
+Du söker på en adress, ett grannskap eller ett stadsdelsområde, eller klickar på kartan. Då får du en sida om
+området med befolkning, inkomst och utbildning, utvecklingen sedan 2015, anmälda brott och polisens händelser,
+skolor och förskolor, butiker och vård, grönområden och översvämningsrisk vid skyfall, hyror, kötider och
+byggprojekt samt valresultatet 2026. Varje siffra jämförs med det större området: ett grannskap med sitt
+stadsdelsområde och ett stadsdelsområde med hela Stockholm. Varje kort anger också källa, år och begränsningar.
+
+Appen täcker tre nivåer: 11 stadsdelsområden, 127 grannskap (SCB:s RegSO) och 569 DeSO-områden, som är där man
+hamnar när man söker på en adress. På `/jamfor` finns sorterbara tabeller med alla stadsdelsområden bredvid
+varandra, och på `/om` finns källorna och deras begränsningar.
+
+## Kom igång
+
+### Krav
+
+- Node.js 24 (låst i `package.json`, och det är den version som produktion och CI kör; lokalt fungerar Node 20+)
+- npm
+- Inga API-nycklar behövs för att köra lokalt. Alla källor är öppna.
+- Bara för produktion: ett konto på [Vercel](https://vercel.com) (Hobby), en databas hos [Turso](https://turso.tech)
+  och GitHub Actions. Alla tre är gratis.
+
+### Installation
 
 ```bash
+git clone https://github.com/michaelsoderberg/flytta-till-stockholm
+cd flytta-till-stockholm
 npm install
-npm run dev        # http://localhost:3000
-npm test           # unit tests
-LIVE=1 npm test    # also tests against the real APIs
 ```
 
-Requires Node 20+. No API keys are needed. Production (Vercel) and CI run Node 24, pinned by `engines` in
-`package.json`; the Vercel CLI used for deploys rejects newer versions set in the Vercel project.
+### Konfiguration
 
-## Data
+Lokalt behövs ingen konfiguration. Polisens händelser sparas då i SQLite-filen `data/kommunkollen.db`.
 
-| Data | Source | How |
-|---|---|---|
-| Who lives there (DeSO/RegSO) | SCB PxWeb API v2 | Live, cached for a day. Boroughs are summed from their DeSO areas |
-| Area boundaries, address → area | SCB open geodata WFS | Live |
-| Reported crimes per borough | Brå statistics database (SOL) | `npm run fetch-bra` → `data/stockholm/crime.json` |
-| Police events | `polisen.se/api/events` | Collected every 10 minutes into SQLite (Turso in production) |
-| Which borough each area belongs to | Stockholms stad stadsdelar (CC0) + SCB DeSO | `npm run build-areas` → `data/stockholm/` |
-| Schools (merit, teachers) | Skolverket Planned Educations API v3 | `npm run build-schools` |
-| Preschools | Stockholms stad Hitta service API | `npm run build-schools` |
-| Shops, restaurants, healthcare | OpenStreetMap via Overpass (ODbL) | `npm run build-places` |
-| Green space, water, protected nature, bathing | SCB, Naturvårdsverket, HaV | `npm run build-nature` |
-| Cloudburst flood risk | MCF (formerly MSB) flood map for Stockholm | `npm run build-flood` (pixel count per DeSO) |
-| Rents, prices, queue times, projects | SCB, Bostadsförmedlingen, Stockholm växer | `npm run build-housing` |
-| Election results 2026 | Valmyndigheten, per voting district | `npm run build-elections` |
-| Trends since 2015 | SCB (2018 and 2025 DeSO divisions joined) | Live |
-| Address search, base map | OpenStreetMap / Nominatim | Live |
-
-### Yearly update of crime statistics
-
-Brå has no API. `scripts/fetch-bra-stockholm.ts` replays the SOL web form and downloads reported crimes
-for 12 crime categories per borough from 2015 onwards. Borough mergers (Hägersten-Älvsjö in 2021, Järva and
-Norra innerstaden in 2024) are reconstructed from their predecessors so every series is continuous. Run
-it after Brå publishes the final annual statistics (usually in March):
+I produktion sätts miljövariablerna i Vercel. Vill du testa dem lokalt kan du skapa en `.env.local`-fil i
+projektets rot (alla `.env*`-filer ignoreras av git):
 
 ```bash
-npm run fetch-bra
+TURSO_DATABASE_URL=libsql://din-databas.turso.io   # polisdatabas i Turso i stället för lokal fil
+TURSO_AUTH_TOKEN=ditt-värde
+CRON_SECRET=ditt-värde                              # krävs för /api/cron/polisen, t.ex. openssl rand -hex 32
+SITE_PUBLIC=1                                       # gör sajten öppen på Vercel
+BASIC_AUTH_USER=ditt-värde                          # lösenordsskydd på Vercel om SITE_PUBLIC saknas
+BASIC_AUTH_PASSWORD=ditt-värde
 ```
 
-Brå's server does not send its intermediate certificate, so the script passes it to Node via
-`NODE_EXTRA_CA_CERTS` (`scripts/certs/`).
+Valfria variabler: `KOMMUNKOLLEN_DB` (sökväg till den lokala SQLite-filen), `NOMINATIM_USER_AGENT` (User-Agent
+för adressökningen) och `DISABLE_POLISEN_POLLING=1` (stänger av insamlingen av polishändelser, t.ex. vid
+`npm run build`).
 
-### Borough boundaries
+För driftsättning läggs samma `CRON_SECRET` och variabeln `APP_URL` in i GitHub (Settings → Secrets and
+variables → Actions), tillsammans med `VERCEL_TOKEN`, `VERCEL_ORG_ID` och `VERCEL_PROJECT_ID` för CI/CD.
 
-`scripts/build-stockholm-areas.ts` assigns each of Stockholm's 569 DeSO areas to one of the 11 boroughs
-(as of 1 July 2023). It finds the stadsdel polygon each area lies in and looks that stadsdel up in a
-borough table taken from Stockholms stad. It also merges the borough polygons for the map.
+### Kör projektet
 
-### Police events
+```bash
+npm run dev            # http://localhost:3000, hämtar även polisens händelser var tionde minut
+npm test               # enhetstester
+LIVE=1 npm test        # testar även mot de riktiga API:erna
+npx tsc --noEmit && npx eslint .
+```
 
-Polisen only gives "Stockholm" as the location. `lib/police-areas.ts` places an event in a borough when
-its text names a stadsdel, neighbourhood or well-known place ("…på Södermalm", "…vid Odenplan"). That
-works for about two thirds of events. The collector polls both the national feed and
-`?locationname=Stockholm` (the latest 500 Stockholm events, about six months). For serverless hosting, call
-`GET /api/cron/polisen` on a schedule with `Authorization: Bearer <CRON_SECRET>`. The route is closed by default:
-without `CRON_SECRET` set it refuses every request (503).
-
-Locally, events are stored in the SQLite file `data/kommunkollen.db` (not in git). In production they are stored
-in [Turso](https://turso.tech) (hosted SQLite) when `TURSO_DATABASE_URL` is set.
-
-## Deploying to Vercel (free)
-
-The app runs on Vercel's free Hobby plan. Three free services are involved:
-
-| Need | Service | Why |
-|---|---|---|
-| Next.js server | **Vercel Hobby** | Deploys from GitHub on every push |
-| Police event database | **Turso** (free plan) | Vercel has no persistent disk, so the SQLite file can't live there |
-| Polling Polisen every 10 min | **GitHub Actions** (`.github/workflows/polisen-cron.yml`) | Vercel Hobby cron runs at most once a day |
-
-1. **Turso:** create a database (web dashboard or `turso db create kommunkollen`) and an auth token
-   (`turso db tokens create kommunkollen`). Copy the existing police history into it, since Polisen's API
-   can't give it back:
-   `TURSO_DATABASE_URL=libsql://… TURSO_AUTH_TOKEN=… npm run migrate-police` (safe to run again; it never
-   overwrites).
-2. **Vercel:** import the GitHub repository (framework Next.js, no other settings). Add these environment
-   variables for Production and Preview:
-   - `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`
-   - `CRON_SECRET`: a long random string, e.g. `openssl rand -hex 32`
-   - `BASIC_AUTH_USER`, `BASIC_AUTH_PASSWORD`: the site is password-protected on Vercel until the licences
-     of all sources are verified (see CLAUDE.md). Without them every page answers 503. After the review,
-     set `SITE_PUBLIC=1` instead.
-3. **GitHub:** in the repository's Settings → Secrets and variables → Actions, add the secret `CRON_SECRET`
-   (same value as on Vercel) and the variable `APP_URL` (e.g. `https://kommunkollen.vercel.app`). The
-   workflow only runs on its schedule once it is on the default branch; run it once by hand
-   (Actions → Collect police events → Run workflow) to check it answers `{"fetched":…,"inserted":…}`.
-
-Caveats: GitHub may delay scheduled runs, and disables them after 60 days without commits in a public
-repository (re-enable in the Actions tab). Each Vercel function instance keeps its own SCB cache, so a cold
-instance takes a few seconds on the first request. Vercel Hobby is for non-commercial use.
-
-### Refreshing the static data
-
-The build scripts write JSON to `data/stockholm/`. Run them in this order, because the area mapping is
-needed first and the flood script uses the land areas from the nature script:
+Den statiska datan i `data/stockholm/` är redan byggd och finns i repot. Så här byggs den om, i den här ordningen:
 
 ```bash
 npm run build-areas && npm run build-schools && npm run build-places && npm run build-nature \
   && npm run build-flood && npm run build-housing && npm run build-elections && npm run fetch-bra
 ```
 
-Suggested refresh rate:
-- **Weekly:** places, housing projects.
-- **Yearly:** schools in the autumn, crime in March, everything else when SCB publishes.
-- **After each election:** elections. The val.se download URLs change when files are replaced.
+Skolor och brott uppdateras en gång om året, butiker och byggprojekt varje vecka, och valdata efter varje val.
 
-Notes on methods:
-- **Elections:** voting districts don't follow SCB's areas, so votes are split by overlapping area.
-- **Flood risk:** MCF only publishes the cloudburst map as images. The script counts flooded pixels per DeSO
-  at 5 m resolution, using the legend colours, and leaves out depths over 1.5 m (existing lakes).
+## Arkitektur
 
-## Structure
+SCB:s DeSO-områden är den gemensamma nyckeln. Varje källa placeras i ett DeSO-område, via kod, koordinater eller
+överlappande yta, och grannskap och stadsdelsområden är bara mängder av DeSO-områden. Data som ändras sällan
+(skolor, brott, val, natur, översvämning, bostäder) byggs av skript till statisk JSON. Bara SCB-statistik,
+områdesgränser, adressökning och polishändelser hämtas live, och de cachas. All extern I/O sker i `lib/` och
+`scripts/`, och beräkningarna är rena funktioner som testas utan nätverk. Sidorna är serverkomponenter. Bara
+kartor, diagram och filter körs i webbläsaren.
 
-- `lib/stockholm.ts`: boroughs, neighbourhoods and DeSO lookups
-- `lib/profile.ts`: loads all SCB statistics for Stockholm and computes any area
-- `lib/crime.ts`: Brå crime data
-- `lib/trends.ts`: time series across SCB's 2018 and 2025 area divisions
-- `lib/local.ts`: schools, services, nature, flood, housing and election data per area
-- `components/LocalSections.tsx`, `components/ExploreMap.tsx`: the area sections and the layered map
-- `lib/police-areas.ts`, `lib/polisen.ts`, `lib/db.ts`: police events, storage and place matching
-- `lib/scb.ts`, `lib/deso.ts`, `lib/geocode.ts`: API clients
+```
+flytta-till-stockholm/
+├── app/                # Sidor och API-routes: start, /stadsdel, /omrade, /jamfor, /om, /api
+├── components/         # Kort, diagram (Recharts) och kartor (Leaflet, laddas bara i webbläsaren)
+├── lib/                # API-klienter (SCB, Polisen, Nominatim), områdeskoppling och beräkningar
+├── scripts/            # Byggskript som hämtar källorna och skriver JSON till data/stockholm/
+├── data/stockholm/     # Färdigbyggd statisk data: områden, brott, skolor, platser, natur, val m.m.
+├── tests/              # Vitest: parsning, beräkningar, routes och valfria live-tester
+├── .github/workflows/  # CI/CD (lint, typkontroll, test, bygg, deploy) och insamling av polishändelser
+├── middleware.ts       # Lösenordsskydd på Vercel tills licenserna är granskade
+└── instrumentation.ts  # Startar insamlingen av polishändelser i den lokala servern
+```
+
+## Teknisk stack
+
+| Komponent | Val | Anledning |
+|---|---|---|
+| Ramverk | Next.js 15 (App Router) + TypeScript | Data hämtas på servern, vilket döljer API-detaljer och undviker CORS-problem hos SCB och Skolverket. Typningen fångar fel i datahanteringen. |
+| Styling | Tailwind CSS v4 med tematokens | Konsekvent UI och ljust/mörkt läge från en färgpalett som är kontrollerad för färgblindhet. |
+| Diagram | Recharts | Enkla stapel- och linjediagram med tooltips som React-komponenter. |
+| Kartor | Leaflet + OpenStreetMap, MCF:s översvämningskartor som WMS | Gratis och utan API-nyckel. Klarar områden, punkter och WMS-lager. |
+| Databas | SQLite lokalt, Turso i produktion (`@libsql/client`) | Polisens API visar bara de senaste 500 händelserna, så de måste sparas löpande. Vercel saknar beständig disk, därför Turso. |
+| Byggskript | tsx med Turf.js, proj4, shapefile, pngjs och SheetJS | Geodata (ytor, koordinatsystem, kartbilder, Excel-filer) bearbetas i samma språk och med samma kod som appen. |
+| Tester | Vitest | Snabbt och TypeScript-vänligt. |
+| Drift | Vercel Hobby + GitHub Actions | Gratis. CI kör lint, typkontroll, tester och bygg på varje PR, och deployar bara när allt går igenom på `main`. Ett schemalagt jobb hämtar polishändelser var tionde minut. |
+
+## Begränsningar
+
+- **Inga försäljningspriser per område.** Öppna prisdata finns bara för hela staden eller Storstockholm, och
+  hyror bara för innerstaden, Söderort och Västerort. För lokala priser hänvisar appen till privata sajter.
+- **Polisens händelser saknar exakt plats.** Polisen anger bara "Stockholm". Appen placerar händelser utifrån
+  ortnamn i texten, vilket lyckas för ungefär två tredjedelar. Historiken börjar i april 2026.
+- **Brott räknas per invånare, inte per besökare.** Områden med många besökare, som Norra innerstaden och
+  Södermalm, får därför höga tal.
+- **Flera siffror är uppskattningar.** Röster fördelas efter överlappande yta, eftersom valdistrikten inte följer
+  SCB:s områden. Översvämningsrisken räknas fram ur pixlar i MCF:s kartbilder. Antalet bostäder i byggprojekt
+  tolkas ur fritext och lyckades för 237 av 422 projekt.
+- **Trenderna byter områdesindelning mellan 2023 och 2024**, vilket kan ge små hopp i serierna.
+- **Skolstatistiken är ofullständig.** Bara ungefär hälften av grundskolorna har ett publicerat meritvärde för
+  årskurs 9.
+- **Tre källor saknar angiven licens** (Stockholm växer, Bostadsförmedlingens statistik och Stockholms stads
+  Hitta service). Sajten är en demo och ska inte lanseras publikt innan villkoren är granskade.
+- **Kända tekniska brister:** första sidladdningen tar 5–6 sekunder eftersom all SCB-data hämtas på en gång,
+  trenddatan uppdateras inte förrän servern startas om, adressökningen hittar ibland bara gatan och inte
+  husnumret, och mobillayouten är inte testad på en riktig telefon.
+
+Den fullständiga listan finns i [PROJECT.md](PROJECT.md) under "Limitations and known bugs".
+
+## Utvecklat med
+
+Claude Code (agentdriven utveckling) som del av kursen Next-Generation Software Development with AI.
+
+## CV-punkt
+
+Designade och utvecklade en webbapp i Next.js 15, TypeScript och SQLite (Turso) med hjälp av agentdriven
+utveckling (Claude Code). Appen samlar öppna data från tio myndigheter och kommunala källor (bl.a. SCB, Brå,
+Skolverket och Valmyndigheten) på en gemensam geografi med 569 statistikområden, så att Stockholms 11
+stadsdelsområden och 127 grannskap kan jämföras med källa angiven för varje siffra. Deployad på Vercel med CI/CD
+via GitHub Actions och tillgänglig på https://flytta-till-stockholm.vercel.app.
