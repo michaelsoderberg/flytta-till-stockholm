@@ -3,8 +3,13 @@ import { TIMEOUT_MS } from "@/lib/http";
 import { findKommunByName, getKommun, LAN } from "@/lib/kommuner";
 
 const API = "https://polisen.se/api/events";
-/** The unfiltered feed covers roughly a week nationwide; a location filter returns 500 events for that place alone. */
-const FEEDS = [API, `${API}?locationname=Stockholm`];
+/**
+ * The app only shows events in Stockholm municipality, so only the Stockholm feed is collected: it returns the
+ * latest 500 events there (about six months). The unfiltered national feed (about a week nationwide) added no
+ * Stockholm events beyond these, cost about 500 database writes per poll, and a failure in it used to stop
+ * the Stockholm feed from being collected at all.
+ */
+const FEEDS = [`${API}?locationname=Stockholm`];
 const POLL_INTERVAL_MS = 10 * 60 * 1000;
 
 export type RawEvent = {
