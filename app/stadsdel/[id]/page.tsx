@@ -26,7 +26,7 @@ import boroughGeo from "@/data/stockholm/boroughs.geojson.json";
 import { verdict } from "@/lib/compare";
 import { CRIME_CATEGORIES, crimeFor, crimeTrend, LATEST_CRIME_YEAR } from "@/lib/crime";
 import { placeEvent } from "@/lib/police-areas";
-import { collectIfStale, getStockholmCollectionStart, getStockholmEvents } from "@/lib/polisen";
+import { getStockholmCollectionStart, getStockholmEvents } from "@/lib/polisen";
 import { boroughRef, loadStockholm, neighbourhoodRef, stadRef, stats, summarize } from "@/lib/profile";
 import { BOROUGHS, desosInBorough, getBorough, neighbourhoodsInBorough, titleCase } from "@/lib/stockholm";
 import { boroughTrendRef, loadTrends, stadTrendRef, trendFor } from "@/lib/trends";
@@ -50,8 +50,6 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
   const borough = getBorough(id);
   if (!borough) notFound();
 
-  // Police collection runs in the background so a slow Polisen API never delays the page.
-  void collectIfStale();
   // Trends are optional: if SCB's trend tables fail, the page renders without that section.
   const [data, trendTables, stockholmEvents, collectionStart] = await Promise.all([
     loadStockholm(),
