@@ -55,7 +55,7 @@ Valen är bestämda.
 | Styling    | **Tailwind CSS v4** med tematokens                                                                                        | Snabbt att bygga ett konsekvent UI. Ljust och mörkt läge ska styras från en validerad färgpalett.                                                                                                                  |
 | Diagram    | **Recharts**                                                                                                              | Enkla stapel- och linjediagram med tooltips, som React-komponenter.                                                                                                                                                |
 | Kartor     | **Leaflet** + OpenStreetMap-kartbilder, MCF:s översvämningskartor som WMS                                                 | Gratis, utan API-nyckel. Klarar GeoJSON-områden, punkter och WMS-lager.                                                                                                                                            |
-| Lagring    | **SQLite** via `better-sqlite3`                                                                                           | Polisens API visar bara de senaste 500 händelserna, så de måste sparas löpande. En fil räcker; ingen databasserver behövs.                                                                                         |
+| Lagring    | **SQLite** via `@libsql/client`: lokal fil i utveckling, **Turso** (hostad SQLite) i produktion på Vercel                  | Polisens API visar bara de senaste 500 händelserna, så de måste sparas löpande. En fil räcker; ingen databasserver behövs.                                                                                         |
 | Byggskript | **tsx**-skript med **Turf.js**, **proj4**, `shapefile`, `pngjs`, SheetJS                                                  | Långsamt föränderlig data ska byggas till statisk JSON. Samma språk och samma kod (API-klienter, områdeskoppling) delas med appen.                                                                                 |
 | Tester     | **Vitest**                                                                                                                | Snabbt och TypeScript-vänligt. Ska testa parsning, beräkningar och data, med valfria live-tester mot API:erna.                                                                                                     |
 
@@ -87,8 +87,7 @@ Valen är bestämda.
 
 - **Inte committa, pusha eller skapa PR:er** utan att användaren ber om det. Skapa en branch först.
 - **Inte lägga till externa beroenden** (npm-paket, tjänster, API-nycklar) utöver stacken ovan utan att fråga.
-- **Inte byta databas, ramverk, kart- eller diagrambibliotek**, och inte uppgradera `better-sqlite3` från v11
-  eller Node utan att testa och fråga.
+- **Inte byta databas, ramverk, kart- eller diagrambibliotek**, och inte uppgradera Node utan att testa och fråga.
 - **Inte stänga av TLS-verifiering** (t.ex. för Brå, vars server saknar ett mellancertifikat). Lägg i stället till
   certifikatet.
 - **Absolut inte använda privata eller betalda källor**, eller skrapa sajter som Hemnet, Booli eller hitta.se.

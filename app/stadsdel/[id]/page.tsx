@@ -53,7 +53,13 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
   // Police collection runs in the background so a slow Polisen API never delays the page.
   void collectIfStale();
   // Trends are optional: if SCB's trend tables fail, the page renders without that section.
-  const [data, trendTables] = await Promise.all([loadStockholm(), optional(loadTrends(), "SCB trends")]);
+  const [data, trendTables, stockholmEvents, collectionStart] = await Promise.all([
+    loadStockholm(),
+    optional(loadTrends(), "SCB trends"),
+    // Police events come from the database; if it is unreachable, only that card says so.
+    optional(getStockholmEvents(365), "Police events"),
+    optional(getStockholmCollectionStart(), "Police collection start"),
+  ]);
   const a = stats(data, boroughRef(id));
   const stad = stats(data, stadRef());
   const geometry = (boroughGeo as unknown as FeatureCollection).features.find((f) => f.properties?.id === id)!
@@ -74,7 +80,7 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
   const trend = crimeTrend(id, "totalt").map((p, i) => ({ year: p.year, a: p.value, b: crimeTrend("stockholm", "totalt")[i].value }));
 
   // Police events placed in this borough by the places their text mentions
-  const allEvents = getStockholmEvents(365).map(placeEvent);
+  const allEvents = (stockholmEvents ?? []).map(placeEvent);
   const events = allEvents.filter((e) => e.borough === id);
   const placedShare = allEvents.length ? allEvents.filter((e) => e.borough).length / allEvents.length : 0;
 
@@ -188,8 +194,8 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
       >
         <PoliceEvents
           events={events}
-          collectionStart={getStockholmCollectionStart()}
-          note={`Polisen anger bara "Stockholm" som plats. Kommunkollen kan placera ${pct(placedShare)} av händelserna utifrån texten; övriga räknas inte här.`}
+          collectionStart={collectionStart}
+          note={stockholmEvents == null ? "Polisens händelser kunde inte hämtas just nu. Försök igen senare." : `Polisen anger bara "Stockholm" som plats. Kommunkollen kan placera ${pct(placedShare)} av händelserna utifrån texten; övriga räknas inte här.`}
         />
       </Card>
 
