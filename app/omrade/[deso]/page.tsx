@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AreaMap from "@/components/AreaMapLazy";
 import { ProfileCharts, ProfileTiles, Summary } from "@/components/ProfileSections";
-import TrendsCard from "@/components/TrendsCard";
+import TrendsCard, { TrendsUnavailable } from "@/components/TrendsCard";
 import SectionNav from "@/components/SectionNav";
 import {
   ElectionsCard,
@@ -12,6 +12,7 @@ import {
   MapCard,
   NatureCard,
   SchoolsCard,
+  MapUnavailable,
   ServicesCard,
 } from "@/components/LocalSections";
 import { geometryCenter } from "@/lib/geometry";
@@ -30,20 +31,24 @@ import { boroughTrendRef, loadTrends, neighbourhoodTrendRef, trendFor } from "@/
 
 export const revalidate = 86400;
 
-/** Resolves a RegSO (grannskap) or DeSO code to what the page needs. */
+/**
+ * Resolves a RegSO (grannskap) or DeSO code to what the page needs. Whether the area exists is decided from
+ * local data only, so an outage of SCB's map service never turns a valid area into a 404. The boundary is
+ * only needed for the maps; without it (null) the page renders without them.
+ */
 async function resolve(code: string) {
   if (isNeighbourhoodCode(code)) {
     const n = getNeighbourhood(code);
-    const geometry = n && (await regsoGeometry(code));
-    if (!n || !geometry) return null;
+    if (!n) return null;
+    const geometry = await optional(regsoGeometry(code), "SCB WFS RegSO boundary");
     return { kind: "grannskap" as const, name: n.name, ref: neighbourhoodRef(code), borough: getBorough(n.borough)!, neighbourhood: n, geometry };
   }
   if (isDesoCode(code)) {
     const borough = boroughForDeso(code);
-    const feature = borough && (await desoByCode(code));
-    if (!borough || !feature) return null;
+    if (!borough) return null;
+    const feature = await optional(desoByCode(code), "SCB WFS DeSO boundary");
     const n = neighbourhoodForDeso(code);
-    return { kind: "deso" as const, name: n?.name ?? `Område ${code}`, ref: desoRef(code), borough, neighbourhood: n, geometry: feature.geometry };
+    return { kind: "deso" as const, name: n?.name ?? `Område ${code}`, ref: desoRef(code), borough, neighbourhood: n, geometry: feature?.geometry ?? null };
   }
   return null;
 }
@@ -79,7 +84,7 @@ export default async function AreaPage({
     desos: n?.desos ?? [code],
     boroughId: area.borough.id,
     geometry: area.geometry,
-    center: geometryCenter(area.geometry),
+    center: area.geometry && geometryCenter(area.geometry),
     stats: n ? stats(data, neighbourhoodRef(n.code)) : a,
     stadStats: stad,
     election: { level: "regso", code: n?.code ?? "" },
@@ -135,7 +140,11 @@ export default async function AreaPage({
           />
         </div>
         <div className="lg:col-span-2">
-          <AreaMap geometry={area.geometry} />
+          {area.geometry ? (
+            <AreaMap geometry={area.geometry} />
+          ) : (
+            <MapUnavailable />
+          )}
         </div>
       </div>
 
@@ -149,13 +158,16 @@ export default async function AreaPage({
 
       <MapCard area={local} />
 
-      {area.neighbourhood && trendTables && (
-        <TrendsCard
-          name={area.neighbourhood.name}
-          points={trendFor(trendTables, neighbourhoodTrendRef(area.neighbourhood.code))}
-          reference={{ name: area.borough.name, points: trendFor(trendTables, boroughTrendRef(area.borough.id)) }}
-        />
-      )}
+      {area.neighbourhood &&
+        (trendTables ? (
+          <TrendsCard
+            name={area.neighbourhood.name}
+            points={trendFor(trendTables, neighbourhoodTrendRef(area.neighbourhood.code))}
+            reference={{ name: area.borough.name, points: trendFor(trendTables, boroughTrendRef(area.borough.id)) }}
+          />
+        ) : (
+          <TrendsUnavailable />
+        ))}
 
       <SchoolsCard area={local} />
       <ServicesCard area={local} />

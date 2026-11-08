@@ -25,8 +25,9 @@ export type LocalArea = {
   name: string;
   desos: string[];
   boroughId: string;
-  geometry: GeoJSON.Geometry;
-  center: [number, number];
+  /** The area's boundary, or null when SCB's map service could not be reached (maps are then left out). */
+  geometry: GeoJSON.Geometry | null;
+  center: [number, number] | null;
   stats: AreaStats;
   stadStats: AreaStats;
   /** Which election level to read: a borough or a neighbourhood (RegSO). */
@@ -85,7 +86,7 @@ export function MapCard({ area }: { area: LocalArea }) {
       key: "bad",
       label: "Badplatser",
       color: COLORS[4],
-      markers: (nature.bathing.length ? nature.bathing : nearestBathing(area.center)).map((b) => ({
+      markers: (nature.bathing.length ? nature.bathing : area.center ? nearestBathing(area.center) : []).map((b) => ({
         lat: b.lat,
         lon: b.lon,
         label: b.name,
@@ -112,8 +113,17 @@ export function MapCard({ area }: { area: LocalArea }) {
       subtitle="Slå på och av lager. Klicka på en punkt för mer information."
       source="Skolverket, Stockholms stad, OpenStreetMap-bidragsgivare (ODbL), Havs- och vattenmyndigheten, MCF (översvämningskartor)."
     >
-      <ExploreMap geometry={area.geometry} groups={groups} />
+      {area.geometry ? <ExploreMap geometry={area.geometry} groups={groups} /> : <MapUnavailable />}
     </Card>
+  );
+}
+
+/** Shown instead of a map when the area's boundary could not be fetched from SCB. */
+export function MapUnavailable() {
+  return (
+    <div className="flex h-72 w-full items-center justify-center rounded-xl border border-line bg-surface p-4 text-center text-sm text-ink-2">
+      Kartan kunde inte visas eftersom SCB:s kartjänst inte svarar just nu. Statistiken nedan påverkas inte.
+    </div>
   );
 }
 
@@ -226,7 +236,11 @@ export function ServicesCard({ area }: { area: LocalArea }) {
 export function NatureCard({ area }: { area: LocalArea }) {
   const n = natureFor(area.desos);
   const stad = natureFor(ALL_DESOS);
-  const bathing = n.bathing.length ? n.bathing.map((b) => ({ ...b, km: null as number | null })) : nearestBathing(area.center);
+  const bathing = n.bathing.length
+    ? n.bathing.map((b) => ({ ...b, km: null as number | null }))
+    : area.center
+      ? nearestBathing(area.center)
+      : [];
   return (
     <Card
       id="natur"
@@ -257,6 +271,9 @@ export function NatureCard({ area }: { area: LocalArea }) {
         </div>
         <div>
           <h3 className="text-sm font-medium">{n.bathing.length ? "Badplatser i området" : "Närmaste badplatser"}</h3>
+          {bathing.length === 0 && (
+            <p className="mt-1 text-sm text-ink-2">De närmaste badplatserna kan inte visas just nu, eftersom områdets karta inte gick att hämta från SCB.</p>
+          )}
           <ul className="mt-1 divide-y divide-line text-sm">
             {bathing.map((b) => (
               <li key={b.id} className="flex justify-between gap-3 py-1.5">
