@@ -4,6 +4,7 @@
 //
 // Data © OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright).
 import { writeFileSync } from "node:fs";
+import { assertAtLeast, assertComparable, previousBuild } from "./lib/checks";
 import { desoLocator } from "./lib/geo";
 
 /** overpass-api.de is often overloaded; mirrors are tried in order. */
@@ -48,7 +49,12 @@ async function overpass(): Promise<Element[]> {
         headers: { "User-Agent": "Kommunkollen/0.1 (open data demo)" },
       });
       if (!res.ok) throw new Error(String(res.status));
-      return ((await res.json()) as { elements: Element[] }).elements;
+      const json = (await res.json()) as { elements?: Element[]; remark?: string };
+      // An overloaded server answers 200 with a "remark" (e.g. "runtime error: Query timed out") and only
+      // part of the elements. Treat that as a failure so the next mirror is tried.
+      if (json.remark) throw new Error(`incomplete answer: ${json.remark}`);
+      if (!Array.isArray(json.elements)) throw new Error("answer has no elements list");
+      return json.elements;
     } catch (err) {
       console.warn(`${url} failed: ${err}`);
     }
@@ -69,6 +75,9 @@ async function main() {
     if (!loc) continue;
     items.push({ n: e.tags.name ?? null, c, lat: Number(lat.toFixed(5)), lon: Number(lon.toFixed(5)), d: loc.deso });
   }
+  const previous = previousBuild<{ items: unknown[] }>("data/stockholm/places.json");
+  assertAtLeast("places: places found", items.length, 1);
+  assertComparable("places: places found", items.length, previous?.items.length);
   writeFileSync("data/stockholm/places.json", JSON.stringify({ fetched: new Date().toISOString().slice(0, 10), items }));
   const counts: Record<string, number> = {};
   for (const i of items) counts[i.c] = (counts[i.c] ?? 0) + 1;

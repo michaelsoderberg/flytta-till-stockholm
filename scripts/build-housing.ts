@@ -9,6 +9,7 @@
 import { writeFileSync } from "node:fs";
 import areas from "../data/stockholm/areas.json";
 import { queryTable } from "../lib/scb";
+import { assertAtLeast, assertComparable, assertOk, previousBuild } from "./lib/checks";
 import { desoLocator, fromSweref1800, pause } from "./lib/geo";
 
 const VAXER = "https://vaxer.stockholm/projekt/";
@@ -36,7 +37,12 @@ function extractLayers(html: string) {
       else if (ch === "{") depth++;
       else if (ch === "}" && --depth === 0) break;
     }
-    const obj = JSON.parse(html.slice(i, j + 1));
+    let obj;
+    try {
+      obj = JSON.parse(html.slice(i, j + 1));
+    } catch (err) {
+      throw new Error(`vaxer.stockholm: could not parse the map layer at offset ${i} – has the page changed? (${err})`);
+    }
     layers.push({ name: obj.name, features: obj.geojson.features });
     i = j + 1;
   }
@@ -61,6 +67,8 @@ async function projects() {
   const res = await fetch(VAXER, { headers: { "User-Agent": "Kommunkollen/0.1 (open data demo)" } });
   if (!res.ok) throw new Error(`vaxer.stockholm ${res.status}`);
   const layers = extractLayers(await res.text());
+  // A changed page gives no layers, which would silently write an empty project list.
+  assertAtLeast("vaxer.stockholm: map layers found", layers.length, 1);
   const locate = await desoLocator();
   const out = [];
   for (const layer of layers) {
@@ -84,6 +92,9 @@ async function projects() {
     }
   }
   console.log(`${out.length} projekt i ${layers.length} kategorier`);
+  // Projects come and go, so allow a larger drop than for other sources before calling it a broken download.
+  const previous = previousBuild<{ projects: unknown[] }>("data/stockholm/housing.json");
+  assertComparable("vaxer.stockholm: projects", out.length, previous?.projects.length, 0.7);
   return out;
 }
 
@@ -151,24 +162,37 @@ function histogramMedian(counts: number[]) {
 async function queueTimes() {
   const year = new Date().getFullYear() - 1; // last complete year
   const q = `year=${year}&queue=${encodeURIComponent("Bostadskön")}`;
-  const list = (await (await fetch(`${BOSTAD}/omraden?${q}`)).json()) as { Kommun: string; Stadsdelar: string[] }[];
+  const listRes = await fetch(`${BOSTAD}/omraden?${q}`);
+  await assertOk(listRes, "Bostadsförmedlingen area list");
+  const list = (await listRes.json()) as { Kommun: string; Stadsdelar: string[] }[];
   const stadsdelar = list.find((k) => k.Kommun === "Stockholm")?.Stadsdelar ?? [];
+  if (!stadsdelar.length) {
+    throw new Error(`Bostadsförmedlingen has no Stockholm districts for ${year} – is the year published yet? The existing file was not overwritten.`);
+  }
   const boroughOf = new Map<string, string>();
   for (const b of areas.boroughs) for (const s of b.stadsdelar) boroughOf.set(s.toLocaleLowerCase("sv-SE"), b.id);
   boroughOf.set("ulvsunda industriområde", "bromma");
   for (const [k, v] of Object.entries(ALIASES)) boroughOf.set(k, v);
 
   const out = [];
+  const failed: string[] = [];
   for (const name of stadsdelar) {
     const area = encodeURIComponent(`Stockholm - ${name.trim()}`);
     const res = await fetch(`${BOSTAD}/kotid-per-omrade?${q}&area=${area}&rooms=&apartmentType=&buildingType=`);
-    if (!res.ok) continue;
+    if (!res.ok) {
+      failed.push(`${name.trim()} (${res.status})`);
+      continue;
+    }
     const json = (await res.json()) as { datasets: { data: number[] }[] };
     const counts = json.datasets[0]?.data ?? [];
     const borough = boroughOf.get(name.trim().toLocaleLowerCase("sv-SE")) ?? null;
     if (!borough) console.warn(`Okänd stadsdel hos Bostadsförmedlingen: ${name}`);
     out.push({ name: name.trim(), borough, flats: counts.reduce((s, c) => s + c, 0), medianYears: histogramMedian(counts), histogram: counts });
     await pause(200);
+  }
+  // A district that fails would otherwise just disappear from the app.
+  if (failed.length) {
+    throw new Error(`Queue times failed for ${failed.length} district(s): ${failed.join(", ")}. The existing file was not overwritten.`);
   }
   console.log(`${out.length} stadsdelar med kötid ${year}`);
   return { year, stadsdelar: out };

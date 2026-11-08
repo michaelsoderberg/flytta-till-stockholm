@@ -10,9 +10,13 @@ import { PNG } from "pngjs";
 import proj4 from "proj4";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
+import { assertAtLeast, assertComparable, previousBuild } from "./lib/checks";
 import { fetchAreas, mapLimit } from "./lib/geo";
 import nature from "../data/stockholm/nature.json";
 
+// If MCF republishes the maps, the service path (with its year) and the layer id change. Check them against
+// MCF's service catalogue (…/rest/services/Oversvamningskarteringar) before running. A wrong layer still
+// returns valid, fully transparent images, which the check at the end of main() catches.
 const SERVICE = "https://gis-tjanster.mcf.se/arcgis/rest/services/Oversvamningskarteringar/hotkartor_2026/MapServer";
 const LAYER = 201; // Stockholm, skyfall, 100-årsregn
 const RESOLUTION = 5; // metres per pixel
@@ -113,6 +117,15 @@ async function main() {
     ] as const;
   });
 
+  // A changed layer id or legend colours give 0 classified pixels everywhere, which would read as
+  // "no flood risk" for the whole city.
+  type Row = { floodedHa: number };
+  const totalFlooded = rows.reduce((s, [, r]) => s + r.floodedHa, 0);
+  const previous = previousBuild<{ deso: Record<string, Row> }>("data/stockholm/flood.json");
+  const previousFlooded = previous && Object.values(previous.deso).reduce((s, r) => s + r.floodedHa, 0);
+  assertAtLeast("flood: DeSO areas measured", rows.length, 500);
+  assertAtLeast("flood: flooded hectares in Stockholm", totalFlooded, 1);
+  assertComparable("flood: flooded hectares in Stockholm", totalFlooded, previousFlooded, 0.5);
   writeFileSync(
     "data/stockholm/flood.json",
     JSON.stringify({
