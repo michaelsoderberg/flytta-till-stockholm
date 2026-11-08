@@ -100,16 +100,16 @@ flytta-till-stockholm/
 
 ## Teknisk stack
 
-| Komponent | Val | Anledning |
-|---|---|---|
-| Ramverk | Next.js 15 (App Router) + TypeScript | Data hämtas på servern, vilket döljer API-detaljer och undviker CORS-problem hos SCB och Skolverket. Typningen fångar fel i datahanteringen. |
-| Styling | Tailwind CSS v4 med tematokens | Konsekvent UI och ljust/mörkt läge från en färgpalett som är kontrollerad för färgblindhet. |
-| Diagram | Recharts | Enkla stapel- och linjediagram med tooltips som React-komponenter. |
-| Kartor | Leaflet + OpenStreetMap, MCF:s översvämningskartor som WMS | Gratis och utan API-nyckel. Klarar områden, punkter och WMS-lager. |
-| Databas | SQLite lokalt, Turso i produktion (`@libsql/client`) | Polisens API visar bara de senaste 500 händelserna, så de måste sparas löpande. Vercel saknar beständig disk, därför Turso. |
-| Byggskript | tsx med Turf.js, proj4, shapefile, pngjs och SheetJS | Geodata (ytor, koordinatsystem, kartbilder, Excel-filer) bearbetas i samma språk och med samma kod som appen. |
-| Tester | Vitest | Snabbt och TypeScript-vänligt. |
-| Drift | Vercel Hobby + GitHub Actions | Gratis. CI kör lint, typkontroll, tester och bygg på varje PR, och deployar bara när allt går igenom på `main`. Ett schemalagt jobb hämtar polishändelser var tionde minut. |
+| Komponent  | Val                                                        | Anledning                                                                                                                                                                   |
+| ---------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ramverk    | Next.js 15 (App Router) + TypeScript                       | Data hämtas på servern, vilket döljer API-detaljer och undviker CORS-problem hos SCB och Skolverket. Typningen fångar fel i datahanteringen.                                |
+| Styling    | Tailwind CSS v4 med tematokens                             | Konsekvent UI och ljust/mörkt läge från en färgpalett som är kontrollerad för färgblindhet.                                                                                 |
+| Diagram    | Recharts                                                   | Enkla stapel- och linjediagram med tooltips som React-komponenter.                                                                                                          |
+| Kartor     | Leaflet + OpenStreetMap, MCF:s översvämningskartor som WMS | Gratis och utan API-nyckel. Klarar områden, punkter och WMS-lager.                                                                                                          |
+| Databas    | SQLite lokalt, Turso i produktion (`@libsql/client`)       | Polisens API visar bara de senaste 500 händelserna, så de måste sparas löpande. Vercel saknar beständig disk, därför Turso.                                                 |
+| Byggskript | tsx med Turf.js, proj4, shapefile, pngjs och SheetJS       | Geodata (ytor, koordinatsystem, kartbilder, Excel-filer) bearbetas i samma språk och med samma kod som appen.                                                               |
+| Tester     | Vitest                                                     | Snabbt och TypeScript-vänligt.                                                                                                                                              |
+| Drift      | Vercel Hobby + GitHub Actions                              | Gratis. CI kör lint, typkontroll, tester och bygg på varje PR, och deployar bara när allt går igenom på `main`. Ett schemalagt jobb hämtar polishändelser var tionde minut. |
 
 ## Begränsningar
 
@@ -142,5 +142,6 @@ Claude Code (agentdriven utveckling) som del av kursen Next-Generation Software 
 Designade och utvecklade en webbapp i Next.js 15, TypeScript och SQLite (Turso) med hjälp av agentdriven
 utveckling (Claude Code). Appen samlar öppna data från tio myndigheter och kommunala källor (bl.a. SCB, Brå,
 Skolverket och Valmyndigheten) på en gemensam geografi med 569 statistikområden, så att Stockholms 11
-stadsdelsområden och 127 grannskap kan jämföras med källa angiven för varje siffra. Deployad på Vercel med CI/CD
+stadsdelsområden och 127 grannskap kan jämföras med källa angiven för varje siffra. Målgruppen är människor som önskar bosätta sig i Stockholm och vill ta del av hur dom olika områdena i Stockholm skiljer sig utifrån tidigare nämnda myndigheter/kommuners data.
+Deployad på Vercel, databas via Turso med CI/CD
 via GitHub Actions och tillgänglig på https://flytta-till-stockholm.vercel.app.
