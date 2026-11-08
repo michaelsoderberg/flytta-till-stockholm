@@ -14,6 +14,22 @@ function matchPlaces(places: Place[], query: string) {
   return [...starts, ...contains].slice(0, 6);
 }
 
+/**
+ * Calls one of the app's own API routes. Only the route's own Swedish error text is shown to the user;
+ * anything else (no connection, a host's HTML error page, invalid JSON) becomes a plain Swedish message.
+ */
+async function callApi<T>(url: string, fallback: string): Promise<T> {
+  let res: Response;
+  try {
+    res = await fetch(url);
+  } catch {
+    throw new Error("Kunde inte nå Kommunkollen. Kontrollera internetanslutningen och försök igen.");
+  }
+  const json = (await res.json().catch(() => null)) as (T & { error?: unknown }) | null;
+  if (!res.ok || json == null) throw new Error(typeof json?.error === "string" ? json.error : fallback);
+  return json;
+}
+
 export default function SearchBox({ places }: { places: Place[] }) {
   const router = useRouter();
   const [query, setQuery] = useState("");
@@ -28,12 +44,13 @@ export default function SearchBox({ places }: { places: Place[] }) {
     setStatus("searching");
     setError(null);
     try {
-      const res = await fetch(`/api/geocode?q=${encodeURIComponent(query)}`);
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
+      const json = await callApi<{ results: GeocodeResult[] }>(
+        `/api/geocode?q=${encodeURIComponent(query)}`,
+        "Adressökningen misslyckades. Försök igen om en stund.",
+      );
       setAddresses(json.results);
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Sökningen misslyckades.");
+      setError((err as Error).message);
     } finally {
       setStatus("idle");
     }
@@ -43,12 +60,13 @@ export default function SearchBox({ places }: { places: Place[] }) {
     setStatus("locating");
     setError(null);
     try {
-      const res = await fetch(`/api/deso?lat=${r.lat}&lon=${r.lon}`);
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
+      const json = await callApi<{ deso: string }>(
+        `/api/deso?lat=${r.lat}&lon=${r.lon}`,
+        "Kunde inte ta reda på vilket område adressen ligger i. Försök igen om en stund.",
+      );
       router.push(`/omrade/${json.deso}?adress=${encodeURIComponent(r.label.split(",").slice(0, 2).join(","))}`);
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Kunde inte hitta området.");
+      setError((err as Error).message);
       setStatus("idle");
     }
   }

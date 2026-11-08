@@ -18,6 +18,7 @@ import intersect from "@turf/intersect";
 import { featureCollection } from "@turf/helpers";
 import type { FeatureCollection, MultiPolygon, Polygon } from "geojson";
 import areas from "../data/stockholm/areas.json";
+import { assertAtLeast } from "./lib/checks";
 import { fetchAreas, fromSweref99tm, reprojectGeometry } from "./lib/geo";
 
 const FILES = {
@@ -58,13 +59,25 @@ async function download(url: string): Promise<Buffer> {
   return Buffer.from(await res.arrayBuffer());
 }
 
+/** Reads a sheet's rows, failing with a clear message if the sheet or any expected column is missing. */
+function readSheet(wb: XLSX.WorkBook, sheet: string, columns: string[]) {
+  if (!wb.Sheets[sheet]) throw new Error(`Sheet "${sheet}" not found; the workbook has: ${wb.SheetNames.join(", ")}`);
+  const rows = XLSX.utils.sheet_to_json<Record<string, string | number>>(wb.Sheets[sheet]);
+  const missing = columns.filter((c) => !(c in (rows[0] ?? {})));
+  if (missing.length) {
+    throw new Error(`Sheet "${sheet}" lacks column(s) ${missing.join(", ")} – has val.se changed the file format?`);
+  }
+  return rows;
+}
+
 /** Reads per-district tallies for Stockholm (0180) from a Valmyndigheten results workbook. */
 function readResults(buf: Buffer, sheet: "roster_RD" | "roster_KF"): Map<string, Tally> {
   const wb = XLSX.read(buf, { dense: true, sheets: [sheet, "Valdeltagande_distrikt"] });
-  const rows = XLSX.utils.sheet_to_json<Record<string, string | number>>(wb.Sheets[sheet]);
+  const rows = readSheet(wb, sheet, ["Kommunkod", "Valdistriktskod", "Parti/kategori", "Röster", "Summa giltiga röster", "Röstberättigade"]);
   const out = new Map<string, Tally>();
   for (const r of rows) {
-    if (String(r["Kommunkod"]) !== "0180") continue;
+    // The code may be read as the number 180 if the cell is numeric.
+    if (String(r["Kommunkod"]).padStart(4, "0") !== "0180") continue;
     const code = String(r["Valdistriktskod"]);
     const t = out.get(code) ?? emptyTally();
     const category = String(r["Parti/kategori"]);
@@ -75,7 +88,7 @@ function readResults(buf: Buffer, sheet: "roster_RD" | "roster_KF"): Map<string,
     t.eligible = Number(r["Röstberättigade"]) || 0;
     out.set(code, t);
   }
-  const turnout = XLSX.utils.sheet_to_json<Record<string, string | number>>(wb.Sheets["Valdeltagande_distrikt"]);
+  const turnout = readSheet(wb, "Valdeltagande_distrikt", ["Valdistriktskod", "Röster"]);
   for (const r of turnout) {
     const t = out.get(String(r["Valdistriktskod"]));
     if (t) t.cast = Number(r["Röster"]) || 0;
@@ -117,6 +130,11 @@ async function main() {
       if (overlap) parts.push({ regso: r.properties.regsokod, w: area(overlap) / total });
     }
     const sum = parts.reduce((s, p) => s + p.w, 0);
+    if (!parts.length) {
+      // No weights: its votes are then counted as unplaced (city total only) instead of silently vanishing.
+      console.warn(`District ${d.properties.Valdistriktskod} overlaps no RegSO; its votes only count city-wide`);
+      continue;
+    }
     if (sum < 0.5) console.warn(`District ${d.properties.Valdistriktskod} only ${Math.round(sum * 100)} % inside RegSO`);
     weights.set(d.properties.Valdistriktskod, parts.map((p) => ({ ...p, w: p.w / sum })));
   }
@@ -127,6 +145,7 @@ async function main() {
     const stad = emptyTally();
     const regso: Record<string, Tally> = {};
     let unplaced = 0;
+    let placedDistricts = 0;
     for (const [code, t] of tallies) {
       addScaled(stad, t, 1);
       const parts = weights.get(code);
@@ -134,6 +153,7 @@ async function main() {
         unplaced += t.cast;
         continue;
       }
+      placedDistricts++;
       for (const p of parts) addScaled((regso[p.regso] ??= emptyTally()), t, p.w);
     }
     const borough: Record<string, Tally> = {};
@@ -141,7 +161,11 @@ async function main() {
       const b = (areas.regso as Record<string, { borough: string }>)[code].borough;
       addScaled((borough[b] ??= emptyTally()), t, 1);
     }
-    console.log(`${election}: ${tallies.size} distrikt, ${unplaced} röster i uppsamlingsdistrikt (bara i stadens total)`);
+    // A renamed column or changed code format gives zero votes or no matched districts; refuse to write that.
+    assertAtLeast(`${election}: voting districts in Stockholm`, tallies.size, 500);
+    assertAtLeast(`${election}: valid votes in Stockholm`, stad.valid, 1);
+    assertAtLeast(`${election}: districts matched to a boundary`, placedDistricts, Math.round(tallies.size * 0.9));
+    console.log(`${election}: ${tallies.size} distrikt, ${unplaced} röster utan område (uppsamlingsdistrikt m.m., bara i stadens total)`);
     result[election] = {
       stockholm: round(stad),
       borough: Object.fromEntries(Object.entries(borough).map(([k, v]) => [k, round(v)])),

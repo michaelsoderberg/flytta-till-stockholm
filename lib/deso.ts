@@ -6,7 +6,6 @@ const DAY = 60 * 60 * 24;
 export type DesoFeature = {
   deso: string;
   regso: string;
-  regsoNamn: string | null;
   kommunkod: string;
   geometry: GeoJSON.Geometry;
 };
@@ -36,25 +35,17 @@ async function wfs(typeName: string, cql: string): Promise<WfsResponse> {
     signal: AbortSignal.timeout(TIMEOUT_MS.wfs),
   });
   if (!res.ok) throw new Error(`SCB WFS ${res.status}`);
-  return (await res.json()) as WfsResponse;
+  const json = (await res.json()) as Partial<WfsResponse>;
+  // GeoServer can answer 200 with an exception report instead of features.
+  if (!Array.isArray(json.features)) throw new Error("SCB WFS: unexpected answer without features");
+  return json as WfsResponse;
 }
 
-async function regsoName(regso: string): Promise<string | null> {
-  const json = await wfs("stat:RegSO_2025", `regsokod='${regso}'`);
-  return json.features[0]?.properties.regsonamn ?? null;
-}
-
-async function toFeature(json: WfsResponse): Promise<DesoFeature | null> {
+function toFeature(json: WfsResponse): DesoFeature | null {
   const f = json.features[0];
   if (!f) return null;
   const p = f.properties;
-  return {
-    deso: p.desokod,
-    regso: p.regsokod,
-    regsoNamn: await regsoName(p.regsokod),
-    kommunkod: p.kommunkod,
-    geometry: f.geometry,
-  };
+  return { deso: p.desokod, regso: p.regsokod, kommunkod: p.kommunkod, geometry: f.geometry };
 }
 
 /** Finds the DeSO area (2025 division) that contains the point. */

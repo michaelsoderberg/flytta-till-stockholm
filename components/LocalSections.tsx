@@ -25,8 +25,9 @@ export type LocalArea = {
   name: string;
   desos: string[];
   boroughId: string;
-  geometry: GeoJSON.Geometry;
-  center: [number, number];
+  /** The area's boundary, or null when SCB's map service could not be reached (maps are then left out). */
+  geometry: GeoJSON.Geometry | null;
+  center: [number, number] | null;
   stats: AreaStats;
   stadStats: AreaStats;
   /** Which election level to read: a borough or a neighbourhood (RegSO). */
@@ -85,7 +86,7 @@ export function MapCard({ area }: { area: LocalArea }) {
       key: "bad",
       label: "Badplatser",
       color: COLORS[4],
-      markers: (nature.bathing.length ? nature.bathing : nearestBathing(area.center)).map((b) => ({
+      markers: (nature.bathing.length ? nature.bathing : area.center ? nearestBathing(area.center) : []).map((b) => ({
         lat: b.lat,
         lon: b.lon,
         label: b.name,
@@ -112,8 +113,17 @@ export function MapCard({ area }: { area: LocalArea }) {
       subtitle="Slå på och av lager. Klicka på en punkt för mer information."
       source="Skolverket, Stockholms stad, OpenStreetMap-bidragsgivare (ODbL), Havs- och vattenmyndigheten, MCF (översvämningskartor)."
     >
-      <ExploreMap geometry={area.geometry} groups={groups} />
+      {area.geometry ? <ExploreMap geometry={area.geometry} groups={groups} /> : <MapUnavailable />}
     </Card>
+  );
+}
+
+/** Shown instead of a map when the area's boundary could not be fetched from SCB. */
+export function MapUnavailable() {
+  return (
+    <div className="flex h-72 w-full items-center justify-center rounded-xl border border-line bg-surface p-4 text-center text-sm text-ink-2">
+      Kartan kunde inte visas eftersom SCB:s kartjänst inte svarar just nu. Statistiken nedan påverkas inte.
+    </div>
   );
 }
 
@@ -173,14 +183,15 @@ export function SchoolsCard({ area }: { area: LocalArea }) {
 export function ServicesCard({ area }: { area: LocalArea }) {
   const counts = placeCounts(placesIn(area.desos));
   const stadCounts = placeCounts(placesIn(ALL_DESOS));
-  const per10k = (n: number, pop: number) => (pop ? (n / pop) * 10_000 : 0);
+  // Without a population figure the rate is unknown, not 0.
+  const per10k = (n: number, pop: number | null) => (pop ? (n / pop) * 10_000 : null);
   const rows = PLACE_CATEGORIES.map((c) => ({
     ...c,
     n: counts[c.key] ?? 0,
     rate: per10k(counts[c.key] ?? 0, area.stats.population),
     stadRate: per10k(stadCounts[c.key] ?? 0, area.stadStats.population),
   }));
-  const max = Math.max(...rows.map((r) => Math.max(r.rate, r.stadRate)));
+  const max = Math.max(...rows.map((r) => Math.max(r.rate ?? 0, r.stadRate ?? 0)));
   return (
     <Card
       id="service"
@@ -206,13 +217,13 @@ export function ServicesCard({ area }: { area: LocalArea }) {
                 <td className="py-2 pl-4">
                   <div className="flex items-center gap-2">
                     <span className="relative h-2.5 w-32 rounded-full bg-grid">
-                      <span className="absolute inset-y-0 left-0 rounded-full bg-accent" style={{ width: `${max ? (r.rate / max) * 100 : 0}%` }} />
-                      <span className="absolute -top-0.5 h-3.5 w-0.5 bg-ink-2" style={{ left: `${max ? (r.stadRate / max) * 100 : 0}%` }} title="Stockholm" />
+                      <span className="absolute inset-y-0 left-0 rounded-full bg-accent" style={{ width: `${max ? ((r.rate ?? 0) / max) * 100 : 0}%` }} />
+                      <span className="absolute -top-0.5 h-3.5 w-0.5 bg-ink-2" style={{ left: `${max ? ((r.stadRate ?? 0) / max) * 100 : 0}%` }} title="Stockholm" />
                     </span>
-                    <span className="tabular">{r.rate.toLocaleString("sv-SE", { maximumFractionDigits: 1 })}</span>
+                    <span className="tabular">{r.rate?.toLocaleString("sv-SE", { maximumFractionDigits: 1 }) ?? "–"}</span>
                   </div>
                 </td>
-                <td className="tabular py-2 text-right text-muted">{r.stadRate.toLocaleString("sv-SE", { maximumFractionDigits: 1 })}</td>
+                <td className="tabular py-2 text-right text-muted">{r.stadRate?.toLocaleString("sv-SE", { maximumFractionDigits: 1 }) ?? "–"}</td>
               </tr>
             ))}
           </tbody>
@@ -226,7 +237,11 @@ export function ServicesCard({ area }: { area: LocalArea }) {
 export function NatureCard({ area }: { area: LocalArea }) {
   const n = natureFor(area.desos);
   const stad = natureFor(ALL_DESOS);
-  const bathing = n.bathing.length ? n.bathing.map((b) => ({ ...b, km: null as number | null })) : nearestBathing(area.center);
+  const bathing = n.bathing.length
+    ? n.bathing.map((b) => ({ ...b, km: null as number | null }))
+    : area.center
+      ? nearestBathing(area.center)
+      : [];
   return (
     <Card
       id="natur"
@@ -257,6 +272,9 @@ export function NatureCard({ area }: { area: LocalArea }) {
         </div>
         <div>
           <h3 className="text-sm font-medium">{n.bathing.length ? "Badplatser i området" : "Närmaste badplatser"}</h3>
+          {bathing.length === 0 && (
+            <p className="mt-1 text-sm text-ink-2">De närmaste badplatserna kan inte visas just nu, eftersom områdets karta inte gick att hämta från SCB.</p>
+          )}
           <ul className="mt-1 divide-y divide-line text-sm">
             {bathing.map((b) => (
               <li key={b.id} className="flex justify-between gap-3 py-1.5">

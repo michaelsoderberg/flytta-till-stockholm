@@ -72,3 +72,12 @@ export default function TrendsCard({
     </Card>
   );
 }
+
+/** Shown in place of the trends when SCB's trend tables could not be loaded, so the section never just vanishes. */
+export function TrendsUnavailable() {
+  return (
+    <Card id="utveckling" title="Utveckling över tid" source="SCB">
+      <p className="text-sm text-ink-2">Utvecklingen sedan 2015 kunde inte hämtas från SCB just nu. Försök igen om en stund.</p>
+    </Card>
+  );
+}

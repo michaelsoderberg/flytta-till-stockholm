@@ -7,7 +7,7 @@ import ComparisonBars from "@/components/charts/ComparisonBars";
 import TrendLine from "@/components/charts/TrendLine";
 import PoliceEvents from "@/components/PoliceEvents";
 import { ProfileCharts, ProfileTiles, Summary } from "@/components/ProfileSections";
-import TrendsCard from "@/components/TrendsCard";
+import TrendsCard, { TrendsUnavailable } from "@/components/TrendsCard";
 import SectionNav from "@/components/SectionNav";
 import {
   ElectionsCard,
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 const fmt = (v: number | null | undefined) => (v == null ? "–" : Math.round(v).toLocaleString("sv-SE"));
-const pct = (v: number) => `${Math.round(v * 100)} %`;
+const pct = (v: number | null) => (v == null ? "–" : `${Math.round(v * 100)} %`);
 
 export default async function BoroughPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -84,7 +84,7 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
 
   const neighbourhoods = neighbourhoodsInBorough(id)
     .map((n) => ({ n, s: stats(data, neighbourhoodRef(n.code)) }))
-    .sort((x, y) => y.s.population - x.s.population);
+    .sort((x, y) => (y.s.population ?? 0) - (x.s.population ?? 0));
 
   const local: LocalArea = {
     name: borough.name,
@@ -148,12 +148,14 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
 
       <MapCard area={local} />
 
-      {trendTables && (
+      {trendTables ? (
         <TrendsCard
           name={borough.name}
           points={trendFor(trendTables, boroughTrendRef(id))}
           reference={{ name: "Stockholm", points: trendFor(trendTables, stadTrendRef()) }}
         />
+      ) : (
+        <TrendsUnavailable />
       )}
 
       <Card
@@ -190,11 +192,16 @@ export default async function BoroughPage({ params }: { params: Promise<{ id: st
         subtitle={`Händelser i Stockholm där Polisens text nämner en plats i ${borough.name}, t.ex. en stadsdel, ett torg eller en park.`}
         source="Polisen (polisen.se/api/events)"
       >
-        <PoliceEvents
-          events={events}
-          collectionStart={collectionStart}
-          note={stockholmEvents == null ? "Polisens händelser kunde inte hämtas just nu. Försök igen senare." : `Polisen anger bara "Stockholm" som plats. Kommunkollen kan placera ${pct(placedShare)} av händelserna utifrån texten; övriga räknas inte här.`}
-        />
+        {stockholmEvents == null ? (
+          // A failed database read must not look like "no events".
+          <p className="text-sm text-ink-2">Polisens händelser kunde inte hämtas just nu. Försök igen om en stund.</p>
+        ) : (
+          <PoliceEvents
+            events={events}
+            collectionStart={collectionStart}
+            note={`Polisen anger bara "Stockholm" som plats. Kommunkollen kan placera ${pct(placedShare)} av händelserna utifrån texten; övriga räknas inte här.`}
+          />
+        )}
       </Card>
 
       <SchoolsCard area={local} />

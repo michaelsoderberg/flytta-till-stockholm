@@ -3,6 +3,7 @@
 // Run once a year after Brå publishes the final annual statistics (usually in March):
 //   npm run fetch-bra
 import { writeFileSync } from "node:fs";
+import { assertComparable, previousBuild } from "./lib/checks";
 
 const SOL = "https://statistik.bra.se/solwebb/action";
 const MENU_ID = 101; // "Årsvis – Kommun och storstädernas stadsområden 1996–"
@@ -94,11 +95,24 @@ async function main() {
     });
     await request("/anmalda/urval/sok");
     const text = await request("/anmalda/resultat/dbfil", { method: "POST" });
-    const rows = text.split(/\r?\n/).slice(1).filter(Boolean).map((l) => l.split(";"));
+    // If the form flow breaks, SOL answers 200 with an HTML page instead of the CSV file.
+    if (/^\s*</.test(text)) throw new Error(`${cat.label}: SOL returned an HTML page instead of a CSV file – has the form changed?`);
+    // The CSV has a header row, then one row per region and year, ";"-separated:
+    // region name; (unused); (unused); year; number of reported crimes; crimes per 100 000 inhabitants.
+    // ".." means the value is suppressed or missing.
+    const [header, ...lines] = text.split(/\r?\n/).filter(Boolean);
+    if (!header || header.split(";").length < 6) {
+      throw new Error(`${cat.label}: unexpected CSV header "${header?.slice(0, 120)}" – expected at least 6 columns`);
+    }
     const out: Record<string, Record<number, Cell>> = {};
-    for (const [region, , , year, count, per100k] of rows) {
+    for (const line of lines) {
+      const [region, , , year, count, per100k] = line.split(";");
       if (count === ".." || !/^\d{4}$/.test(year)) continue;
-      ((out[region] ??= {})[Number(year)] = { count: Number(count), per100k: Number(per100k) });
+      const cell = { count: Number(count), per100k: Number(per100k) };
+      if (!Number.isFinite(cell.count) || !Number.isFinite(cell.per100k)) {
+        throw new Error(`${cat.label}: non-numeric values in row "${line}" – have the CSV columns changed?`);
+      }
+      (out[region] ??= {})[Number(year)] = cell;
     }
     raw[cat.key] = out;
     console.log(`${cat.label}: ${Object.keys(out).length} regioner`);
@@ -112,6 +126,14 @@ async function main() {
   };
   const years = periods.map((p) => p.year).sort();
 
+  // Population of a SOL region in a year, recovered from the total crime count and rate. It is taken from
+  // "totalt" (never 0) and reused for every category: a category's own rate can't give the population when
+  // its count is 0, which would understate the merged population and overstate the merged rate.
+  const population = (sol: string, year: number) => {
+    const t = raw.totalt[name(sol)]?.[year];
+    return t && t.per100k > 0 ? (t.count / t.per100k) * 100_000 : undefined;
+  };
+
   const data: Record<string, Record<string, Record<number, Cell>>> = {};
   for (const region of REGIONS) {
     data[region.id] = {};
@@ -121,11 +143,11 @@ async function main() {
         let cell: Cell | undefined;
         if (region.predecessors && year <= region.predecessors.until) {
           const parts = region.predecessors.sol.map((s) => raw[cat.key][name(s)]?.[year]);
-          if (parts.every(Boolean)) {
+          const populations = region.predecessors.sol.map((s) => population(s, year));
+          if (parts.every(Boolean) && populations.every((p) => p !== undefined)) {
             const count = parts.reduce((s, p) => s + p!.count, 0);
-            // Population is recovered from each part's rate so the combined rate is exact.
-            const population = parts.reduce((s, p) => s + (p!.per100k ? (p!.count / p!.per100k) * 100_000 : 0), 0);
-            cell = { count, per100k: population ? Math.round((count / population) * 100_000) : 0 };
+            const total = populations.reduce((s, p) => s + p!, 0);
+            cell = { count, per100k: Math.round((count / total) * 100_000) };
           }
         } else {
           cell = raw[cat.key][name(region.sol)]?.[year];
@@ -135,6 +157,16 @@ async function main() {
       data[region.id][cat.key] = series;
     }
   }
+
+  // Every region must have the total for every year; anything less means a broken or partial download.
+  for (const region of REGIONS) {
+    const missing = years.filter((y) => !data[region.id].totalt[y]);
+    if (missing.length) {
+      throw new Error(`${region.id}: "Brott totalt" missing for ${missing.join(", ")}. The existing file was not overwritten.`);
+    }
+  }
+  const previous = previousBuild<{ years: number[] }>("data/stockholm/crime.json");
+  assertComparable("crime: years", years.length, previous?.years.length, 1);
 
   writeFileSync(
     "data/stockholm/crime.json",

@@ -12,6 +12,7 @@ import centroid from "@turf/centroid";
 import intersect from "@turf/intersect";
 import { featureCollection } from "@turf/helpers";
 import type { Feature, FeatureCollection, MultiPolygon, Polygon } from "geojson";
+import { assertAtLeast, assertOk } from "./lib/checks";
 import { desoLocator, fetchAreas, mapLimit } from "./lib/geo";
 import { desoRegionCode, queryTable } from "../lib/scb";
 
@@ -120,9 +121,15 @@ async function main() {
   });
 
   const deso: Record<string, { landHa: number; waterShare: number; greenShare: number; protectedShare: number; protectedSites: number[] }> = {};
+  // DeSOs missing from TAB6420 fall back to the polygon area, with water unknown (counted as 0). That is fine
+  // for a few, but many means the table's codes or dimensions have changed, and every DeSO would silently get
+  // waterShare 0 and a land area that includes water (which build-flood also uses).
+  const missingArea: string[] = [];
   for (const d of desos) {
     const code = d.properties.desokod;
-    const ha = (t: string) => areaTable.get({ Region: desoRegionCode(code), ArealTyp: t }) ?? 0;
+    const get = (t: string) => areaTable.get({ Region: desoRegionCode(code), ArealTyp: t });
+    if (["01", "02", "03", "04", "05"].some((t) => get(t) == null)) missingArea.push(code);
+    const ha = (t: string) => get(t) ?? 0;
     const total = ha("05") || area(d) / 10_000;
     const land = ha("01") || total;
     deso[code] = {
@@ -135,8 +142,17 @@ async function main() {
     };
   }
 
+  if (missingArea.length) console.warn(`${missingArea.length} DeSO missing in TAB6420: ${missingArea.slice(0, 20).join(", ")}`);
+  if (missingArea.length > 10) {
+    throw new Error(`${missingArea.length} DeSO lack land/water area in SCB TAB6420 – have its codes or dimensions changed? The existing file was not overwritten.`);
+  }
+  assertAtLeast("nature: DeSO areas", Object.keys(deso).length, 500);
+
   // Bathing sites in Stockholm with their latest EU classification.
-  const allWaters = ((await (await fetch(`${HAV}/bathing-waters`)).json()) as { watersAndAdvisories: BathingWater[] }).watersAndAdvisories;
+  const watersRes = await fetch(`${HAV}/bathing-waters`);
+  await assertOk(watersRes, "HaV bathing waters");
+  const allWaters = ((await watersRes.json()) as { watersAndAdvisories?: BathingWater[] }).watersAndAdvisories;
+  if (!Array.isArray(allWaters)) throw new Error("HaV bathing waters: answer has no watersAndAdvisories list");
   const stockholm = allWaters.filter((w) => w.bathingWater.municipality?.id === 180);
   const bathing = (
     await mapLimit(stockholm, 4, async (w) => {
