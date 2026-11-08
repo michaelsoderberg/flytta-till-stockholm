@@ -1,7 +1,8 @@
 # Kommunkollen Stockholm
 
-En webbapp som beskriver hur det är att bo i olika delar av Stockholm. Den samlar öppna data från ett tiotal
-myndigheter, som annars finns i olika format och på olika geografiska nivåer, på en gemensam karta.
+Kommunkollen hjälper den som bor i Stockholm, eller funderar på att flytta dit, att jämföra stadsdelar och
+grannskap genom att samla öppna data om befolkning, trygghet, skolor, service och boende från ett tiotal
+myndigheter, data som annars är spridd i olika format och på olika geografiska nivåer.
 
 **Live:** https://flytta-till-stockholm.vercel.app
 
