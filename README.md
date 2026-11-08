@@ -25,7 +25,8 @@ npm test           # unit tests
 LIVE=1 npm test    # also tests against the real APIs
 ```
 
-Requires Node 20+. No API keys are needed.
+Requires Node 20+. No API keys are needed. Production (Vercel) and CI run Node 24, pinned by `engines` in
+`package.json`; the Vercel CLI used for deploys rejects newer versions set in the Vercel project.
 
 ## Data
 
