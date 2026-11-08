@@ -143,6 +143,6 @@ Claude Code (agentdriven utveckling) som del av kursen Next-Generation Software 
 Designade och utvecklade en webbapp i Next.js 15, TypeScript och SQLite (Turso) med hjälp av agentdriven
 utveckling (Claude Code). Appen samlar öppna data från tio myndigheter och kommunala källor (bl.a. SCB, Brå,
 Skolverket och Valmyndigheten) på en gemensam geografi med 569 statistikområden, så att Stockholms 11
-stadsdelsområden och 127 grannskap kan jämföras med källa angiven för varje siffra. Målgruppen är människor som önskar bosätta sig i Stockholm och vill ta del av hur dom olika områdena i Stockholm skiljer sig utifrån tidigare nämnda myndigheter/kommuners data.
+stadsdelsområden och 127 grannskap kan jämföras med källa angiven för varje siffra. Kommunkollen hjälper den som bor i Stockholm, eller funderar på att flytta dit, att jämföra stadsdelar och grannskap genom att samla öppna data om befolkning, trygghet, skolor, service och boende från ett tiotal myndigheter, data som annars är spridd i olika format och på olika geografiska nivåer.
 Deployad på Vercel, databas via Turso med CI/CD
 via GitHub Actions och tillgänglig på https://flytta-till-stockholm.vercel.app.
