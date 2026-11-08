@@ -10,24 +10,28 @@ import {
 
 export type Share = { code: string; label: string; count: number; share: number };
 
+/**
+ * Statistics for one area. A value is null, and a list empty, when SCB has no data for the area, so the page
+ * can say "Uppgift saknas" instead of showing 0 as if it were a fact.
+ */
 export type AreaStats = {
-  population: number;
-  households: number;
-  averageAge: number;
+  population: number | null;
+  households: number | null;
+  averageAge: number | null;
   ageBands: Share[];
   ageGroups: { children: number; working: number; seniors: number };
   householdTypes: Share[];
-  familiesWithChildrenShare: number;
+  familiesWithChildrenShare: number | null;
   /** Only available for a single SCB region; aggregated areas use the mean. */
   medianIncome: number | null;
   meanIncome: number | null;
-  incomeQuartiles: number[];
+  incomeQuartiles: (number | null)[];
   education: Share[];
-  higherEducationShare: number;
+  higherEducationShare: number | null;
   houseTypes: Share[];
   tenure: Share[];
-  rentalShare: number;
-  foreignBackgroundShare: number;
+  rentalShare: number | null;
+  foreignBackgroundShare: number | null;
   carsPer1000: number | null;
   employmentRate: number | null;
   buildingAge: Share[];
@@ -104,36 +108,53 @@ function sum(table: StatTable, regions: string[], codes: Record<string, string>)
   return found ? total : null;
 }
 
+/** Shares per category, or an empty list if the table has no data for the area at all. */
 function shares(table: StatTable, dim: string, regions: string[], labels: [string, string][], extra = {}): Share[] {
-  const counts = labels.map(([code, label]) => ({
-    code,
-    label,
-    count: sum(table, regions, { [dim]: code, ...extra }) ?? 0,
-  }));
+  const raw = labels.map(([code, label]) => ({ code, label, count: sum(table, regions, { [dim]: code, ...extra }) }));
+  if (raw.every((c) => c.count == null)) return [];
+  const counts = raw.map((c) => ({ ...c, count: c.count ?? 0 }));
   const total = counts.reduce((s, c) => s + c.count, 0);
   return counts.map((c) => ({ ...c, share: total ? c.count / total : 0 }));
 }
 
+/** Sum of the shares of the given codes, or null when the list has no data. */
+const shareOf = (list: Share[], codes: string[]) =>
+  list.length ? list.filter((x) => codes.includes(x.code)).reduce((s, x) => s + x.share, 0) : null;
+
 function statsFor(t: Tables, ref: AreaRef): AreaStats {
   const r = ref.scb;
-  const ageCounts = t.age
+  const rawAges = t.age
     .codes("Alder")
     .filter((c) => c !== "totalt")
-    .map((code) => ({ code, label: t.age.label("Alder", code), count: sum(t.age, r, { Alder: code, Kon: "1+2" }) ?? 0 }));
-  const population = ageCounts.reduce((s, a) => s + a.count, 0);
-  const ageBands = ageCounts.map((a) => ({ ...a, share: population ? a.count / population : 0 }));
+    .map((code) => ({ code, label: t.age.label("Alder", code), count: sum(t.age, r, { Alder: code, Kon: "1+2" }) }));
+  const ageCounts = rawAges.map((a) => ({ ...a, count: a.count ?? 0 }));
+  const population = rawAges.some((a) => a.count != null) ? ageCounts.reduce((s, a) => s + a.count, 0) : null;
+  const ageBands = population ? ageCounts.map((a) => ({ ...a, share: a.count / population })) : [];
   const bandShare = (pred: (code: string) => boolean) => ageBands.filter((a) => pred(a.code)).reduce((s, a) => s + a.share, 0);
 
   // Income: persons-weighted mean and quartile shares; the median only exists for single regions.
+  // TAB6684 codes: 000008A5 = number of persons, 000008AA = mean (tkr), 000008AB = median (tkr),
+  // 000008A6–A9 = % of persons in each quartile of the national distribution.
+  // A region only counts towards a value when SCB has that value for it; otherwise its persons would be
+  // weighted with 0 and pull the result down.
   let persons = 0;
   let meanWeighted = 0;
+  let quartilePersons = 0;
   const quartiles = [0, 0, 0, 0];
   const quartileCodes = ["000008A6", "000008A7", "000008A8", "000008A9"];
   for (const Region of r) {
-    const n = t.income.get({ Region, ContentsCode: "000008A5" }) ?? 0;
-    persons += n;
-    meanWeighted += n * (t.income.get({ Region, ContentsCode: "000008AA" }) ?? 0);
-    quartileCodes.forEach((c, i) => (quartiles[i] += (n * (t.income.get({ Region, ContentsCode: c }) ?? 0)) / 100));
+    const n = t.income.get({ Region, ContentsCode: "000008A5" });
+    if (!n) continue;
+    const mean = t.income.get({ Region, ContentsCode: "000008AA" });
+    if (mean != null) {
+      persons += n;
+      meanWeighted += n * mean;
+    }
+    const q = quartileCodes.map((c) => t.income.get({ Region, ContentsCode: c }));
+    if (q.every((v) => v != null)) {
+      quartilePersons += n;
+      q.forEach((v, i) => (quartiles[i] += (n * v!) / 100));
+    }
   }
 
   const householdTypes = shares(t.households, "Hushallstyp", r, HOUSEHOLD_LABELS);
@@ -142,18 +163,21 @@ function statsFor(t: Tables, ref: AreaRef): AreaStats {
   const employed = sum(t.work, ref.work, { ContentsCode: "0000089X" });
   const workTotal = sum(t.work, ref.work, { ContentsCode: "0000089Y" });
   const cars = sum(t.cars, r, { Bestand: "ITRAF" });
-  const background = (code: string) => sum(t.background, r, { UtlBakgrund: code, Kon: "1+2" }) ?? 0;
+  // TAB6571: "SA" = everyone, "1" = foreign background.
+  const background = (code: string) => sum(t.background, r, { UtlBakgrund: code, Kon: "1+2" });
+  const backgroundAll = background("SA");
+  const backgroundForeign = background("1");
 
   const buildingCounts = t.buildings
     .codes("ByggAr")
     .filter((c) => c !== "Totalt" && c !== "Okänt")
-    .map((code) => ({ code, label: t.buildings.label("ByggAr", code), count: sum(t.buildings, r, { ByggAr: code }) ?? 0 }));
-  const buildingTotal = buildingCounts.reduce((s, b) => s + b.count, 0);
+    .map((code) => ({ code, label: t.buildings.label("ByggAr", code), count: sum(t.buildings, r, { ByggAr: code }) }));
+  const buildingTotal = buildingCounts.reduce((s, b) => s + (b.count ?? 0), 0);
 
   return {
     population,
-    households: sum(t.households, r, { Hushallstyp: "TOTALT" }) ?? 0,
-    averageAge: population ? ageCounts.reduce((s, a) => s + a.count * (AGE_MIDPOINTS[a.code] ?? 40), 0) / population : 0,
+    households: sum(t.households, r, { Hushallstyp: "TOTALT" }),
+    averageAge: population ? ageCounts.reduce((s, a) => s + a.count * (AGE_MIDPOINTS[a.code] ?? 40), 0) / population : null,
     ageBands,
     ageGroups: {
       children: bandShare((c) => CHILD_BANDS.includes(c)),
@@ -161,19 +185,21 @@ function statsFor(t: Tables, ref: AreaRef): AreaStats {
       seniors: bandShare((c) => SENIOR_BANDS.includes(c)),
     },
     householdTypes,
-    familiesWithChildrenShare: householdTypes.filter((h) => h.code === "SBMB" || h.code === "ESMB").reduce((s, h) => s + h.share, 0),
+    familiesWithChildrenShare: shareOf(householdTypes, ["SBMB", "ESMB"]),
     medianIncome: r.length === 1 ? t.income.get({ Region: r[0], ContentsCode: "000008AB" }) : null,
     meanIncome: persons ? meanWeighted / persons : null,
-    incomeQuartiles: quartiles.map((q) => (persons ? q / persons : 0)),
+    incomeQuartiles: quartiles.map((q) => (quartilePersons ? q / quartilePersons : null)),
     education,
-    higherEducationShare: education.filter((e) => e.code === "5" || e.code === "6").reduce((s, e) => s + e.share, 0),
+    higherEducationShare: shareOf(education, ["5", "6"]),
     houseTypes: shares(t.house, "Hustyp", r, HOUSE_LABELS),
     tenure,
-    rentalShare: tenure.find((x) => x.code === "HYRESRÄTT")?.share ?? 0,
-    foreignBackgroundShare: background("SA") ? background("1") / background("SA") : 0,
+    rentalShare: shareOf(tenure, ["HYRESRÄTT"]),
+    foreignBackgroundShare: backgroundAll && backgroundForeign != null ? backgroundForeign / backgroundAll : null,
     carsPer1000: cars != null && population ? (cars / population) * 1000 : null,
     employmentRate: employed != null && workTotal ? employed / workTotal : null,
-    buildingAge: buildingCounts.map((b) => ({ ...b, share: buildingTotal ? b.count / buildingTotal : 0 })),
+    buildingAge: buildingTotal
+      ? buildingCounts.map((b) => ({ ...b, count: b.count ?? 0, share: (b.count ?? 0) / buildingTotal }))
+      : [],
   };
 }
 
@@ -225,10 +251,12 @@ export async function boroughStats() {
 }
 
 const pct = (x: number) => `${Math.round(x * 100)} %`;
-const top = (list: Share[]) => [...list].sort((a, b) => b.share - a.share)[0];
+const top = (list: Share[]): Share | undefined => [...list].sort((a, b) => b.share - a.share)[0];
 
+/** "x % högre än i Y". Returns "" when there is nothing to compare with (callers then leave out the clause). */
 function compare(value: number, reference: number, refName: string, unit: "%" | "rel" = "rel") {
-  if (!reference) return "";
+  // A relative difference needs a non-zero reference; a difference in percentage points does not.
+  if (unit === "rel" && !reference) return "";
   const diff = unit === "%" ? (value - reference) * 100 : ((value - reference) / reference) * 100;
   if (Math.abs(diff) < 3) return `ungefär som i ${refName}`;
   const word = diff > 0 ? "högre" : "lägre";
@@ -237,35 +265,53 @@ function compare(value: number, reference: number, refName: string, unit: "%" | 
 }
 
 /** Plain-language summary of who lives in an area, compared with a reference area. */
+/** Joins a sentence and an optional comparison clause, leaving out the clause when it is empty. */
+const withComparison = (sentence: string, comparison: string) => (comparison ? `${sentence}, ${comparison}.` : `${sentence}.`);
+
+/** Plain-language summary of who lives in an area, compared with a reference area. Missing data is left out. */
 export function summarize(a: AreaStats, ref: AreaStats, refName: string): string[] {
   const lines: string[] = [];
-  const hh = top(a.householdTypes);
-  lines.push(
-    `Här bor ungefär ${a.population.toLocaleString("sv-SE")} personer i ${a.households.toLocaleString("sv-SE")} hushåll. ` +
-      `Den vanligaste hushållstypen är ${hh.label.toLowerCase()} (${pct(hh.share)}).`,
-  );
-  const ageWord =
-    a.averageAge < ref.averageAge - 3 ? "yngre än" : a.averageAge > ref.averageAge + 3 ? "äldre än" : "ungefär lika gamla som";
-  lines.push(
-    `Medelåldern är cirka ${Math.round(a.averageAge)} år – invånarna är ${ageWord} i ${refName} (${Math.round(ref.averageAge)} år). ` +
-      `${pct(a.ageGroups.children)} är under 20 och ${pct(a.ageGroups.seniors)} är 65 eller äldre.`,
-  );
+  if (a.population == null) {
+    lines.push("SCB har ingen befolkningsstatistik för området.");
+  } else {
+    const hh = top(a.householdTypes);
+    lines.push(
+      `Här bor ungefär ${a.population.toLocaleString("sv-SE")} personer` +
+        (a.households != null ? ` i ${a.households.toLocaleString("sv-SE")} hushåll. ` : ". ") +
+        (hh ? `Den vanligaste hushållstypen är ${hh.label.toLowerCase()} (${pct(hh.share)}).` : ""),
+    );
+  }
+  if (a.averageAge != null && ref.averageAge != null) {
+    const ageWord =
+      a.averageAge < ref.averageAge - 3 ? "yngre än" : a.averageAge > ref.averageAge + 3 ? "äldre än" : "ungefär lika gamla som";
+    lines.push(
+      `Medelåldern är cirka ${Math.round(a.averageAge)} år – invånarna är ${ageWord} i ${refName} (${Math.round(ref.averageAge)} år). ` +
+        `${pct(a.ageGroups.children)} är under 20 och ${pct(a.ageGroups.seniors)} är 65 eller äldre.`,
+    );
+  }
   const house = top(a.houseTypes);
   const tenure = top(a.tenure);
-  lines.push(`De flesta bor i ${house.label.toLowerCase()} (${pct(house.share)}), oftast med ${tenure.label.toLowerCase()} (${pct(tenure.share)}).`);
+  if (house && tenure) {
+    lines.push(`De flesta bor i ${house.label.toLowerCase()} (${pct(house.share)}), oftast med ${tenure.label.toLowerCase()} (${pct(tenure.share)}).`);
+  }
   // Compare like with like: medians only when both areas have one.
   const useMedian = a.medianIncome != null && ref.medianIncome != null;
   const ai = useMedian ? a.medianIncome : a.meanIncome;
   const ri = useMedian ? ref.medianIncome : ref.meanIncome;
   if (ai != null && ri != null) {
     const what = useMedian ? "Medianen för ekonomisk standard" : "Den genomsnittliga ekonomiska standarden";
-    lines.push(`${what} är ${Math.round(ai).toLocaleString("sv-SE")} tkr per person och år, ${compare(ai, ri, refName)}.`);
+    lines.push(withComparison(`${what} är ${Math.round(ai).toLocaleString("sv-SE")} tkr per person och år`, compare(ai, ri, refName)));
   }
-  lines.push(
-    `${pct(a.higherEducationShare)} av de vuxna (25–65 år) har eftergymnasial utbildning, ${compare(a.higherEducationShare, ref.higherEducationShare, refName, "%")}.`,
-  );
+  if (a.higherEducationShare != null) {
+    lines.push(
+      withComparison(
+        `${pct(a.higherEducationShare)} av de vuxna (25–65 år) har eftergymnasial utbildning`,
+        ref.higherEducationShare != null ? compare(a.higherEducationShare, ref.higherEducationShare, refName, "%") : "",
+      ),
+    );
+  }
   if (a.employmentRate != null && ref.employmentRate != null) {
-    lines.push(`${pct(a.employmentRate)} av 20–64-åringarna förvärvsarbetar, ${compare(a.employmentRate, ref.employmentRate, refName, "%")}.`);
+    lines.push(withComparison(`${pct(a.employmentRate)} av 20–64-åringarna förvärvsarbetar`, compare(a.employmentRate, ref.employmentRate, refName, "%")));
   }
   return lines;
 }

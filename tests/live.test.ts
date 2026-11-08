@@ -11,7 +11,8 @@ describe.runIf(process.env.LIVE)("live APIs", () => {
 
   it("aggregates borough populations to roughly the city total", async () => {
     const { stad, boroughs } = await boroughStats();
-    const sum = boroughs.reduce((s, b) => s + b.stats.population, 0);
-    expect(Math.abs(sum - stad.population) / stad.population).toBeLessThan(0.005);
+    const sum = boroughs.reduce((s, b) => s + (b.stats.population ?? 0), 0);
+    const total = stad.population!;
+    expect(Math.abs(sum - total) / total).toBeLessThan(0.005);
   });
 }, 60_000);

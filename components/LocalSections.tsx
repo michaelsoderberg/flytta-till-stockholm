@@ -183,14 +183,15 @@ export function SchoolsCard({ area }: { area: LocalArea }) {
 export function ServicesCard({ area }: { area: LocalArea }) {
   const counts = placeCounts(placesIn(area.desos));
   const stadCounts = placeCounts(placesIn(ALL_DESOS));
-  const per10k = (n: number, pop: number) => (pop ? (n / pop) * 10_000 : 0);
+  // Without a population figure the rate is unknown, not 0.
+  const per10k = (n: number, pop: number | null) => (pop ? (n / pop) * 10_000 : null);
   const rows = PLACE_CATEGORIES.map((c) => ({
     ...c,
     n: counts[c.key] ?? 0,
     rate: per10k(counts[c.key] ?? 0, area.stats.population),
     stadRate: per10k(stadCounts[c.key] ?? 0, area.stadStats.population),
   }));
-  const max = Math.max(...rows.map((r) => Math.max(r.rate, r.stadRate)));
+  const max = Math.max(...rows.map((r) => Math.max(r.rate ?? 0, r.stadRate ?? 0)));
   return (
     <Card
       id="service"
@@ -216,13 +217,13 @@ export function ServicesCard({ area }: { area: LocalArea }) {
                 <td className="py-2 pl-4">
                   <div className="flex items-center gap-2">
                     <span className="relative h-2.5 w-32 rounded-full bg-grid">
-                      <span className="absolute inset-y-0 left-0 rounded-full bg-accent" style={{ width: `${max ? (r.rate / max) * 100 : 0}%` }} />
-                      <span className="absolute -top-0.5 h-3.5 w-0.5 bg-ink-2" style={{ left: `${max ? (r.stadRate / max) * 100 : 0}%` }} title="Stockholm" />
+                      <span className="absolute inset-y-0 left-0 rounded-full bg-accent" style={{ width: `${max ? ((r.rate ?? 0) / max) * 100 : 0}%` }} />
+                      <span className="absolute -top-0.5 h-3.5 w-0.5 bg-ink-2" style={{ left: `${max ? ((r.stadRate ?? 0) / max) * 100 : 0}%` }} title="Stockholm" />
                     </span>
-                    <span className="tabular">{r.rate.toLocaleString("sv-SE", { maximumFractionDigits: 1 })}</span>
+                    <span className="tabular">{r.rate?.toLocaleString("sv-SE", { maximumFractionDigits: 1 }) ?? "–"}</span>
                   </div>
                 </td>
-                <td className="tabular py-2 text-right text-muted">{r.stadRate.toLocaleString("sv-SE", { maximumFractionDigits: 1 })}</td>
+                <td className="tabular py-2 text-right text-muted">{r.stadRate?.toLocaleString("sv-SE", { maximumFractionDigits: 1 }) ?? "–"}</td>
               </tr>
             ))}
           </tbody>
